@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 
-//Should't be packaged in graphics, it's something bigger, it's graphics + model, it's main level
 public class GameInitiator {
     private Game game;
     private DrawingArea drawingArea;
@@ -16,26 +15,16 @@ public class GameInitiator {
 
     public GameInitiator() {
         game = new Game();
-        AudioPlayer aPlayer = new AudioPlayer();
-        this.audioPlayer = aPlayer;
+        audioPlayer = new AudioPlayer();
+        GameInitiator initiator = this;
         try {
-            SwingUtilities.invokeAndWait(new Runnable() {
-                public void run() {
-                    drawingArea = new DrawingArea(game.getMap(), game, aPlayer);
-                    JFrame frame = new JFrame("Колонизаторы!");
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    addComponentsToPane(frame.getContentPane(), drawingArea);
-//                    ErrorNotification errorNotification = new ErrorNotification();
-//                    JDesktopPane desktopPane = new JDesktopPane();
-//                    desktopPane.add(errorNotification);
-//                    frame.getContentPane().add(desktopPane, BorderLayout.CENTER);
-//                    these don't do anything right now and are needed for testing
-//                    int frameWidth = 800;
-//                    int frameHeight = 800;
-//                    frame.setSize(frameWidth, frameHeight);
-                    frame.pack();
-                    frame.setVisible(true);
-                }
+            SwingUtilities.invokeAndWait(() -> {
+                drawingArea = new DrawingArea(game.getMap(), game, initiator);
+                JFrame frame = new JFrame("Колонизаторы!");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                addComponentsToPane(frame.getContentPane(), drawingArea);
+                frame.pack();
+                frame.setVisible(true);
             });
         } catch (InterruptedException e) {
             e.printStackTrace(System.out);
@@ -46,38 +35,7 @@ public class GameInitiator {
         game.goSettling();
     }
 
-//    public Game initiateGame() {
-//        game = new Game();
-//        try {
-//            SwingUtilities.invokeAndWait(new Runnable() {
-//                public void run() {
-//                    drawingArea = new DrawingArea(game.getMap(), game);
-//                    JFrame frame = new JFrame("Колонизаторы!");
-//                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                    addComponentsToPane(frame.getContentPane(), drawingArea);
-////                    ErrorNotification errorNotification = new ErrorNotification();
-////                    JDesktopPane desktopPane = new JDesktopPane();
-////                    desktopPane.add(errorNotification);
-////                    frame.getContentPane().add(desktopPane, BorderLayout.CENTER);
-////                    these don't do anything right now and are needed for testing
-////                    int frameWidth = 800;
-////                    int frameHeight = 800;
-////                    frame.setSize(frameWidth, frameHeight);
-//                    frame.pack();
-//                    frame.setVisible(true);
-//                }
-//            });
-//        } catch (InterruptedException e) {
-//            e.printStackTrace(System.out);
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace(System.out);
-//        }
-//        game.addGuiActionsProcessor(drawingArea.getGuiActionsProcessor());
-//        game.goSettling();
-//        return game;
-//    }
-
-    public void addComponentsToPane(Container pane, DrawingArea drawingArea) {
+    private void addComponentsToPane(Container pane, DrawingArea drawingArea) {
         pane.setLayout(new GridBagLayout());
         GridBagConstraints drawingAreaConstraints = new GridBagConstraints();
         drawingAreaConstraints.fill = GridBagConstraints.NONE;
@@ -112,5 +70,9 @@ public class GameInitiator {
 
     public Game getGame() {
         return game;
+    }
+
+    public AudioPlayer getAudioPlayer() {
+        return audioPlayer;
     }
 }

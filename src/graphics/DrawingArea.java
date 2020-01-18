@@ -1,6 +1,7 @@
 package graphics;
 
 import sound.AudioPlayer;
+import system.GameInitiator;
 import user_interface.GuiActionsProcessor;
 import interactions.Game;
 import interactions.Player;
@@ -17,18 +18,17 @@ public class DrawingArea extends JPanel {
     private GuiActionsProcessor guiActionsProcessor;
     private Game game;
     private MouseInputAdapter currentListener = null;
-    private AudioPlayer audioPlayer;
+    private GameInitiator gameInitiator;
 
-    public DrawingArea(MapHexes map, Game game, AudioPlayer audioPlayer)
+    public DrawingArea(MapHexes map, Game game, GameInitiator gameInitiator)
     {
         super();
         this.map = map;
         this.game = game;
-        this.audioPlayer = audioPlayer;
+        this.gameInitiator = gameInitiator;
         setBackground(new Color(235, 240, 255));
         guiActionsProcessor = new GuiActionsProcessor(map, this, mapLocationX, mapLocationY);
         setPreferredSize(new Dimension(700, 700));
-        //for some weird reason guiActionsProcessor is null?...
     }
 
     public void replaceListener(MouseInputAdapter newListener) {
@@ -46,7 +46,7 @@ public class DrawingArea extends JPanel {
         drawer.drawMap(g2d);
     }
 
-    public void initializeDrawer(MapHexes map) {
+    private void initializeDrawer(MapHexes map) {
         drawer = new MapDrawer(map, mapLocationX, mapLocationY);
     }
 
@@ -71,7 +71,7 @@ public class DrawingArea extends JPanel {
         return game;
     }
 
-    public AudioPlayer getAudioPlayer() {
-        return audioPlayer;
+    public GameInitiator getGameInitiator() {
+        return gameInitiator;
     }
 }

@@ -26,28 +26,19 @@ public class AudioPlayer {
         AudioListener listener = new AudioListener();
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(clipFile);
         currentAudioInputStream = audioInputStream;
-        System.out.println("Made current stream");
-        System.out.println(currentAudioInputStream);
         try {
             Clip clip = AudioSystem.getClip();
             clip.addLineListener(listener);
             clip.open(audioInputStream);
-            System.out.println("opened clip");
-            System.out.println(currentAudioInputStream);
             try {
                 clip.start();
-                System.out.println("started playing");
-                System.out.println(currentAudioInputStream);
                 listener.waitUntilDone();
-                System.out.println("done playing");
             } finally {
                 clip.close();
-                System.out.println("clip died of natural causes");
             }
         } finally {
             audioInputStream.close();
             currentAudioInputStream = null;
-            System.out.println("audio input stream died of natural causes");
             isPlaying = false;
         }
     }
@@ -72,12 +63,9 @@ public class AudioPlayer {
             try {
                 if (AudioSystem.getClip() != null) {
                     AudioSystem.getClip().stop();
-                    System.out.println("clip interrupted and stopped");
                     AudioSystem.getClip().close();
-                    System.out.println("clip interrupted and closed");
                 }
                 currentAudioInputStream.close();
-                System.out.println("current stream interrupted and closed");
             } catch (IOException ioexception) {
                 ioexception.printStackTrace();
             } catch (LineUnavailableException lineUnavailableException) {

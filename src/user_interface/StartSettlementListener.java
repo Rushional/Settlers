@@ -63,11 +63,10 @@ public class StartSettlementListener extends MouseInputAdapter {
             System.out.println("Здесь нет точки");
             File warnWav = new File("src\\warn.wav");
             new Thread(() -> {
-                AudioPlayer player = drawingArea.getAudioPlayer();
+                AudioPlayer player = drawingArea.getGameInitiator().getAudioPlayer();
                 try {
                     if (player.getIsPlaying()) {
-                        AudioSystem.getClip().stop();//interrupt from outside of AudioPlayer somehow
-                        System.out.println("Interrupted from listener");
+                        AudioSystem.getClip().stop();
                     }
                 } catch (Exception e){
                     e.printStackTrace();
