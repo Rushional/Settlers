@@ -1,4 +1,4 @@
-package user_interface;
+package building_interface;
 
 import building.*;
 import exceptions.*;
@@ -8,27 +8,30 @@ import hex.HexPoint;
 import hex.PointsLinesController;
 import interactions.*;
 import map.MapHexes;
+import sound.AudioPlayer;
 
 import java.util.concurrent.CountDownLatch;
 
 //This class takes interface actions and creates game actions
-public class GuiActionsProcessor {
+public class BuildingGuiActionsProcessor {
     private MapHexes map;
     private int mapLocationX, mapLocationY;
     private final static int pointDetectionRadius = 15;
     private DrawingArea drawingArea;
+    private AudioPlayer audioPlayer;
 
-    public GuiActionsProcessor(MapHexes map, DrawingArea drawingArea, int mapLocationX, int mapLocationY) {
+    public BuildingGuiActionsProcessor(MapHexes map, DrawingArea drawingArea, int mapLocationX, int mapLocationY, AudioPlayer audioPlayer) {
         this.map = map;
         this.drawingArea = drawingArea;
         this.mapLocationX = mapLocationX;
         this.mapLocationY = mapLocationY;
+        this.audioPlayer = audioPlayer;
     }
 
-    public void activateStartSettlementListener(StartBuildingManager startBuildingManager) {
+    void activateStartSettlementListener(StartBuildingManager startBuildingManager) {
         CountDownLatch startSettlementLatch = new CountDownLatch(1);
         StartSettlementListener startSettlementListener = new
-                StartSettlementListener(drawingArea, startSettlementLatch, startBuildingManager);
+                StartSettlementListener(drawingArea, startSettlementLatch, startBuildingManager, audioPlayer);
         drawingArea.replaceListener(startSettlementListener);
         try {
             startSettlementLatch.await();
@@ -37,7 +40,7 @@ public class GuiActionsProcessor {
         }
     }
 
-    public void activateStartRoadListener(HexPoint point, StartBuildingManager startBuildingManager) {
+    void activateStartRoadListener(HexPoint point, StartBuildingManager startBuildingManager) {
         CountDownLatch startRoadLatch = new CountDownLatch(1);
         StartRoadListener startRoadListener = new StartRoadListener(drawingArea, startRoadLatch, point, startBuildingManager);
         drawingArea.replaceListener(startRoadListener);
@@ -52,7 +55,7 @@ public class GuiActionsProcessor {
         drawingArea.removeMouseListener(startRoadListener);
     }
 
-    public void requestRoadBuilding(Player player, int x1, int y1, int x2, int y2) throws buildingException
+    void requestRoadBuilding(Player player, int x1, int y1, int x2, int y2) throws buildingException
     {
         HexLine line = lineByCoordinates(x1, y1, x2, y2);
         BuildRoad buildRoad = new BuildRoad(player, line);
@@ -69,7 +72,7 @@ public class GuiActionsProcessor {
         drawingArea.repaint();
     }
 
-    public void requestBuildingOnPoint(Player player, int x, int y) throws buildingException
+    void requestBuildingOnPoint(Player player, int x, int y) throws buildingException
     {
         HexPoint point = pointByCoordinates(x, y);
         BuildOnPoint buildOnPoint = new BuildOnPoint(player, point);
@@ -84,7 +87,7 @@ public class GuiActionsProcessor {
         startBuildSettlement.build();
         drawingArea.repaint();
         startBuildingManager.assignPoint(point);
-        //building.StartBuildingManager.assignPoint(point)
+        //building_interface.StartBuildingManager.assignPoint(point)
     }
 
     public void activateTurnListener() {
@@ -112,23 +115,23 @@ public class GuiActionsProcessor {
         if (buildingException.getClass() == opponentsCityOnWay.class) System.out.println("На пути город другого игрока");
     }
 
-    public void handleStartSettlementExceptions(buildingException buildingException) {
+    void handleStartSettlementExceptions(buildingException buildingException) {
         if (buildingException.getClass() == wrongPointCoordinates.class) System.out.println("Здесь нет точки");
         if (buildingException.getClass() == buildingNearby.class) System.out.println("Рядом уже есть поселение");
         if (buildingException.getClass() == pointHasSettlement.class) System.out.println("В этом месте уже есть поселение");
     }
 
-    public void handleStartRoadExceptions(buildingException buildingException) {
+    void handleStartRoadExceptions(buildingException buildingException) {
         if (buildingException.getClass() == wrongRoadCoordinates.class) System.out.println("Проведите линию между двумя точками, чтобы построить дорогу");
         if (buildingException.getClass() == lineHasRoad.class) System.out.println("В этом месте уже есть дорога");
         if (buildingException.getClass() == lineHasNoPoint.class) System.out.println("Дорогу нужно построить рядом с новым поселением");
     }
 
-    public void repaint() {
+    void repaint() {
         drawingArea.repaint();
     }
 
-    protected HexPoint pointByCoordinates(int x, int y) throws wrongPointCoordinates {
+    HexPoint pointByCoordinates(int x, int y) throws wrongPointCoordinates {
         x -= mapLocationX;
         y -= mapLocationY;
         if ((x > -192 - pointDetectionRadius) && (x < -192 + pointDetectionRadius)) {
@@ -329,7 +332,7 @@ public class GuiActionsProcessor {
         else throw new wrongPointCoordinates();
     }
 
-    public HexLine lineByCoordinates(int x1, int y1, int x2, int y2) throws wrongRoadCoordinates {
+    HexLine lineByCoordinates(int x1, int y1, int x2, int y2) throws wrongRoadCoordinates {
         HexPoint point1, point2;
         try {
             point1 = pointByCoordinates(x1, y1);

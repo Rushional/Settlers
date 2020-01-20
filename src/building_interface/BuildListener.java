@@ -1,4 +1,4 @@
-package user_interface;
+package building_interface;
 
 import exceptions.*;
 import graphics.DrawingArea;
@@ -16,11 +16,11 @@ public class BuildListener extends MouseInputAdapter {
     private DrawingArea drawingArea;
     private Player humanPlayer;
 
-    public BuildListener(DrawingArea drawingArea) {
+    BuildListener(DrawingArea drawingArea) {
         super();
         this.drawingArea = drawingArea;
         this.humanPlayer = drawingArea.getCurrentPlayer();
-        if (humanPlayer.isHuman() != true) throw new playerNotHuman();
+        if (!humanPlayer.isHuman()) throw new playerNotHuman();
     }
 
     public void mousePressed(MouseEvent e)
@@ -43,13 +43,13 @@ public class BuildListener extends MouseInputAdapter {
         releasedY = releasedPoint.y;
         if ((abs(releasedX - pressedX) < 15) && (abs(releasedY - pressedY) < 15)) {
             try {
-                drawingArea.getGuiActionsProcessor().requestBuildingOnPoint(humanPlayer, releasedX, releasedY);
+                drawingArea.getBuildingGuiActionsProcessor().requestBuildingOnPoint(humanPlayer, releasedX, releasedY);
             } catch (buildingException buildingException) {
                 handleBuildingException(buildingException);
             }
         }
         else try {
-            drawingArea.getGuiActionsProcessor().requestRoadBuilding(humanPlayer, pressedX, pressedY, releasedX, releasedY);
+            drawingArea.getBuildingGuiActionsProcessor().requestRoadBuilding(humanPlayer, pressedX, pressedY, releasedX, releasedY);
         } catch (buildingException buildingException) {
             handleBuildingException(buildingException);
         }

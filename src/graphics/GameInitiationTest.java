@@ -13,11 +13,11 @@ class GameInitiationTest {
         GameInitiator gameInitiator = new GameInitiator();
         Game game = gameInitiator.getGame();
         assertTrue(game.getPlayers() != null);
-        assertTrue(game.getGuiActionsProcessor() != null);
+        assertTrue(game.getBuildingGuiActionsProcessor() != null);
         assertTrue(game.getCurrentPlayer() != null);
         assertTrue(game.getMap() != null);
-        DrawingArea drawingArea = game.getGuiActionsProcessor().getDrawingArea();
-        assertTrue(drawingArea.getGuiActionsProcessor() != null);
+        DrawingArea drawingArea = game.getBuildingGuiActionsProcessor().getDrawingArea();
+        assertTrue(drawingArea.getBuildingGuiActionsProcessor() != null);
         assertTrue(drawingArea.getCurrentPlayer() != null);
         //assertTrue(drawingArea.getDrawer() != null);
         assertTrue(drawingArea.getGame() != null);

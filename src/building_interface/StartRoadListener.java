@@ -1,10 +1,9 @@
-package user_interface;
+package building_interface;
 
 import exceptions.*;
 import graphics.DrawingArea;
 import hex.HexPoint;
 import interactions.Player;
-import building.StartBuildingManager;
 
 import javax.swing.event.MouseInputAdapter;
 import java.awt.Point;
@@ -20,7 +19,7 @@ public class StartRoadListener extends MouseInputAdapter {
     private CountDownLatch latch;
     private StartBuildingManager startBuildingManager;
 
-    public StartRoadListener(DrawingArea drawingArea, CountDownLatch latch, HexPoint point, StartBuildingManager startBuildingManager) {
+    StartRoadListener(DrawingArea drawingArea, CountDownLatch latch, HexPoint point, StartBuildingManager startBuildingManager) {
         super();
         this.startBuildingManager = startBuildingManager;
         this.drawingArea = drawingArea;
@@ -42,7 +41,7 @@ public class StartRoadListener extends MouseInputAdapter {
         releasedX = releasedPoint.x;
         releasedY = releasedPoint.y;
         try {
-            startBuildingManager.assignLine(drawingArea.getGuiActionsProcessor().lineByCoordinates(pressedX, pressedY, releasedX, releasedY));
+            startBuildingManager.assignLine(drawingArea.getBuildingGuiActionsProcessor().lineByCoordinates(pressedX, pressedY, releasedX, releasedY));
             latch.countDown();
         } catch (buildingException buildingException) {
             handleBuildingException(buildingException);

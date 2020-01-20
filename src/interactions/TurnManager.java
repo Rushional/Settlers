@@ -1,20 +1,20 @@
 package interactions;
 
-import user_interface.GuiActionsProcessor;
+import building_interface.BuildingGuiActionsProcessor;
 import hex.HexPoint;
 
 public class TurnManager {
     private Game game;
     private HexPoint point;
-    private GuiActionsProcessor guiActionsProcessor;
+    private BuildingGuiActionsProcessor buildingGuiActionsProcessor;
 
-    public TurnManager(Game game, GuiActionsProcessor guiActionsProcessor) {
+    TurnManager(Game game, BuildingGuiActionsProcessor buildingGuiActionsProcessor) {
         this.game = game;
-        this.guiActionsProcessor = guiActionsProcessor;
+        this.buildingGuiActionsProcessor = buildingGuiActionsProcessor;
     }
 
-    public void activateTurnCycle() {
-        guiActionsProcessor.activateTurnListener();
+    void activateTurnCycle() {
+        buildingGuiActionsProcessor.activateTurnListener();
 //        do {
 //            //guiActionsProcessor method - drawingArea.replaceListener(new BuildListener());
 //            //and then wait for end turn button press

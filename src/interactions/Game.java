@@ -1,14 +1,14 @@
 package interactions;
 
 import AI.StartBuildingAI;
-import building.StartBuildingManager;
-import user_interface.GuiActionsProcessor;
+import building_interface.StartBuildingManager;
+import building_interface.BuildingGuiActionsProcessor;
 import map.MapHexes;
 
 public class Game {
     private MapHexes map;
     private Players players;
-    private GuiActionsProcessor guiActionsProcessor;
+    private BuildingGuiActionsProcessor buildingGuiActionsProcessor;
     //it will become AiManager later
     private StartBuildingAI startBuildingAI;
 
@@ -19,9 +19,9 @@ public class Game {
             startBuildingAI = new StartBuildingAI(map);
     }
 
-    public void addGuiActionsProcessor(GuiActionsProcessor actionsProcessor)
+    public void addGuiActionsProcessor(BuildingGuiActionsProcessor actionsProcessor)
     {
-        this.guiActionsProcessor = actionsProcessor;
+        this.buildingGuiActionsProcessor = actionsProcessor;
     }
 
     public void goSettling() {
@@ -29,32 +29,32 @@ public class Game {
         System.out.println("Players take turns repeatedly...");
 //        System.out.println("There will be an end turn button some day...");
         players.nextPlayer();
-        TurnManager turnManager = new TurnManager(this, guiActionsProcessor);
+        TurnManager turnManager = new TurnManager(this, buildingGuiActionsProcessor);
         turnManager.activateTurnCycle();
     }
 
     private void startBuilding() {
-        StartBuildingManager red1 = new StartBuildingManager(guiActionsProcessor, startBuildingAI, getCurrentPlayer());
+        StartBuildingManager red1 = new StartBuildingManager(buildingGuiActionsProcessor, startBuildingAI, getCurrentPlayer());
         red1.requestBuild();
         players.nextPlayer();
-        StartBuildingManager blue1 = new StartBuildingManager(guiActionsProcessor, startBuildingAI, getCurrentPlayer());
+        StartBuildingManager blue1 = new StartBuildingManager(buildingGuiActionsProcessor, startBuildingAI, getCurrentPlayer());
         blue1.requestBuild();
         players.nextPlayer();
-        StartBuildingManager green1 = new StartBuildingManager(guiActionsProcessor, startBuildingAI, getCurrentPlayer());
+        StartBuildingManager green1 = new StartBuildingManager(buildingGuiActionsProcessor, startBuildingAI, getCurrentPlayer());
         green1.requestBuild();
         players.nextPlayer();
-        StartBuildingManager violet1 = new StartBuildingManager(guiActionsProcessor, startBuildingAI, getCurrentPlayer());
+        StartBuildingManager violet1 = new StartBuildingManager(buildingGuiActionsProcessor, startBuildingAI, getCurrentPlayer());
         violet1.requestBuild();
-        StartBuildingManager violet2 = new StartBuildingManager(guiActionsProcessor, startBuildingAI, getCurrentPlayer());
+        StartBuildingManager violet2 = new StartBuildingManager(buildingGuiActionsProcessor, startBuildingAI, getCurrentPlayer());
         violet2.requestBuild();
         players.previousPlayer();
-        StartBuildingManager green2 = new StartBuildingManager(guiActionsProcessor, startBuildingAI, getCurrentPlayer());
+        StartBuildingManager green2 = new StartBuildingManager(buildingGuiActionsProcessor, startBuildingAI, getCurrentPlayer());
         green2.requestBuild();
         players.previousPlayer();
-        StartBuildingManager blue2 = new StartBuildingManager(guiActionsProcessor, startBuildingAI, getCurrentPlayer());
+        StartBuildingManager blue2 = new StartBuildingManager(buildingGuiActionsProcessor, startBuildingAI, getCurrentPlayer());
         blue2.requestBuild();
         players.previousPlayer();
-        StartBuildingManager red2 = new StartBuildingManager(guiActionsProcessor, startBuildingAI, getCurrentPlayer());
+        StartBuildingManager red2 = new StartBuildingManager(buildingGuiActionsProcessor, startBuildingAI, getCurrentPlayer());
         red2.requestBuild();
     }
 
@@ -67,8 +67,8 @@ public class Game {
         return map;
     }
 
-    public GuiActionsProcessor getGuiActionsProcessor() {
-        return guiActionsProcessor;
+    public BuildingGuiActionsProcessor getBuildingGuiActionsProcessor() {
+        return buildingGuiActionsProcessor;
     }
 
     public Player getCurrentPlayer() {

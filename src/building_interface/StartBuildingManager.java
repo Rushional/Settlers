@@ -1,21 +1,23 @@
-package building;
+package building_interface;
 
 import AI.StartBuildingAI;
+import building.StartBuildRoad;
+import building.StartBuildSettlement;
 import exceptions.buildingException;
 import exceptions.lineHasNoPoint;
 import interactions.Player;
-import user_interface.GuiActionsProcessor;
+import building_interface.BuildingGuiActionsProcessor;
 import hex.HexLine;
 import hex.HexPoint;
 
 public class StartBuildingManager {
     private Player player;
     private HexPoint point;
-    private GuiActionsProcessor actionsProcessor;
+    private BuildingGuiActionsProcessor actionsProcessor;
     private StartBuildingAI startBuildingAI;
     private HexLine line;
 
-    public StartBuildingManager(GuiActionsProcessor actionsProcessor, StartBuildingAI startBuildingAI, Player player) {
+    public StartBuildingManager(BuildingGuiActionsProcessor actionsProcessor, StartBuildingAI startBuildingAI, Player player) {
         this.player = player;
         this.actionsProcessor = actionsProcessor;
         this.startBuildingAI = startBuildingAI;
@@ -55,11 +57,11 @@ public class StartBuildingManager {
         }
     }
 
-    public void assignPoint(HexPoint point) {
+    void assignPoint(HexPoint point) {
         this.point = point;
     }
 
-    public void assignLine(HexLine line) {
+    void assignLine(HexLine line) {
         this.line = line;
     }
 }

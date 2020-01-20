@@ -2,44 +2,40 @@ package sound;
 
 import javax.sound.sampled.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class AudioPlayer {
     private AudioInputStream currentAudioInputStream;
-
-    private boolean isPlaying;
-    public boolean getIsPlaying() {
-        return isPlaying;
+    private AudioExceptionHandler audioExceptionHandler;
+    public AudioInputStream getCurrentAudioInputStream() {
+        return currentAudioInputStream;
     }
 
     public AudioPlayer() {
-        isPlaying = false;
+        audioExceptionHandler = new AudioExceptionHandler(this);
     }
 
-    public void playClip(File clipFile) throws IOException,
-            UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
-        isPlaying = true;
-        if (!clipFile.exists()) throw new FileNotFoundException();
+    private void playClip(File clipFile) {
         if (currentAudioInputStream != null)
             interruptSound();
         AudioListener listener = new AudioListener();
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(clipFile);
-        currentAudioInputStream = audioInputStream;
+        AudioInputStream audioInputStream = null;
         try {
+            audioInputStream = AudioSystem.getAudioInputStream(clipFile);
+            currentAudioInputStream = audioInputStream;
             Clip clip = AudioSystem.getClip();
             clip.addLineListener(listener);
             clip.open(audioInputStream);
             try {
                 clip.start();
                 listener.waitUntilDone();
-            } finally {
+            } catch (InterruptedException interruptedException) {
                 clip.close();
             }
-        } finally {
-            audioInputStream.close();
-            currentAudioInputStream = null;
-            isPlaying = false;
+        } catch (IOException inputOutputException) {
+            audioExceptionHandler.handleIO(inputOutputException);
+        } catch (UnsupportedAudioFileException | LineUnavailableException e) {
+            audioExceptionHandler.handleUnsupportedFile(e, audioInputStream);
         }
     }
 
@@ -52,11 +48,13 @@ public class AudioPlayer {
                 notifyAll();
             }
         }
-        public synchronized void waitUntilDone() throws InterruptedException {
+        synchronized void waitUntilDone() throws InterruptedException {
             while (!done) { wait(); }
         }
     }
 
+    //Not sure if it works sadly, but don't want to delve into sounds too much, it's not important
+    //It definitely runs, but it doesn't interrupt anything
     private void interruptSound() {
         if (currentAudioInputStream != null) {
             System.out.println("Well current one exists");
@@ -66,12 +64,15 @@ public class AudioPlayer {
                     AudioSystem.getClip().close();
                 }
                 currentAudioInputStream.close();
-            } catch (IOException ioexception) {
-                ioexception.printStackTrace();
-            } catch (LineUnavailableException lineUnavailableException) {
-                lineUnavailableException.printStackTrace();
+            } catch (IOException | LineUnavailableException e) {
+                e.printStackTrace();
             }
         }
         else System.out.println("Well AudioInputStream doesn't even exist!");
+    }
+
+    //TO DO move this to BuildingExceptionHandler
+    public void playWrongPointCoordinates() {
+        playClip(new File("src\\wrongPointCoordinates.wav"));
     }
 }
