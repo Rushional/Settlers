@@ -12,15 +12,15 @@ class GameInitiationTest {
     void initiateGameTest() {
         GameInitiator gameInitiator = new GameInitiator();
         Game game = gameInitiator.getGame();
-        assertTrue(game.getPlayers() != null);
-        assertTrue(game.getBuildingGuiActionsProcessor() != null);
-        assertTrue(game.getCurrentPlayer() != null);
-        assertTrue(game.getMap() != null);
-        DrawingArea drawingArea = game.getBuildingGuiActionsProcessor().getDrawingArea();
-        assertTrue(drawingArea.getBuildingGuiActionsProcessor() != null);
-        assertTrue(drawingArea.getCurrentPlayer() != null);
+        assertNotNull(game.getPlayers());
+        assertNotNull(game.getBuildingGraphicsManager());
+        assertNotNull(game.getCurrentPlayer());
+        assertNotNull(game.getMap());
+        DrawingArea drawingArea = game.getBuildingGraphicsManager().getDrawingArea();
+        assertNotNull(drawingArea.getBuildingGraphicsManager());
+        assertNotNull(drawingArea.getCurrentPlayer());
         //assertTrue(drawingArea.getDrawer() != null);
-        assertTrue(drawingArea.getGame() != null);
-        assertTrue(drawingArea.getMap() != null);
+        assertNotNull(drawingArea.getGame());
+        assertNotNull(drawingArea.getMap());
     }
 }

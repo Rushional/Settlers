@@ -6,62 +6,62 @@ import building.StartBuildSettlement;
 import exceptions.buildingException;
 import exceptions.lineHasNoPoint;
 import interactions.Player;
-import building_interface.BuildingGuiActionsProcessor;
 import hex.HexLine;
 import hex.HexPoint;
+import map.MapHexes;
+import sound.BuildingMessagesPlayer;
 
 public class StartBuildingManager {
     private Player player;
-    private HexPoint point;
-    private BuildingGuiActionsProcessor actionsProcessor;
+    private BuildingGraphicsManager graphicsManager;
     private StartBuildingAI startBuildingAI;
-    private HexLine line;
+    private BuildingExceptionHandler buildingExceptionHandler;
+    private PointsLinesGetter pointsLinesGetter;
 
-    public StartBuildingManager(BuildingGuiActionsProcessor actionsProcessor, StartBuildingAI startBuildingAI, Player player) {
+    public StartBuildingManager(BuildingGraphicsManager graphicsManager,
+                                StartBuildingAI startBuildingAI, Player player, BuildingMessagesPlayer messagePlayer,
+                                MapHexes map) {
         this.player = player;
-        this.actionsProcessor = actionsProcessor;
+        this.graphicsManager = graphicsManager;
         this.startBuildingAI = startBuildingAI;
+        buildingExceptionHandler = new BuildingExceptionHandler(messagePlayer);
+        pointsLinesGetter = new PointsLinesGetter(graphicsManager, map, buildingExceptionHandler);
     }
 
     public void requestBuild() {
         if (player.isHuman()) {
+            //build starting settlement
+            HexPoint point = null;
             boolean buildSettlementAwaiting = true;
             while (buildSettlementAwaiting) {
-                actionsProcessor.activateStartSettlementListener(this);
-                StartBuildSettlement startBuildSettlement = new StartBuildSettlement(player, point);
                 try {
+                    point = pointsLinesGetter.getPoint();
+                    StartBuildSettlement startBuildSettlement = new StartBuildSettlement(player, point);
                     startBuildSettlement.build();
                     buildSettlementAwaiting = false;
                 } catch (buildingException buildingException) {
-                    actionsProcessor.handleStartSettlementExceptions(buildingException);
+                    buildingExceptionHandler.handleStartSettlement(buildingException);
                 }
             }
-            actionsProcessor.repaint();
+            graphicsManager.repaint();
             //build starting road
+            HexLine line;
             boolean buildRoadAwaiting = true;
             while (buildRoadAwaiting) {
-                actionsProcessor.activateStartRoadListener(point, this);
+                line = pointsLinesGetter.getLine(point);
                 try {
                     if (!line.checkHasPoint(point)) throw new lineHasNoPoint();
                     StartBuildRoad startBuildRoad = new StartBuildRoad(player, line, point);
                     startBuildRoad.build();
                     buildRoadAwaiting = false;
                 } catch (buildingException buildingException) {
-                    actionsProcessor.handleStartRoadExceptions(buildingException);
+                    buildingExceptionHandler.handleStartRoad(buildingException);
                 }
             }
-            actionsProcessor.repaint();
+            graphicsManager.repaint();
         }
         else {
             startBuildingAI.startBuildPoint(player);
         }
-    }
-
-    void assignPoint(HexPoint point) {
-        this.point = point;
-    }
-
-    void assignLine(HexLine line) {
-        this.line = line;
     }
 }

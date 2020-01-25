@@ -1,7 +1,7 @@
 package graphics;
 
 import system.GameInitiator;
-import building_interface.BuildingGuiActionsProcessor;
+import building_interface.BuildingGraphicsManager;
 import interactions.Game;
 import interactions.Player;
 import map.MapHexes;
@@ -14,7 +14,7 @@ public class DrawingArea extends JPanel {
     private final static int mapLocationX = 210, mapLocationY = 30;
     private MapDrawer drawer;
     private MapHexes map;
-    private BuildingGuiActionsProcessor buildingGuiActionsProcessor;
+    private BuildingGraphicsManager buildingGraphicsManager;
     private Game game;
     private MouseInputAdapter currentListener = null;
     private GameInitiator gameInitiator;
@@ -29,7 +29,7 @@ public class DrawingArea extends JPanel {
         //TO DO buildingGuiActionsProcessor is now too big to be created inside drawingArea,
         // so it needs to be moved higher,
         // probably somewhere in the GameInitiator
-        buildingGuiActionsProcessor = new BuildingGuiActionsProcessor(map, this, mapLocationX, mapLocationY, gameInitiator.getAudioPlayer());
+        buildingGraphicsManager = new BuildingGraphicsManager(this, mapLocationX, mapLocationY);
         setPreferredSize(new Dimension(700, 700));
     }
 
@@ -52,8 +52,8 @@ public class DrawingArea extends JPanel {
         drawer = new MapDrawer(map, mapLocationX, mapLocationY);
     }
 
-    public BuildingGuiActionsProcessor getBuildingGuiActionsProcessor() {
-        return buildingGuiActionsProcessor;
+    public BuildingGraphicsManager getBuildingGraphicsManager() {
+        return buildingGraphicsManager;
     }
 
     public Player getCurrentPlayer() {

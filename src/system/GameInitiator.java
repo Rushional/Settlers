@@ -1,5 +1,6 @@
 package system;
 
+import building_interface.PointsLinesGetter;
 import graphics.DrawingArea;
 import interactions.Game;
 import sound.AudioPlayer;
@@ -13,10 +14,12 @@ public class GameInitiator {
     private Game game;
     private DrawingArea drawingArea;
     private AudioPlayer audioPlayer;
+    private PointsLinesGetter pointsLinesGetter;
 
     public GameInitiator() {
         game = new Game();
         audioPlayer = new AudioPlayer();
+        game.assignSystemStuff(audioPlayer.getBuildingMessagesPlayer());
         GameInitiator initiator = this;
         try {
             SwingUtilities.invokeAndWait(() -> {
@@ -31,7 +34,7 @@ public class GameInitiator {
             e.printStackTrace(System.out);
         }
 
-        game.addGuiActionsProcessor(drawingArea.getBuildingGuiActionsProcessor());
+        game.addGuiActionsProcessor(drawingArea.getBuildingGraphicsManager());
         game.goSettling();
     }
 

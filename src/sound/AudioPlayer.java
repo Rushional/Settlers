@@ -6,16 +6,23 @@ import java.io.IOException;
 
 public class AudioPlayer {
     private AudioInputStream currentAudioInputStream;
+
     private AudioExceptionHandler audioExceptionHandler;
     public AudioInputStream getCurrentAudioInputStream() {
         return currentAudioInputStream;
     }
 
-    public AudioPlayer() {
-        audioExceptionHandler = new AudioExceptionHandler(this);
+    private BuildingMessagesPlayer buildingMessagesPlayer;
+    public BuildingMessagesPlayer getBuildingMessagesPlayer() {
+        return buildingMessagesPlayer;
     }
 
-    private void playClip(File clipFile) {
+    public AudioPlayer() {
+        audioExceptionHandler = new AudioExceptionHandler(this);
+        buildingMessagesPlayer = new BuildingMessagesPlayer(this);
+    }
+
+    void playClip(File clipFile) {
         if (currentAudioInputStream != null)
             interruptSound();
         AudioListener listener = new AudioListener();
@@ -69,10 +76,5 @@ public class AudioPlayer {
             }
         }
         else System.out.println("Well AudioInputStream doesn't even exist!");
-    }
-
-    //TO DO move this to BuildingExceptionHandler
-    public void playWrongPointCoordinates() {
-        playClip(new File("src\\building_messages\\wrongPointCoordinates.wav"));
     }
 }

@@ -1,56 +1,34 @@
 package building_interface;
 
-import exceptions.*;
-import graphics.DrawingArea;
-import hex.HexPoint;
-import interactions.Player;
-
 import javax.swing.event.MouseInputAdapter;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.concurrent.CountDownLatch;
 
 public class StartRoadListener extends MouseInputAdapter {
-    private Point pressedPoint, releasedPoint;
-    private int pressedX, pressedY, releasedX, releasedY;
-    private DrawingArea drawingArea;
-    private Player humanPlayer;
-    private HexPoint point;
+    private int pressedX, pressedY;
     private CountDownLatch latch;
-    private StartBuildingManager startBuildingManager;
+    private PointsLinesGetter pointsLinesGetter;
 
-    StartRoadListener(DrawingArea drawingArea, CountDownLatch latch, HexPoint point, StartBuildingManager startBuildingManager) {
+    StartRoadListener(PointsLinesGetter pointsLinesGetter, CountDownLatch latch) {
         super();
-        this.startBuildingManager = startBuildingManager;
-        this.drawingArea = drawingArea;
-        this.humanPlayer = drawingArea.getCurrentPlayer();
+        this.pointsLinesGetter = pointsLinesGetter;
         this.latch = latch;
-        this.point = point;
     }
 
     public void mousePressed(MouseEvent e)
     {
-        pressedPoint = e.getPoint();
+        Point pressedPoint = e.getPoint();
         pressedX = pressedPoint.x;
         pressedY = pressedPoint.y;
     }
 
     public void mouseReleased(MouseEvent e)
     {
-        releasedPoint = e.getPoint();
-        releasedX = releasedPoint.x;
-        releasedY = releasedPoint.y;
-        try {
-            startBuildingManager.assignLine(drawingArea.getBuildingGuiActionsProcessor().lineByCoordinates(pressedX, pressedY, releasedX, releasedY));
-            latch.countDown();
-        } catch (buildingException buildingException) {
-            handleBuildingException(buildingException);
-        }
-    }
-
-    private void handleBuildingException(buildingException buildingException) {
-        if (buildingException.getClass() == wrongRoadCoordinates.class) System.out.println("Проведите линию между двумя точками, чтобы построить дорогу");
-        if (buildingException.getClass() == lineHasRoad.class) System.out.println("В этом месте уже есть дорога");
-        if (buildingException.getClass() == lineHasNoPoint.class) System.out.println("Дорогу нужно построить рядом с новым поселением");
+        Point releasedPoint = e.getPoint();
+        int releasedX = releasedPoint.x;
+        int releasedY = releasedPoint.y;
+        pointsLinesGetter.assignLineCoordinates(pressedX, pressedY, releasedX, releasedY);
+        latch.countDown();
     }
 }

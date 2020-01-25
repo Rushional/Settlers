@@ -30,29 +30,23 @@ public class BuildListener extends MouseInputAdapter {
         pressedY = pressedPoint.y;
     }
 
-    //can replace drawingArea.getGuiActionsProcessor with actionsManager field
-    // but for some reason it doesn't work
-    // it becomes null somehow
-
-    //TO DO make one superListener that does all the work. This way you don't have to repeat exceptions
-    //and it would look better, I guess
     public void mouseReleased(MouseEvent e)
     {
         releasedPoint = e.getPoint();
         releasedX = releasedPoint.x;
         releasedY = releasedPoint.y;
-        if ((abs(releasedX - pressedX) < 15) && (abs(releasedY - pressedY) < 15)) {
-            try {
-                drawingArea.getBuildingGuiActionsProcessor().requestBuildingOnPoint(humanPlayer, releasedX, releasedY);
-            } catch (buildingException buildingException) {
-                handleBuildingException(buildingException);
-            }
-        }
-        else try {
-            drawingArea.getBuildingGuiActionsProcessor().requestRoadBuilding(humanPlayer, pressedX, pressedY, releasedX, releasedY);
-        } catch (buildingException buildingException) {
-            handleBuildingException(buildingException);
-        }
+//        if ((abs(releasedX - pressedX) < 15) && (abs(releasedY - pressedY) < 15)) {
+//            try {
+//                drawingArea.getBuildingGuiListenerManager().requestBuildingOnPoint(humanPlayer, releasedX, releasedY);
+//            } catch (buildingException buildingException) {
+//                handleBuildingException(buildingException);
+//            }
+//        }
+//        else try {
+//            drawingArea.getBuildingGuiListenerManager().requestRoadBuilding(humanPlayer, pressedX, pressedY, releasedX, releasedY);
+//        } catch (buildingException buildingException) {
+//            handleBuildingException(buildingException);
+//        }
     }
 
     private void handleBuildingException(buildingException buildingException) {
