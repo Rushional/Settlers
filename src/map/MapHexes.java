@@ -1,7 +1,6 @@
 package map;
 
-import hex.Hex;
-import hex.HexController;
+import hex.*;
 
 public class MapHexes {
     private Hex top1LeftHex;
@@ -25,25 +24,25 @@ public class MapHexes {
     private Hex bottom2RightHex;
 
     public MapHexes() {
-        top1LeftHex = new Hex();
-        top1MiddleHex = new Hex();
-        top1RightHex = new Hex();
-        top2LeftHex = new Hex();
-        top2Middle2Hex = new Hex();
-        top2Middle3Hex = new Hex();
-        top2RightHex = new Hex();
-        middleLeftHex = new Hex();
-        middle2Hex = new Hex();
-        middle3Hex = new Hex();
-        middle4Hex = new Hex();
-        middleRightHex = new Hex();
-        bottom1LeftHex = new Hex();
-        bottom1Middle2Hex = new Hex();
-        bottom1Middle3Hex = new Hex();
-        bottom1RightHex = new Hex();
-        bottom2LeftHex = new Hex();
-        bottom2MiddleHex = new Hex();
-        bottom2RightHex = new Hex();
+        top1LeftHex = new HexWood(6);
+        top1MiddleHex = new HexSheep(3);
+        top1RightHex = new HexSheep(8);
+        top2LeftHex = new HexWheat(2);
+        top2Middle2Hex = new HexOre(4);
+        top2Middle3Hex = new HexWheat(5);
+        top2RightHex = new HexWood(10);
+        middleLeftHex = new HexWood(5);
+        middle2Hex = new HexBricks(9);
+        middle3Hex = new HexDesert();
+        middle4Hex = new HexOre(6);
+        middleRightHex = new HexWheat(9);
+        bottom1LeftHex = new HexWheat(10);
+        bottom1Middle2Hex = new HexOre(11);
+        bottom1Middle3Hex = new HexWood(3);
+        bottom1RightHex = new HexSheep(12);
+        bottom2LeftHex = new HexBricks(8);
+        bottom2MiddleHex = new HexSheep(4);
+        bottom2RightHex = new HexBricks(11);
         HexController.upLeftAdd(top1LeftHex, top1MiddleHex);
         HexController.upLeftAdd(top1MiddleHex, top1RightHex);
         HexController.rightAdd(top2LeftHex, top1LeftHex);

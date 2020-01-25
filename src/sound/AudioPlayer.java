@@ -73,6 +73,6 @@ public class AudioPlayer {
 
     //TO DO move this to BuildingExceptionHandler
     public void playWrongPointCoordinates() {
-        playClip(new File("src\\wrongPointCoordinates.wav"));
+        playClip(new File("src\\building_messages\\wrongPointCoordinates.wav"));
     }
 }

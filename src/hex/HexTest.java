@@ -1,9 +1,9 @@
 package hex;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HexTest {
+class HexTest {
     boolean checkLinePoint(HexLine line, HexPoint point) {
         boolean connectedFlag = false;
         for (int i = 0; i <= 1; i++) {
@@ -15,25 +15,20 @@ public class HexTest {
         return connectedFlag;
     }
 
-    //@Test
-    public void hexCompositionTest(int upPointX, int upPointY) {
-         Hex hex = new Hex();
-         assertTrue(checkLinePoint(hex.upperRightLine, hex.upPoint));
-         assertTrue(checkLinePoint(hex.upperRightLine, hex.upperRightPoint));
-         assertTrue(checkLinePoint(hex.middleRightLine, hex.upperRightPoint));
-         assertTrue(checkLinePoint(hex.middleRightLine, hex.lowerRightPoint));
-         assertTrue(checkLinePoint(hex.lowerRightLine, hex.lowerRightPoint));
-         assertTrue(checkLinePoint(hex.lowerRightLine, hex.lowPoint));
-         assertTrue(checkLinePoint(hex.lowerLeftLine, hex.lowPoint));
-         assertTrue(checkLinePoint(hex.lowerLeftLine, hex.lowerLeftPoint));
-         assertTrue(checkLinePoint(hex.middleLeftLine, hex.lowerLeftPoint));
-         assertTrue(checkLinePoint(hex.middleLeftLine, hex.upperLeftPoint));
-         assertTrue(checkLinePoint(hex.upperLeftLine, hex.upperLeftPoint));
-         assertTrue(checkLinePoint(hex.upperLeftLine, hex.upPoint));
-    }
-
     @Test
-    public void singleHexTest() {
-        hexCompositionTest(200, 30);
+    void hexCompositionTest() {
+        Hex hex = new HexWood(8);
+        assertTrue(checkLinePoint(hex.upperRightLine, hex.upPoint));
+        assertTrue(checkLinePoint(hex.upperRightLine, hex.upperRightPoint));
+        assertTrue(checkLinePoint(hex.middleRightLine, hex.upperRightPoint));
+        assertTrue(checkLinePoint(hex.middleRightLine, hex.lowerRightPoint));
+        assertTrue(checkLinePoint(hex.lowerRightLine, hex.lowerRightPoint));
+        assertTrue(checkLinePoint(hex.lowerRightLine, hex.lowPoint));
+        assertTrue(checkLinePoint(hex.lowerLeftLine, hex.lowPoint));
+        assertTrue(checkLinePoint(hex.lowerLeftLine, hex.lowerLeftPoint));
+        assertTrue(checkLinePoint(hex.middleLeftLine, hex.lowerLeftPoint));
+        assertTrue(checkLinePoint(hex.middleLeftLine, hex.upperLeftPoint));
+        assertTrue(checkLinePoint(hex.upperLeftLine, hex.upperLeftPoint));
+        assertTrue(checkLinePoint(hex.upperLeftLine, hex.upPoint));
     }
 }

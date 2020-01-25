@@ -3,20 +3,21 @@ package hex;
 import interactions.ResourcesSet;
 
 public class Hex {
-    protected HexPoint upPoint;
-    protected HexPoint upperRightPoint;
-    protected HexPoint lowerRightPoint;
-    protected HexPoint lowPoint;
-    protected HexPoint lowerLeftPoint;
-    protected HexPoint upperLeftPoint;
-    protected HexLine upperRightLine;
-    protected HexLine middleRightLine;
-    protected HexLine lowerRightLine;
-    protected HexLine lowerLeftLine;
-    protected HexLine middleLeftLine;
-    protected HexLine upperLeftLine;
+    HexPoint upPoint;
+    HexPoint upperRightPoint;
+    HexPoint lowerRightPoint;
+    HexPoint lowPoint;
+    HexPoint lowerLeftPoint;
+    HexPoint upperLeftPoint;
+    HexLine upperRightLine;
+    HexLine middleRightLine;
+    HexLine lowerRightLine;
+    HexLine lowerLeftLine;
+    HexLine middleLeftLine;
+    HexLine upperLeftLine;
+    private int frequency;
 
-    public Hex() {
+    public Hex(int frequency) {
         upPoint = new HexPoint();
         upperRightPoint = new HexPoint();
         lowerRightPoint = new HexPoint();
@@ -35,6 +36,7 @@ public class Hex {
         PointsLinesController.connectPoints(lowerLeftPoint, lowPoint, lowerLeftLine);
         PointsLinesController.connectPoints(upperLeftPoint, lowerLeftPoint, middleLeftLine);
         PointsLinesController.connectPoints(upperLeftPoint, upPoint, upperLeftLine);
+        this.frequency = frequency;
     }
 
     public ResourcesSet getResource() {
