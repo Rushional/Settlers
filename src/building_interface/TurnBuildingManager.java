@@ -2,7 +2,7 @@ package building_interface;
 
 import interactions.Player;
 
-public class BuildingManager {
+public class TurnBuildingManager {
     private Player player;
     private BuildingGraphicsManager actionsProcessor;
     //TO DO add building AI

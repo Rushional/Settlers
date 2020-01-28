@@ -14,6 +14,6 @@ public class BuildingMessagesPlayer {
     }
 
     public void playException() {
-        audioPlayer.playClip(new File("src\\building_messages\\warn.wav"));
+        audioPlayer.playClip(new File("src\\building_messages\\defaultException.wav"));
     }
 }

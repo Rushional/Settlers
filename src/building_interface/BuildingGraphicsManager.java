@@ -1,15 +1,8 @@
 package building_interface;
 
-import building.*;
-import exceptions.*;
 import graphics.DrawingArea;
-import hex.HexLine;
-import hex.HexPoint;
-import interactions.*;
-import map.MapHexes;
 import java.util.concurrent.CountDownLatch;
 
-//This class takes interface actions and creates game actions
 public class BuildingGraphicsManager {
     private int mapLocationX, mapLocationY;
     private final static int pointDetectionRadius = 15;

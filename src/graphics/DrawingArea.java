@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 
+//TO DO make some graphics class so that a JPanel doesn't run everything and instead IS run by some bigger graphics class
 public class DrawingArea extends JPanel {
     private final static int mapLocationX = 210, mapLocationY = 30;
     private MapDrawer drawer;

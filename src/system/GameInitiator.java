@@ -1,5 +1,6 @@
 package system;
 
+import building_interface.BuildManagersRunner;
 import building_interface.PointsLinesGetter;
 import graphics.DrawingArea;
 import interactions.Game;
@@ -14,12 +15,10 @@ public class GameInitiator {
     private Game game;
     private DrawingArea drawingArea;
     private AudioPlayer audioPlayer;
-    private PointsLinesGetter pointsLinesGetter;
 
     public GameInitiator() {
         game = new Game();
         audioPlayer = new AudioPlayer();
-        game.assignSystemStuff(audioPlayer.getBuildingMessagesPlayer());
         GameInitiator initiator = this;
         try {
             SwingUtilities.invokeAndWait(() -> {
@@ -33,8 +32,9 @@ public class GameInitiator {
         } catch (InterruptedException | InvocationTargetException e) {
             e.printStackTrace(System.out);
         }
-
-        game.addGuiActionsProcessor(drawingArea.getBuildingGraphicsManager());
+        BuildManagersRunner buildManagersRunner = new BuildManagersRunner
+                (game, drawingArea.getBuildingGraphicsManager(), audioPlayer.getBuildingMessagesPlayer());
+        game.assignBuildManagersRunner(buildManagersRunner);
         game.goSettling();
     }
 
@@ -77,5 +77,9 @@ public class GameInitiator {
 
     public AudioPlayer getAudioPlayer() {
         return audioPlayer;
+    }
+
+    public DrawingArea getDrawingArea() {
+        return drawingArea;
     }
 }
