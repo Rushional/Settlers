@@ -1,10 +1,10 @@
 package AI;
 
-import hex.HexPoint;
-import interactions.Player;
-import building.StartBuildRoad;
-import building.StartBuildSettlement;
-import map.MapHexes;
+import game_model.hex.HexPoint;
+import game_model.Player;
+import game_model.building_model.StartBuildRoad;
+import game_model.building_model.StartBuildSettlement;
+import game_model.map.MapHexes;
 import exceptions.*;
 
 public class StartBuildingAI {
@@ -34,7 +34,7 @@ public class StartBuildingAI {
     public void startBuildPoint(Player player) {
         HexPoint point = null;
         boolean settlementBuilt = false;
-        while (settlementBuilt == false) {
+        while (!settlementBuilt) {
             try {
                 StartBuildSettlement startBuildSettlement = new StartBuildSettlement(player, getCurrentPoint());
                 startBuildSettlement.build();
@@ -54,12 +54,12 @@ public class StartBuildingAI {
         }
     }
 
-    public HexPoint getCurrentPoint() {
+    private HexPoint getCurrentPoint() {
         return points[currentPoint];
     }
 
     //this is not a *real* AI method so RuntimeException is probably fine
-    public void increaseCurrentPoint() {
+    private void increaseCurrentPoint() {
         currentPoint++;
         if (getCurrentPoint() == null) throw new RuntimeException();
     }

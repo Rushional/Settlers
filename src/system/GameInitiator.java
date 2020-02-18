@@ -1,10 +1,9 @@
 package system;
 
-import building_interface.BuildManagersRunner;
-import building_interface.PointsLinesGetter;
-import graphics.DrawingArea;
-import interactions.Game;
-import sound.AudioPlayer;
+import game_view.building_view.BuildManagersRunner;
+import game_view.graphics.DrawingArea;
+import game_model.GameModel;
+import game_view.sound.AudioPlayer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,17 +11,17 @@ import java.lang.reflect.InvocationTargetException;
 
 public class GameInitiator {
     //TO DO: I probably need to create an InterfaceInitiator that would be run by this lil guy
-    private Game game;
+    private GameModel gameModel;
     private DrawingArea drawingArea;
     private AudioPlayer audioPlayer;
 
     public GameInitiator() {
-        game = new Game();
+        gameModel = new GameModel();
         audioPlayer = new AudioPlayer();
         GameInitiator initiator = this;
         try {
             SwingUtilities.invokeAndWait(() -> {
-                drawingArea = new DrawingArea(game.getMap(), game, initiator);
+                drawingArea = new DrawingArea(gameModel.getMap(), gameModel, initiator);
                 JFrame frame = new JFrame("Колонизаторы!");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 addComponentsToPane(frame.getContentPane(), drawingArea);
@@ -33,9 +32,9 @@ public class GameInitiator {
             e.printStackTrace(System.out);
         }
         BuildManagersRunner buildManagersRunner = new BuildManagersRunner
-                (game, drawingArea.getBuildingGraphicsManager(), audioPlayer.getBuildingMessagesPlayer());
-        game.assignBuildManagersRunner(buildManagersRunner);
-        game.goSettling();
+                (gameModel, drawingArea.getBuildingGraphicsManager(), audioPlayer.getBuildingMessagesPlayer());
+        gameModel.assignBuildManagersRunner(buildManagersRunner);
+        gameModel.goSettling();
     }
 
     private void addComponentsToPane(Container pane, DrawingArea drawingArea) {
@@ -71,8 +70,8 @@ public class GameInitiator {
         controlPanel.add(button, buttonConstraints);
     }
 
-    public Game getGame() {
-        return game;
+    public GameModel getGameModel() {
+        return gameModel;
     }
 
     public AudioPlayer getAudioPlayer() {
