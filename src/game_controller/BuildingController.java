@@ -44,7 +44,7 @@ public class BuildingController {
         HexLine roadLine;
         while (!buildSuccessful) {
             try {
-                roadLine = view.askForLine(settlementPoint); //restricts to only neighbour lines
+                roadLine = view.askForLine();
                 model.startBuildRoad(roadLine, settlementPoint);
                 buildSuccessful = true;
             } catch (buildingException buildingException) {

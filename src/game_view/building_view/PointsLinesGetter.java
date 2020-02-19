@@ -24,13 +24,14 @@ class PointsLinesGetter {
 
     HexPoint getPoint() throws wrongPointCoordinates {
         graphicsManager.activateStartSettlementListener(this);
-        HexPoint point = pointByCoordinates(x1, y1);
-        x1 = -100;
-        y1 = -100;
+        //TO DO add an algorithm that checks if the user has tried to build a road with those points
+        if (x2-x1 > pointDetectionRadius || y2 - y1 > pointDetectionRadius) throw new wrongPointCoordinates();
+        HexPoint point = pointByCoordinates(x2, y2);
+        x1 = y1 = x2 = y2 = -100;
         return point;
     }
 
-    HexLine getLine(HexPoint point) {
+    HexLine getLine() {
         boolean awaitingLine = true;
         HexLine line = null;
         while (awaitingLine) {
@@ -49,12 +50,12 @@ class PointsLinesGetter {
         return line;
     }
 
-    void assignPointCoordinates(int x, int y) {
-        x1 = x;
-        y1 = y;
-    }
+//    void assignPointCoordinates(int x, int y) {
+//        x1 = x;
+//        y1 = y;
+//    }
 
-    void assignLineCoordinates(int x1, int y1, int x2, int y2) {
+    void assignCoordinates(int x1, int y1, int x2, int y2) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;

@@ -28,7 +28,7 @@ public class StartRoadListener extends MouseInputAdapter {
         Point releasedPoint = e.getPoint();
         int releasedX = releasedPoint.x;
         int releasedY = releasedPoint.y;
-        pointsLinesGetter.assignLineCoordinates(pressedX, pressedY, releasedX, releasedY);
+        pointsLinesGetter.assignCoordinates(pressedX, pressedY, releasedX, releasedY);
         latch.countDown();
     }
 }

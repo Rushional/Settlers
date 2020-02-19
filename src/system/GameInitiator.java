@@ -12,7 +12,6 @@ import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 
 public class GameInitiator {
-    //TO DO: I probably need to create an InterfaceInitiator that would be run by this lil guy
     private GameModel gameModel;
     private GameView gameView;
 

@@ -25,8 +25,8 @@ public class BuildingView {
         return pointsLinesGetter.getPoint();
     }
 
-    public HexLine askForLine(HexPoint point) {
-        return pointsLinesGetter.getLine(point);
+    public HexLine askForLine() {
+        return pointsLinesGetter.getLine();
     }
 
     public void handleStartSettlement(buildingException buildingException) {

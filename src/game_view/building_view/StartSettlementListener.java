@@ -8,6 +8,7 @@ import java.util.concurrent.CountDownLatch;
 public class StartSettlementListener extends MouseInputAdapter {
     private PointsLinesGetter pointsLinesGetter;
     private CountDownLatch latch;
+    private int pressedX, pressedY;
 
     StartSettlementListener(PointsLinesGetter pointsLinesGetter, CountDownLatch latch)
     {
@@ -16,12 +17,19 @@ public class StartSettlementListener extends MouseInputAdapter {
         this.pointsLinesGetter = pointsLinesGetter;
     }
 
+    public void mousePressed(MouseEvent e)
+    {
+        Point pressedPoint = e.getPoint();
+        pressedX = pressedPoint.x;
+        pressedY = pressedPoint.y;
+    }
+
     public void mouseReleased(MouseEvent e)
     {
         Point releasedPoint = e.getPoint();
         int releasedX = releasedPoint.x;
         int releasedY = releasedPoint.y;
-        pointsLinesGetter.assignPointCoordinates(releasedX, releasedY);
+        pointsLinesGetter.assignCoordinates(pressedX, pressedY, releasedX, releasedY);
         latch.countDown();
     }
 }

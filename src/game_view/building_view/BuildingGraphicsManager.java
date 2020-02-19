@@ -5,7 +5,6 @@ import java.util.concurrent.CountDownLatch;
 
 public class BuildingGraphicsManager {
     private final int mapLocationX, mapLocationY;
-    private static int pointDetectionRadius = 15;
     private DrawingArea drawingArea;
     public DrawingArea getDrawingArea() {
         return drawingArea;
