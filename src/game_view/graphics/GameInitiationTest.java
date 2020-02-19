@@ -17,8 +17,6 @@ class GameInitiationTest {
         assertNotNull(gameModel.getMap());
         DrawingArea drawingArea = gameInitiator.getDrawingArea();
         assertNotNull(drawingArea.getBuildingGraphicsManager());
-        assertNotNull(drawingArea.getCurrentPlayer());
-        assertNotNull(drawingArea.getGameModel());
         assertNotNull(drawingArea.getMap());
     }
 }

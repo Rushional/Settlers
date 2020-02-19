@@ -11,14 +11,7 @@ class BuildingExceptionHandler {
     }
 
     void handleStartSettlement(buildingException buildingException) {
-        if (buildingException.getClass() == wrongPointCoordinates.class) {
-            System.out.println("Здесь нет точки");
-            new Thread(() -> buildingMessagesPlayer.playWrongPointCoordinates()).start();
-        }
-        if (buildingException.getClass() == buildingNearby.class) {
-            System.out.println("Рядом уже есть поселение");
-            new Thread(() -> buildingMessagesPlayer.playException()).start();
-        }
+        defaultHandleSettlement(buildingException);
         if (buildingException.getClass() == pointHasSettlement.class) {
             System.out.println("В этом месте уже есть поселение");
             new Thread(() -> buildingMessagesPlayer.playException()).start();
@@ -26,14 +19,7 @@ class BuildingExceptionHandler {
     }
 
     void handleStartRoad(buildingException buildingException) {
-        if (buildingException.getClass() == wrongRoadCoordinates.class) {
-            System.out.println("Проведите линию между двумя точками, чтобы построить дорогу");
-            new Thread(() -> buildingMessagesPlayer.playException()).start();
-        }
-        if (buildingException.getClass() == lineHasRoad.class) {
-            System.out.println("В этом месте уже есть дорога");
-            new Thread(() -> buildingMessagesPlayer.playException()).start();
-        }
+        defaultHandleRoad(buildingException);
         if (buildingException.getClass() == lineHasNoPoint.class) {
             System.out.println("Дорогу нужно построить рядом с новым поселением");
             new Thread(() -> buildingMessagesPlayer.playException()).start();
@@ -41,19 +27,11 @@ class BuildingExceptionHandler {
     }
 
     public void handleTurn(buildingException buildingException) {
-        if (buildingException.getClass() == wrongPointCoordinates.class) {
-            System.out.println("Здесь нет точки");
-            new Thread(() -> buildingMessagesPlayer.playWrongPointCoordinates()).start();
-        }
-        new Thread(() -> buildingMessagesPlayer.playException()).start();
-        if (buildingException.getClass() == buildingNearby.class) {
-            System.out.println("Рядом уже есть поселение");
-        }
-        new Thread(() -> buildingMessagesPlayer.playException()).start();
+        defaultHandleSettlement(buildingException);
         if (buildingException.getClass() == noRoadsNearby.class) {
             System.out.println("Рядом нет дорог");
+            new Thread(() -> buildingMessagesPlayer.playException()).start();
         }
-        new Thread(() -> buildingMessagesPlayer.playException()).start();
         if (buildingException.getClass() == pointHasSettlement.class) {
             System.out.println("В этом месте уже есть чужое поселение:(");
             new Thread(() -> buildingMessagesPlayer.playException()).start();
@@ -79,14 +57,7 @@ class BuildingExceptionHandler {
             new Thread(() -> buildingMessagesPlayer.playException()).start();
         }
         //road exceptions
-        if (buildingException.getClass() == wrongRoadCoordinates.class) {
-            System.out.println("Проведите линию между двумя точками, чтобы построить дорогу");
-            new Thread(() -> buildingMessagesPlayer.playException()).start();
-        }
-        if (buildingException.getClass() == lineHasRoad.class) {
-            System.out.println("В этом месте уже есть дорога");
-            new Thread(() -> buildingMessagesPlayer.playException()).start();
-        }
+        defaultHandleRoad(buildingException);
         if (buildingException.getClass() == roadHasNoAccess.class) {
             System.out.println("Это место ещё не колонизировано");
             new Thread(() -> buildingMessagesPlayer.playException()).start();
@@ -97,6 +68,28 @@ class BuildingExceptionHandler {
         }
         if (buildingException.getClass() == opponentsCityOnWay.class) {
             System.out.println("На пути город другого игрока");
+            new Thread(() -> buildingMessagesPlayer.playException()).start();
+        }
+    }
+
+    private void defaultHandleSettlement(buildingException buildingException) {
+        if (buildingException.getClass() == wrongPointCoordinates.class) {
+            System.out.println("Здесь нет точки");
+            new Thread(() -> buildingMessagesPlayer.playWrongPointCoordinates()).start();
+        }
+        if (buildingException.getClass() == buildingNearby.class) {
+            System.out.println("Рядом уже есть поселение");
+            new Thread(() -> buildingMessagesPlayer.playException()).start();
+        }
+    }
+
+    private void defaultHandleRoad(buildingException buildingException) {
+        if (buildingException.getClass() == wrongRoadCoordinates.class) {
+            System.out.println("Проведите линию между двумя точками, чтобы построить дорогу");
+            new Thread(() -> buildingMessagesPlayer.playException()).start();
+        }
+        if (buildingException.getClass() == lineHasRoad.class) {
+            System.out.println("В этом месте уже есть дорога");
             new Thread(() -> buildingMessagesPlayer.playException()).start();
         }
     }

@@ -22,7 +22,7 @@ public class GameInitiator {
         GameInitiator initiator = this;
         try {
             SwingUtilities.invokeAndWait(() -> {
-                drawingArea = new DrawingArea(gameModel.getMap(), gameModel, initiator);
+                drawingArea = new DrawingArea(gameModel.getMap(), initiator);
                 JFrame frame = new JFrame("Колонизаторы!");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 addComponentsToPane(frame.getContentPane(), drawingArea);

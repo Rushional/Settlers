@@ -59,8 +59,4 @@ public class BuildingGraphicsManager {
     int getMapLocationY() {
         return mapLocationY;
     }
-
-    public void setMapLocationY(int mapLocationY) {
-        this.mapLocationY = mapLocationY;
-    }
 }

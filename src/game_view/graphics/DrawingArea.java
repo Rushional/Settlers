@@ -13,18 +13,17 @@ import java.awt.*;
 //TO DO make some game_view.graphics class so that a JPanel doesn't run everything and instead IS run by some bigger game_view.graphics class
 public class DrawingArea extends JPanel {
     private final static int mapLocationX = 210, mapLocationY = 30;
-    private MapDrawer drawer;
     private MapHexes map;
+    //Can we delete this?
+    //The roles should be reversed probably. Panel shouldn't control the manager
     private BuildingGraphicsManager buildingGraphicsManager;
-    private GameModel gameModel;
     private MouseInputAdapter currentListener = null;
     private GameInitiator gameInitiator;
 
-    public DrawingArea(MapHexes map, GameModel gameModel, GameInitiator gameInitiator)
+    public DrawingArea(MapHexes map, GameInitiator gameInitiator)
     {
         super();
         this.map = map;
-        this.gameModel = gameModel;
         this.gameInitiator = gameInitiator;
         setBackground(new Color(235, 240, 255));
         //TO DO buildingGuiActionsProcessor is now too big to be created inside drawingArea,
@@ -45,33 +44,17 @@ public class DrawingArea extends JPanel {
     {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
-        initializeDrawer(map);
+        MapDrawer drawer = new MapDrawer(map, mapLocationX, mapLocationY);
         drawer.drawMap(g2d);
     }
 
-    private void initializeDrawer(MapHexes map) {
-        drawer = new MapDrawer(map, mapLocationX, mapLocationY);
-    }
-
+    //Is this necessary?
     public BuildingGraphicsManager getBuildingGraphicsManager() {
         return buildingGraphicsManager;
     }
 
-    public Player getCurrentPlayer() {
-        return gameModel.getPlayers().getCurrentPlayer();
-    }
-
-    //for tests
-    public MapDrawer getDrawer() {
-        return drawer;
-    }
-
     MapHexes getMap() {
         return map;
-    }
-
-    GameModel getGameModel() {
-        return gameModel;
     }
 
     public GameInitiator getGameInitiator() {

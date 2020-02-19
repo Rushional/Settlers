@@ -2,23 +2,17 @@ package game_view.building_view;
 
 import exceptions.*;
 import game_view.graphics.DrawingArea;
-import game_model.Player;
-
 import javax.swing.event.MouseInputAdapter;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-
 import static java.lang.Math.abs;
 
 public class BuildListener extends MouseInputAdapter {
     private Point pressedPoint, releasedPoint;
     private int pressedX, pressedY, releasedX, releasedY;
-    private Player humanPlayer;
 
     BuildListener(DrawingArea drawingArea) {
         super();
-        this.humanPlayer = drawingArea.getCurrentPlayer();
-        if (!humanPlayer.isHuman()) throw new playerNotHuman();
     }
 
     public void mousePressed(MouseEvent e)
