@@ -6,6 +6,7 @@ import game_model.GameModel;
 import game_model.hex.HexLine;
 import game_model.hex.HexPoint;
 import game_model.map.MapHexes;
+import game_view.graphics.DrawingArea;
 import game_view.sound.BuildingMessagesPlayer;
 
 public class BuildingView {
@@ -13,10 +14,11 @@ public class BuildingView {
     private PointsLinesGetter pointsLinesGetter;
     private BuildingGraphicsManager graphicsManager;
 
-    public BuildingView(BuildingMessagesPlayer buildingMessagesPlayer, BuildingGraphicsManager graphicsManager, MapHexes map) {
+    public BuildingView
+            (BuildingMessagesPlayer buildingMessagesPlayer, DrawingArea drawingArea, MapHexes map) {
         handler = new BuildingExceptionHandler(buildingMessagesPlayer);
+        graphicsManager = new BuildingGraphicsManager(drawingArea);
         pointsLinesGetter = new PointsLinesGetter(graphicsManager, map, handler);
-        this.graphicsManager = graphicsManager;
     }
 
     public HexPoint askForPoint() throws wrongPointCoordinates {

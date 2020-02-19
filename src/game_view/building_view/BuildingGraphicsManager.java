@@ -4,17 +4,18 @@ import game_view.graphics.DrawingArea;
 import java.util.concurrent.CountDownLatch;
 
 public class BuildingGraphicsManager {
-    private int mapLocationX, mapLocationY;
-    private final static int pointDetectionRadius = 15;
+    private final int mapLocationX, mapLocationY;
+    private static int pointDetectionRadius = 15;
     private DrawingArea drawingArea;
     public DrawingArea getDrawingArea() {
         return drawingArea;
     }
 
-    public BuildingGraphicsManager(DrawingArea drawingArea, int mapLocationX, int mapLocationY) {
+    BuildingGraphicsManager(DrawingArea drawingArea) {
         this.drawingArea = drawingArea;
-        this.mapLocationX = mapLocationX;
-        this.mapLocationY = mapLocationY;
+        int[] coordinates = drawingArea.getMapCoordinates();
+        mapLocationX = coordinates[0];
+        mapLocationY = coordinates[1];
     }
 
     void activateStartSettlementListener(PointsLinesGetter pointsLinesGetter) {
