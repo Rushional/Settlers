@@ -1,6 +1,7 @@
 package system;
 
-import game_view.building_view.BuildManagersRunner;
+import game_controller.BuildingController;
+import game_view.building_view.BuildingView;
 import game_view.graphics.DrawingArea;
 import game_model.GameModel;
 import game_view.sound.AudioPlayer;
@@ -31,10 +32,10 @@ public class GameInitiator {
         } catch (InterruptedException | InvocationTargetException e) {
             e.printStackTrace(System.out);
         }
-        BuildManagersRunner buildManagersRunner = new BuildManagersRunner
-                (gameModel, drawingArea.getBuildingGraphicsManager(), audioPlayer.getBuildingMessagesPlayer());
-        gameModel.assignBuildManagersRunner(buildManagersRunner);
-        gameModel.goSettling();
+        BuildingView buildingView = new BuildingView
+                (audioPlayer.getBuildingMessagesPlayer(), drawingArea.getBuildingGraphicsManager(), gameModel.getMap());
+        BuildingController buildingController = new BuildingController(gameModel.getBuildingModel(), buildingView);
+        buildingController.startingBuildingStage();
     }
 
     private void addComponentsToPane(Container pane, DrawingArea drawingArea) {

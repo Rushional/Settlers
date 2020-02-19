@@ -23,13 +23,26 @@ public class Players {
         return players[currentPlayer];
     }
 
-    Player nextPlayer() {
+    public Player getPlayerIndex(int index) {
+        return players[index];
+    }
+
+    //will be changed to allow for 3 players
+    public boolean currentIsLast() {
+        return currentPlayer == 3;
+    }
+
+    public boolean currentIsFirst() {
+        return currentPlayer == 0;
+    }
+
+    public Player nextPlayer() {
         if (currentPlayer == 3) currentPlayer = 0;
         else currentPlayer++;
         return players[currentPlayer];
     }
 
-    Player previousPlayer() {
+    public Player previousPlayer() {
         if (currentPlayer == 0) currentPlayer = 3;
         else currentPlayer--;
         return players[currentPlayer];

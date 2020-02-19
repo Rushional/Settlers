@@ -11,16 +11,17 @@ import game_model.hex.HexPoint;
 import game_model.map.MapHexes;
 import game_view.sound.BuildingMessagesPlayer;
 
-class StartBuildingManager {
+//TO BE DELETED
+class StartBuildingView {
     private Player player;
     private BuildingGraphicsManager graphicsManager;
     private StartBuildingAI startBuildingAI;
     private BuildingExceptionHandler buildingExceptionHandler;
     private PointsLinesGetter pointsLinesGetter;
 
-    StartBuildingManager(BuildingGraphicsManager graphicsManager,
-                         StartBuildingAI startBuildingAI, Player player, BuildingMessagesPlayer messagePlayer,
-                         MapHexes map) {
+    StartBuildingView(BuildingGraphicsManager graphicsManager,
+                      StartBuildingAI startBuildingAI, Player player, BuildingMessagesPlayer messagePlayer,
+                      MapHexes map) {
         this.player = player;
         this.graphicsManager = graphicsManager;
         this.startBuildingAI = startBuildingAI;
