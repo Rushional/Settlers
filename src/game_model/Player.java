@@ -1,9 +1,7 @@
 package game_model;
 
 import exceptions.*;
-
 import java.awt.Color;
-
 import static game_model.ResourcesSet.*;
 
 public class Player {
@@ -18,21 +16,13 @@ public class Player {
         resources = new ResourcesSet(7, 7, 2, 4, 3);
     }
 
-    public void payForSettlement() {
-        resources = subtractSet(resources, settlementSet());
+    public void subtractResources(ResourcesSet subtracted) {
+        resources = subtractSet(resources, subtracted);
     }
 
     public void increaseSettlementsAmount() {
         settlementsAmount++;
         if (settlementsAmount == 6) throw new tooManySettlements();
-    }
-
-    public void payForRoad() {
-        resources = subtractSet(resources, roadSet());
-    }
-
-    public void payForCity() {
-        resources = subtractSet(resources, citySet());
     }
 
     public void increaseCitiesAmount() {

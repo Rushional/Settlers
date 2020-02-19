@@ -5,6 +5,7 @@ import exceptions.lineHasRoad;
 import game_model.hex.HexLine;
 import game_model.Player;
 
+import static game_model.building_model.BuildingPlayerInteraction.payForRoad;
 import static game_model.building_model.BuildingPlayerInteraction.validateRoad;
 
 public class BuildRoad {
@@ -20,6 +21,6 @@ public class BuildRoad {
         if (line.hasRoad()) throw new lineHasRoad();
         validateRoad(player);
         line.addRoad(player);
-        player.payForRoad();
+        payForRoad(player);
     }
 }

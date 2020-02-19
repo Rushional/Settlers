@@ -4,8 +4,7 @@ import exceptions.*;
 import game_model.hex.HexPoint;
 import game_model.Player;
 
-import static game_model.building_model.BuildingPlayerInteraction.validateCity;
-import static game_model.building_model.BuildingPlayerInteraction.validateSettlement;
+import static game_model.building_model.BuildingPlayerInteraction.*;
 
 //This is an action object, it manages building on a point
 public class BuildOnPoint {
@@ -23,15 +22,14 @@ public class BuildOnPoint {
             validateSettlement(player);
             point.addSettlement(player);
             player.increaseSettlementsAmount();
-            player.payForSettlement();
+            payForSettlement(player);
         }
         else if (point.getBuilding().isSettlement()) {
             if (point.getSettlement().getPlayer() == player) {
-                //build city!
                 validateCity(player);
                 point.addCity(player);
                 player.increaseCitiesAmount();
-                player.payForCity();
+                payForCity(player);
                 System.out.println("Город построен!");
             }
             else throw new pointHasSettlement();
