@@ -2,14 +2,7 @@ package system;
 
 import game_controller.BuildingController;
 import game_view.GameView;
-import game_view.building_view.BuildingView;
-import game_view.graphics.DrawingArea;
 import game_model.GameModel;
-import game_view.sound.AudioPlayer;
-
-import javax.swing.*;
-import java.awt.*;
-import java.lang.reflect.InvocationTargetException;
 
 public class GameInitiator {
     private GameModel gameModel;
@@ -18,8 +11,8 @@ public class GameInitiator {
     public GameInitiator() {
         gameModel = new GameModel();
         gameView = new GameView(gameModel.getMap());
-        BuildingController buildingController = new BuildingController(gameModel.getBuildingModel(), gameView.getBuildingView());
-        buildingController.startingBuildingStage();
+        var buildingController = new BuildingController(gameModel.getStartBuildingModel(), gameView.getBuildingView());
+        buildingController.initiateGame();
     }
 
     public GameModel getGameModel() {

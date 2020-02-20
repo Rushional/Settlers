@@ -1,16 +1,16 @@
 package game_controller;
 
 import exceptions.buildingException;
-import game_model.building_model.BuildingModel;
+import game_model.building_model.StartBuildingModel;
 import game_model.hex.HexLine;
 import game_model.hex.HexPoint;
 import game_view.building_view.BuildingView;
 
 public class BuildingController {
-    private BuildingModel model;
+    private StartBuildingModel model;
     private BuildingView view;
 
-    public BuildingController(BuildingModel model, BuildingView view) {
+    public BuildingController(StartBuildingModel model, BuildingView view) {
         this.model = model;
         this.view = view;
     }
@@ -20,11 +20,11 @@ public class BuildingController {
         //turns
     }
 
-    public void startingBuildingStage() {
-        while (model.isStartBuildingStage()) {
+    private void startingBuildingStage() {
+        while (model.isRequiresBuilding()) {
             startBuildSettlement();
+            model.startBuildingAiActions();
         }
-
     }
 
     private void startBuildSettlement() {

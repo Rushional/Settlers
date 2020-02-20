@@ -1,20 +1,17 @@
-package AI;
+package game_model.building_model;
 
+import game_model.hex.HexLine;
 import game_model.hex.HexPoint;
-import game_model.Player;
-import game_model.building_model.StartBuildRoad;
-import game_model.building_model.StartBuildSettlement;
 import game_model.map.MapHexes;
-import exceptions.*;
 
-public class StartBuildingAI {
+class StartBuildingAI {
     //Obviously someday it won't be just an array of points to build in, but now it is
     private MapHexes map;
     private HexPoint[] points;
     private int currentPoint = 0;
 
     //array of points in "priority" order.
-    public StartBuildingAI(MapHexes map) {
+    StartBuildingAI(MapHexes map) {
         this.map = map;
         points = new HexPoint[12];
         points[0] = map.getTop1Left().getUpperLeftPoint();
@@ -31,34 +28,23 @@ public class StartBuildingAI {
         points[11] = map.getBottom1Middle2().getLowPoint();
     }
 
-    public void startBuildPoint(Player player) {
-        HexPoint point = null;
-        boolean settlementBuilt = false;
-        while (!settlementBuilt) {
-            try {
-                StartBuildSettlement startBuildSettlement = new StartBuildSettlement(player, getCurrentPoint());
-                startBuildSettlement.build();
-                point = getCurrentPoint();
-                increaseCurrentPoint();
-                settlementBuilt = true;
-            } catch (buildingNearby | pointHasSettlement failedToBuild) {
-                increaseCurrentPoint();
-            }
-        }
-        //this is really stupid...
-        StartBuildRoad startBuildRoad = new StartBuildRoad(player, point.getLine(0), point);
-        try {
-            startBuildRoad.build();
-        } catch (lineHasNoPoint lineHasNoPoint) {
-            throw new RuntimeException();
-        }
+    //So for now model will be running this until it works, but someday it will determine a point
+    //without building and there will be no need to rerun it - it will know what it's doing
+    HexPoint chooseStartPoint() {
+        HexPoint point = getCurrentPoint();
+        increaseCurrentPoint();
+        return point;
+    }
+
+    HexLine chooseStartLine(HexPoint point) {
+        return point.getLine(0);
     }
 
     private HexPoint getCurrentPoint() {
         return points[currentPoint];
     }
 
-    //this is not a *real* AI method so RuntimeException is probably fine
+    //this is not a *real* game_model.AI method so RuntimeException is fine
     private void increaseCurrentPoint() {
         currentPoint++;
         if (getCurrentPoint() == null) throw new RuntimeException();

@@ -1,18 +1,18 @@
 package game_model;
 
-import game_model.building_model.BuildingModel;
+import game_model.building_model.StartBuildingModel;
 import game_model.map.MapHexes;
 
 //This class starts the game and determines the whole flow of it
 public class GameModel {
     private MapHexes map;
     private Players players;
-    private BuildingModel buildingModel;
+    private StartBuildingModel startBuildingModel;
 
     public GameModel() {
         map = new MapHexes();
         players = new Players(false, true, false, false);
-        buildingModel = new BuildingModel(players);
+        startBuildingModel = new StartBuildingModel(players, map);
     }
 
     public Players getPlayers() {
@@ -27,7 +27,7 @@ public class GameModel {
         return players.getCurrentPlayer();
     }
 
-    public BuildingModel getBuildingModel() {
-        return buildingModel;
+    public StartBuildingModel getStartBuildingModel() {
+        return startBuildingModel;
     }
 }
