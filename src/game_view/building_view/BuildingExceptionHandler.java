@@ -70,6 +70,10 @@ class BuildingExceptionHandler {
             System.out.println("На пути город другого игрока");
             new Thread(() -> buildingMessagesPlayer.playException()).start();
         }
+        if (buildingException.getClass() == notEnoughForRoad.class) {
+            System.out.println("Недостаточно ресурсов на дорогу:(");
+            new Thread(() -> buildingMessagesPlayer.playException()).start();
+        }
     }
 
     private void defaultHandleSettlement(buildingException buildingException) {

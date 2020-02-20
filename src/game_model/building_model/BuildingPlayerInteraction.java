@@ -9,7 +9,9 @@ import static game_model.ResourcesSet.citySet;
 //This class checks if player can afford building
 class BuildingPlayerInteraction {
     static void validateSettlement(Player player) throws notEnoughForSettlement, maximumSettlementsAlready {
-        if (!player.getResources().enoughFor(ResourcesSet.settlementSet())) throw new notEnoughForSettlement();
+        if (!player.getResources().enoughFor(ResourcesSet.settlementSet())) {
+            throw new notEnoughForSettlement();
+        }
         if (player.getSettlementsAmount() >= 5) throw new maximumSettlementsAlready();
     }
 
