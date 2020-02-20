@@ -6,7 +6,7 @@ import game_model.hex.HexLine;
 import game_model.hex.HexPoint;
 import game_view.building_view.BuildingView;
 
-public class BuildingController {
+class BuildingController {
     private StartBuildingModel model;
     private BuildingView view;
 
@@ -27,7 +27,7 @@ public class BuildingController {
         HexPoint settlementPoint = null;
         while (!buildSuccessful) {
             try {
-                settlementPoint = view.askForPoint();
+                settlementPoint = view.requestPoint();
                 model.startBuildSettlement(settlementPoint);
                 buildSuccessful = true;
             } catch (buildingException buildingException) {
@@ -39,7 +39,7 @@ public class BuildingController {
         HexLine roadLine;
         while (!buildSuccessful) {
             try {
-                roadLine = view.askForLine();
+                roadLine = view.requestLine();
                 model.startBuildRoad(roadLine, settlementPoint);
                 buildSuccessful = true;
             } catch (buildingException buildingException) {

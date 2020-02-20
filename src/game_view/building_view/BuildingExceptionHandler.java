@@ -26,7 +26,7 @@ class BuildingExceptionHandler {
         }
     }
 
-    public void handleTurn(buildingException buildingException) {
+    void handleTurn(buildingException buildingException) {
         defaultHandleSettlement(buildingException);
         if (buildingException.getClass() == noRoadsNearby.class) {
             System.out.println("Рядом нет дорог");

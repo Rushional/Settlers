@@ -6,6 +6,10 @@ import game_model.hex.HexLine;
 import game_model.hex.HexPoint;
 import game_model.hex.PointsLinesController;
 import game_model.map.MapHexes;
+import game_view.TurnsView;
+import game_view.graphics.*;
+
+import java.util.concurrent.CountDownLatch;
 
 class PointsLinesGetter {
     private BuildingGraphicsManager graphicsManager;
@@ -46,16 +50,36 @@ class PointsLinesGetter {
         return line;
     }
 
-//    void assignPointCoordinates(int x, int y) {
-//        x1 = x;
-//        y1 = y;
-//    }
+    void waitForIntention(TurnsView turnsView, CountDownLatch latch) {
+        graphicsManager.activateTurnListener(this, turnsView,latch);
+    }
 
+    void assignIntentionCoordinates(TurnsView turnsView, CountDownLatch latch, int[] coordinates) {
+        turnsView.setIntention(intentionByCoordinates(coordinates));
+        latch.countDown();
+    }
+
+    //TO DO refactor to int[] coordinates
     void assignCoordinates(int x1, int y1, int x2, int y2) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
+    }
+
+    private ViewIntention intentionByCoordinates(int[] coordinates) {
+        if (coordinates[2]-coordinates[0] <= pointDetectionRadius && coordinates[3] - coordinates[1] <= pointDetectionRadius) {
+            try {
+                return new ViewIntentionBuildOnPoint(pointByCoordinates(coordinates[2], coordinates[3]));
+            } catch (wrongPointCoordinates wrongPoint) {
+                return new ViewIntentionWrongPoint();
+            }
+        }
+        else try {
+            return new ViewIntentionBuildRoad(lineByCoordinates(coordinates[0], coordinates[1], coordinates[2], coordinates[3]));
+        } catch (wrongRoadCoordinates wrongLine) {
+            return new ViewIntentionWrongLine();
+        }
     }
 
     private HexPoint pointByCoordinates(int x, int y) throws wrongPointCoordinates{

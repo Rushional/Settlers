@@ -1,7 +1,10 @@
 package game_view.graphics;
 
+import game_view.TurnsView;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.CountDownLatch;
 
 //shouldn't be public, it was done to test the listener
 public class ControlPanel extends JPanel {
@@ -21,15 +24,13 @@ public class ControlPanel extends JPanel {
         buttonConstraints.anchor = GridBagConstraints.PAGE_END;
         buttonConstraints.insets = new Insets(0,0,100,0);
         add(button, buttonConstraints);
-        var endTurnListener = new EndTurnListener("End turn button pressed!");
-        button.addEndTurnListener(endTurnListener);
     }
 
     public void removeEndTurnListener() {
         button.removeEndTurnListener();
     }
 
-    public void addEndTurnListener(EndTurnListener listener) {
-        button.addEndTurnListener(listener);
+    public void addEndTurnListener(CountDownLatch latch, TurnsView turnsView) {
+        button.addEndTurnListener(new EndTurnListener(latch, turnsView));
     }
 }

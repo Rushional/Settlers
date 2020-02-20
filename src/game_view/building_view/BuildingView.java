@@ -6,9 +6,13 @@ import exceptions.wrongRoadCoordinates;
 import game_model.hex.HexLine;
 import game_model.hex.HexPoint;
 import game_model.map.MapHexes;
+import game_view.TurnsView;
 import game_view.graphics.map_graphics.MapPanel;
 import game_view.sound.BuildingMessagesPlayer;
 
+import java.util.concurrent.CountDownLatch;
+
+//This probably violates(?) SRP, so maybe should be refactored
 public class BuildingView {
     private BuildingExceptionHandler handler;
     private PointsLinesGetter pointsLinesGetter;
@@ -21,12 +25,16 @@ public class BuildingView {
         pointsLinesGetter = new PointsLinesGetter(graphicsManager, map, handler);
     }
 
-    public HexPoint askForPoint() throws wrongPointCoordinates {
+    public HexPoint requestPoint() throws wrongPointCoordinates {
         return pointsLinesGetter.getPoint();
     }
 
-    public HexLine askForLine() throws wrongRoadCoordinates {
+    public HexLine requestLine() throws wrongRoadCoordinates {
         return pointsLinesGetter.getLine();
+    }
+
+    public void waitForIntention(CountDownLatch latch, TurnsView turnsView) {
+        pointsLinesGetter.waitForIntention(turnsView, latch);
     }
 
     public void handleStartSettlement(buildingException buildingException) {
@@ -37,7 +45,10 @@ public class BuildingView {
         handler.handleStartRoad(buildingException);
     }
 
-    //this will be refactored when I change graphics, but now it's okay
+    public void handleTurn(buildingException buildingException) {
+        handler.handleTurn(buildingException);
+    }
+
     public void showResult() {
         graphicsManager.repaint();
     }

@@ -9,6 +9,7 @@ public class Player {
     private boolean isHuman;
     private ResourcesSet resources;
     private int settlementsAmount = 0, citiesAmount = 0;
+    private short victoryPoints = 0;
 
     public Player(Color color, boolean isHuman) {
         this.color = color;
@@ -30,6 +31,10 @@ public class Player {
         if (citiesAmount == 5) throw new tooManyCities();
     }
 
+    public void addVictoryPoint() {
+        victoryPoints++;
+    }
+
     public Color getColor() {
         return color;
     }
@@ -48,5 +53,9 @@ public class Player {
 
     public int getCitiesAmount() {
         return citiesAmount;
+    }
+
+    short getVictoryPoints() {
+        return victoryPoints;
     }
 }

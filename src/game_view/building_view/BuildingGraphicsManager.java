@@ -1,5 +1,6 @@
 package game_view.building_view;
 
+import game_view.TurnsView;
 import game_view.graphics.map_graphics.MapPanel;
 import java.util.concurrent.CountDownLatch;
 
@@ -43,8 +44,8 @@ public class BuildingGraphicsManager {
         mapPanel.removeMouseListener(startRoadListener);
     }
 
-    public void activateTurnListener() {
-        mapPanel.replaceListener(new BuildListener(mapPanel));
+    void activateTurnListener(PointsLinesGetter pointsLinesGetter, TurnsView turnsView, CountDownLatch latch) {
+        mapPanel.replaceListener(new BuildListener(pointsLinesGetter, turnsView, latch));
     }
 
     //TO DO move repainting to another class

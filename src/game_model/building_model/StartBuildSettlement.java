@@ -6,20 +6,21 @@ import game_model.hex.HexPoint;
 import game_model.Player;
 
 //This is an action object, it manages building on a point at the start of the game
-public class StartBuildSettlement {
+class StartBuildSettlement {
     private Player player;
     private HexPoint point;
 
-    public StartBuildSettlement(Player player, HexPoint point) {
+    StartBuildSettlement(Player player, HexPoint point) {
         this.player = player;
         this.point = point;
     }
 
-    public void build() throws buildingNearby, pointHasSettlement
+    void build() throws buildingNearby, pointHasSettlement
     {
         if (!point.hasBuilding()) {
             point.startAddSettlement(player);
             player.increaseSettlementsAmount();
+            player.addVictoryPoint();
         }
         else throw new pointHasSettlement();
     }

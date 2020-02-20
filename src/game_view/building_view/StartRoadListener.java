@@ -7,8 +7,8 @@ import java.util.concurrent.CountDownLatch;
 
 public class StartRoadListener extends MouseInputAdapter {
     private int pressedX, pressedY;
-    private CountDownLatch latch;
     private PointsLinesGetter pointsLinesGetter;
+    private CountDownLatch latch;
 
     StartRoadListener(PointsLinesGetter pointsLinesGetter, CountDownLatch latch) {
         super();
