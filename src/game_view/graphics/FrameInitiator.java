@@ -6,25 +6,25 @@ import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 
 public class FrameInitiator {
-    private DrawingArea drawingArea;
+    private MapPanel mapPanel;
 
-    public DrawingArea initiateFrame(MapHexes map) {
+    public MapPanel initiateFrame(MapHexes map) {
         try {
             SwingUtilities.invokeAndWait(() -> {
-                drawingArea = new DrawingArea(map);
+                mapPanel = new MapPanel(map);
                 JFrame frame = new JFrame("Колонизаторы!");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                addComponentsToPane(frame.getContentPane(), drawingArea);
+                addComponentsToPane(frame.getContentPane(), mapPanel);
                 frame.pack();
                 frame.setVisible(true);
             });
         } catch (InterruptedException | InvocationTargetException e) {
             e.printStackTrace(System.out);
         }
-        return drawingArea;
+        return mapPanel;
     }
 
-    private void addComponentsToPane(Container pane, DrawingArea drawingArea) {
+    private void addComponentsToPane(Container pane, MapPanel mapPanel) {
         pane.setLayout(new GridBagLayout());
         GridBagConstraints drawingAreaConstraints = new GridBagConstraints();
         drawingAreaConstraints.fill = GridBagConstraints.NONE;
@@ -32,7 +32,7 @@ public class FrameInitiator {
         drawingAreaConstraints.weighty = 0;
         drawingAreaConstraints.gridx = 0;
         drawingAreaConstraints.gridy = 0;
-        pane.add(drawingArea, drawingAreaConstraints);
+        pane.add(mapPanel, drawingAreaConstraints);
 
         JPanel controlPanel = new JPanel();
         controlPanel.setBackground(new Color(116, 255, 207));

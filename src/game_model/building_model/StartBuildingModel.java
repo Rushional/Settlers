@@ -24,7 +24,6 @@ public class StartBuildingModel {
     }
 
     public void startBuildingAiActions() {
-        //run startBuilding for AI for as long as needed
         while (!players.getCurrentPlayer().isHuman() && requiresBuilding) startBuildAi();
     }
 

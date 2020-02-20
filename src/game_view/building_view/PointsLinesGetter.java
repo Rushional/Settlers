@@ -31,17 +31,13 @@ class PointsLinesGetter {
         return point;
     }
 
-    HexLine getLine() {
+    HexLine getLine() throws wrongRoadCoordinates {
         boolean awaitingLine = true;
         HexLine line = null;
         while (awaitingLine) {
             graphicsManager.activateStartRoadListener(this);
-            try {
-                line = lineByCoordinates(x1, y1, x2, y2);
-                awaitingLine = false;
-            } catch (wrongRoadCoordinates wrongRoadCoordinates) {
-                //TO DO add audio message wrong road coordinates
-            }
+            line = lineByCoordinates(x1, y1, x2, y2);
+            awaitingLine = false;
         }
         x1 = -100;
         y1 = -100;

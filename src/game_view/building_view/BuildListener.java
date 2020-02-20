@@ -1,7 +1,6 @@
 package game_view.building_view;
 
-import exceptions.*;
-import game_view.graphics.DrawingArea;
+import game_view.graphics.MapPanel;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -11,7 +10,7 @@ public class BuildListener extends MouseInputAdapter {
     private Point pressedPoint, releasedPoint;
     private int pressedX, pressedY, releasedX, releasedY;
 
-    BuildListener(DrawingArea drawingArea) {
+    BuildListener(MapPanel mapPanel) {
         super();
     }
 

@@ -1,18 +1,18 @@
 package game_view.building_view;
 
-import game_view.graphics.DrawingArea;
+import game_view.graphics.MapPanel;
 import java.util.concurrent.CountDownLatch;
 
 public class BuildingGraphicsManager {
     private final int mapLocationX, mapLocationY;
-    private DrawingArea drawingArea;
-    public DrawingArea getDrawingArea() {
-        return drawingArea;
+    private MapPanel mapPanel;
+    public MapPanel getMapPanel() {
+        return mapPanel;
     }
 
-    BuildingGraphicsManager(DrawingArea drawingArea) {
-        this.drawingArea = drawingArea;
-        int[] coordinates = drawingArea.getMapCoordinates();
+    BuildingGraphicsManager(MapPanel mapPanel) {
+        this.mapPanel = mapPanel;
+        int[] coordinates = mapPanel.getMapCoordinates();
         mapLocationX = coordinates[0];
         mapLocationY = coordinates[1];
     }
@@ -20,7 +20,7 @@ public class BuildingGraphicsManager {
     void activateStartSettlementListener(PointsLinesGetter pointsLinesGetter) {
         CountDownLatch startSettlementLatch = new CountDownLatch(1);
         StartSettlementListener startSettlementListener = new StartSettlementListener(pointsLinesGetter, startSettlementLatch);
-        drawingArea.replaceListener(startSettlementListener);
+        mapPanel.replaceListener(startSettlementListener);
         try {
             startSettlementLatch.await();
         } catch (InterruptedException e) {
@@ -31,7 +31,7 @@ public class BuildingGraphicsManager {
     void activateStartRoadListener(PointsLinesGetter pointsLinesGetter) {
         CountDownLatch startRoadLatch = new CountDownLatch(1);
         StartRoadListener startRoadListener = new StartRoadListener(pointsLinesGetter, startRoadLatch);
-        drawingArea.replaceListener(startRoadListener);
+        mapPanel.replaceListener(startRoadListener);
         try
         {
             startRoadLatch.await();
@@ -40,16 +40,16 @@ public class BuildingGraphicsManager {
         {
             Thread.currentThread().interrupt();
         }
-        drawingArea.removeMouseListener(startRoadListener);
+        mapPanel.removeMouseListener(startRoadListener);
     }
 
     public void activateTurnListener() {
-        drawingArea.replaceListener(new BuildListener(drawingArea));
+        mapPanel.replaceListener(new BuildListener(mapPanel));
     }
 
     //TO DO move repainting to another class
     void repaint() {
-        drawingArea.repaint();
+        mapPanel.repaint();
     }
 
     int getMapLocationX() {

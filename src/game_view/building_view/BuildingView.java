@@ -2,11 +2,11 @@ package game_view.building_view;
 
 import exceptions.buildingException;
 import exceptions.wrongPointCoordinates;
-import game_model.GameModel;
+import exceptions.wrongRoadCoordinates;
 import game_model.hex.HexLine;
 import game_model.hex.HexPoint;
 import game_model.map.MapHexes;
-import game_view.graphics.DrawingArea;
+import game_view.graphics.MapPanel;
 import game_view.sound.BuildingMessagesPlayer;
 
 public class BuildingView {
@@ -15,9 +15,9 @@ public class BuildingView {
     private BuildingGraphicsManager graphicsManager;
 
     public BuildingView
-            (BuildingMessagesPlayer buildingMessagesPlayer, DrawingArea drawingArea, MapHexes map) {
+            (BuildingMessagesPlayer buildingMessagesPlayer, MapPanel mapPanel, MapHexes map) {
         handler = new BuildingExceptionHandler(buildingMessagesPlayer);
-        graphicsManager = new BuildingGraphicsManager(drawingArea);
+        graphicsManager = new BuildingGraphicsManager(mapPanel);
         pointsLinesGetter = new PointsLinesGetter(graphicsManager, map, handler);
     }
 
@@ -25,7 +25,7 @@ public class BuildingView {
         return pointsLinesGetter.getPoint();
     }
 
-    public HexLine askForLine() {
+    public HexLine askForLine() throws wrongRoadCoordinates {
         return pointsLinesGetter.getLine();
     }
 

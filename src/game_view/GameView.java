@@ -2,7 +2,7 @@ package game_view;
 
 import game_model.map.MapHexes;
 import game_view.building_view.BuildingView;
-import game_view.graphics.DrawingArea;
+import game_view.graphics.MapPanel;
 import game_view.graphics.FrameInitiator;
 import game_view.sound.AudioPlayer;
 
@@ -13,8 +13,8 @@ public class GameView {
     public GameView(MapHexes map) {
         audioPlayer = new AudioPlayer();
         FrameInitiator frameInitiator = new FrameInitiator();
-        DrawingArea drawingArea = frameInitiator.initiateFrame(map);
-        buildingView = new BuildingView(audioPlayer.getBuildingMessagesPlayer(), drawingArea, map);
+        MapPanel mapPanel = frameInitiator.initiateFrame(map);
+        buildingView = new BuildingView(audioPlayer.getBuildingMessagesPlayer(), mapPanel, map);
     }
 
     public BuildingView getBuildingView() {

@@ -4,7 +4,6 @@ import exceptions.buildingException;
 import exceptions.lineHasRoad;
 import game_model.hex.HexLine;
 import game_model.Player;
-
 import static game_model.building_model.BuildingPlayerInteraction.payForRoad;
 import static game_model.building_model.BuildingPlayerInteraction.validateRoad;
 

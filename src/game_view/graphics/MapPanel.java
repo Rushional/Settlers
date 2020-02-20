@@ -5,12 +5,12 @@ import javax.swing.JPanel;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 
-public class DrawingArea extends JPanel {
+public class MapPanel extends JPanel {
     private static int mapLocationX = 210, mapLocationY = 30;
     private MapHexes map;
     private MouseInputAdapter currentListener = null;
 
-    DrawingArea(MapHexes map)
+    MapPanel(MapHexes map)
     {
         super();
         this.map = map;
@@ -19,9 +19,9 @@ public class DrawingArea extends JPanel {
     }
 
     public void replaceListener(MouseInputAdapter newListener) {
-        if (currentListener != null) this.removeMouseListener(currentListener);
+        if (currentListener != null) removeMouseListener(currentListener);
         currentListener = newListener;
-        this.addMouseListener(currentListener);
+        addMouseListener(currentListener);
     }
 
     @Override
