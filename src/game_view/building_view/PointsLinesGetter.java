@@ -8,8 +8,8 @@ import game_model.hex.PointsLinesController;
 import game_model.map.MapHexes;
 import game_view.TurnsView;
 import game_view.graphics.*;
-
 import java.util.concurrent.CountDownLatch;
+import static java.lang.Math.abs;
 
 class PointsLinesGetter {
     private BuildingGraphicsManager graphicsManager;
@@ -68,7 +68,7 @@ class PointsLinesGetter {
     }
 
     private ViewIntention intentionByCoordinates(int[] coordinates) {
-        if (coordinates[2]-coordinates[0] <= pointDetectionRadius && coordinates[3] - coordinates[1] <= pointDetectionRadius) {
+        if (abs(coordinates[2]-coordinates[0]) <= pointDetectionRadius && abs(coordinates[3] - coordinates[1]) <= pointDetectionRadius) {
             try {
                 return new ViewIntentionBuildOnPoint(pointByCoordinates(coordinates[2], coordinates[3]));
             } catch (wrongPointCoordinates wrongPoint) {
