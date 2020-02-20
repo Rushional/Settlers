@@ -14,7 +14,6 @@ class TurnsController {
     }
 
     void playTurns() {
-        gameModel.getPlayers().nextPlayer();
         while (gameModel.isOngoing()) {
             try {
                 gameModel.getTurnsModel().realizeIntention(gameView.getTurnsView().requestIntention());
