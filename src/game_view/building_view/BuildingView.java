@@ -6,7 +6,7 @@ import exceptions.wrongRoadCoordinates;
 import game_model.hex.HexLine;
 import game_model.hex.HexPoint;
 import game_model.map.MapHexes;
-import game_view.graphics.MapPanel;
+import game_view.graphics.map_graphics.MapPanel;
 import game_view.sound.BuildingMessagesPlayer;
 
 public class BuildingView {

@@ -1,4 +1,4 @@
-package game_view.graphics;
+package game_view.graphics.map_graphics;
 
 import game_model.hex.Hex;
 import game_model.hex.HexLine;

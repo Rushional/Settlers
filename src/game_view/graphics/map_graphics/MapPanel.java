@@ -1,4 +1,4 @@
-package game_view.graphics;
+package game_view.graphics.map_graphics;
 
 import game_model.map.MapHexes;
 import javax.swing.JPanel;
@@ -10,7 +10,7 @@ public class MapPanel extends JPanel {
     private MapHexes map;
     private MouseInputAdapter currentListener = null;
 
-    MapPanel(MapHexes map)
+    public MapPanel(MapHexes map)
     {
         super();
         this.map = map;

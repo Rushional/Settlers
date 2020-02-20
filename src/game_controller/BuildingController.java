@@ -10,17 +10,12 @@ public class BuildingController {
     private StartBuildingModel model;
     private BuildingView view;
 
-    public BuildingController(StartBuildingModel model, BuildingView view) {
+    BuildingController(StartBuildingModel model, BuildingView view) {
         this.model = model;
         this.view = view;
     }
 
-    public void initiateGame() {
-        startingBuildingStage();
-        //turns
-    }
-
-    private void startingBuildingStage() {
+    void startingBuildingStage() {
         while (model.isRequiresBuilding()) {
             startBuildSettlement();
             model.startBuildingAiActions();

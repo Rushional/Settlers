@@ -1,6 +1,6 @@
 package game_view.building_view;
 
-import game_view.graphics.MapPanel;
+import game_view.graphics.map_graphics.MapPanel;
 import java.util.concurrent.CountDownLatch;
 
 public class BuildingGraphicsManager {

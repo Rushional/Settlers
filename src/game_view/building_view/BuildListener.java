@@ -1,6 +1,6 @@
 package game_view.building_view;
 
-import game_view.graphics.MapPanel;
+import game_view.graphics.map_graphics.MapPanel;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
