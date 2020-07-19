@@ -2,7 +2,10 @@ package controllers;
 
 import exceptions.buildingException;
 import models.GameModel;
+import services.ProcessHarvestStage;
 import views.GameView;
+import views.graphics.ViewIntention;
+import views.graphics.ViewIntentionEndTurn;
 
 class TurnsController {
     private GameModel gameModel;
@@ -15,12 +18,27 @@ class TurnsController {
 
     void playTurns() {
         while (gameModel.isOngoing()) {
-            try {
-                gameModel.getTurnsModel().realizeIntention(gameView.getTurnsView().requestIntention());
-            } catch (buildingException buildingException) {
-                gameView.getBuildingView().handleTurn(buildingException);
-            }
-            gameView.showTurnResult();
+            processTurn();
         }
+    }
+
+    private void processTurn() {
+        ProcessHarvestStage.call(gameModel.getMap());
+        ViewIntention intention = gameView.getTurnsView().requestIntention();
+        while (!(intention instanceof ViewIntentionEndTurn)) {
+            processIntention(intention);
+            intention = gameView.getTurnsView().requestIntention();
+        }
+//        end turn
+        processIntention(intention);
+    }
+
+    private void processIntention(ViewIntention intention) {
+        try {
+            gameModel.getTurnsModel().realizeIntention(intention);
+        } catch (buildingException buildingException) {
+            gameView.getBuildingView().handleTurn(buildingException);
+        }
+        gameView.showTurnResult();
     }
 }

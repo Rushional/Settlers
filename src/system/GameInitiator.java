@@ -12,9 +12,6 @@ public class GameInitiator {
 
     public GameInitiator() {
         gameModel = new GameModel();
-        ProcessHarvestStage.call(gameModel.getMap());
-        ProcessHarvestStage.call(gameModel.getMap());
-        ProcessHarvestStage.call(gameModel.getMap());
         gameView = new GameView(gameModel.getMap());
         gameController = new GameController(gameModel, gameView);
         gameController.startGame();

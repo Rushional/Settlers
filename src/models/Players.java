@@ -27,7 +27,7 @@ public class Players {
         return players[index];
     }
 
-    //will be changed to allow for 3 players
+//    TODO: change to allow for 3 players
     public boolean currentIsLast() {
         return currentPlayer == 3;
     }

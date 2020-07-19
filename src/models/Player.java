@@ -15,7 +15,7 @@ public class Player {
         this.color = color;
         this.isHuman = isHuman;
 //        resources = new ResourcesSet(7, 7, 2, 4, 3);
-        resources = new ResourcesSet(99, 99, 99, 99, 102);
+        resources = new ResourcesSet(0, 0, 0, 0, 0);
     }
 
     public void subtractResources(ResourcesSet subtracted) {
