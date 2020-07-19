@@ -1,8 +1,9 @@
 package system;
 
-import game_controller.GameController;
-import game_view.GameView;
-import game_model.GameModel;
+import controllers.GameController;
+import services.ProcessHarvestStage;
+import views.GameView;
+import models.GameModel;
 
 public class GameInitiator {
     private GameModel gameModel;
@@ -11,6 +12,9 @@ public class GameInitiator {
 
     public GameInitiator() {
         gameModel = new GameModel();
+        ProcessHarvestStage.call(gameModel.getMap());
+        ProcessHarvestStage.call(gameModel.getMap());
+        ProcessHarvestStage.call(gameModel.getMap());
         gameView = new GameView(gameModel.getMap());
         gameController = new GameController(gameModel, gameView);
         gameController.startGame();
