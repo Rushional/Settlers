@@ -47,15 +47,43 @@ public class ResourcesSet {
         return new ResourcesSet(0, 0, 1, 1, 1);
     }
 
-    public static ResourcesSet singleWood() { return new ResourcesSet(1,0,0,0,0); }
-    public static ResourcesSet singleBricks() { return new ResourcesSet(0,1,0,0,0); }
-    public static ResourcesSet singleSheep() { return new ResourcesSet(0,0,1,0,0); }
-    public static ResourcesSet singleWheat() { return new ResourcesSet(0,0,0,1,0); }
-    public static ResourcesSet singleOre() { return new ResourcesSet(0,0,0,0,1); }
+    public static ResourcesSet getOneOf(ResourceType type) {
+        switch (type) {
+            case WOOD:
+                return new ResourcesSet(1,0,0,0,0);
+            case BRICKS:
+                return new ResourcesSet(0,1,0,0,0);
+            case SHEEP:
+                return new ResourcesSet(0,0,1,0,0);
+            case WHEAT:
+                return new ResourcesSet(0,0,0,1,0);
+            case ORE:
+                return new ResourcesSet(0,0,0,0,1);
+            default:
+                return null;
+        }
+    }
+
+    public static ResourcesSet getTwoOf(ResourceType type) {
+        switch (type) {
+            case WOOD:
+                return new ResourcesSet(2,0,0,0,0);
+            case BRICKS:
+                return new ResourcesSet(0,2,0,0,0);
+            case SHEEP:
+                return new ResourcesSet(0,0,2,0,0);
+            case WHEAT:
+                return new ResourcesSet(0,0,0,2,0);
+            case ORE:
+                return new ResourcesSet(0,0,0,0,2);
+            default:
+                return null;
+        }
+    }
 
     @Override
     public String toString() {
-        return wood + ", " + bricks + ", " + sheep + ", " + wheat + ", " + ore;
+        return "Wood: " + wood + ", bricks: " + bricks + ", sheep: " + sheep + ", wheat: " + wheat + ", ore: " + ore;
     }
 
     int getWood() { return wood; }

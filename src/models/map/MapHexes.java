@@ -1,5 +1,6 @@
 package models.map;
 
+import models.ResourceType;
 import models.hex.*;
 
 import java.util.LinkedList;
@@ -27,25 +28,25 @@ public class MapHexes {
     private Hex bottom2RightHex;
 
     public MapHexes() {
-        top1LeftHex = new HexWood(6);
-        top1MiddleHex = new HexSheep(3);
-        top1RightHex = new HexSheep(8);
-        top2LeftHex = new HexWheat(2);
-        top2Middle2Hex = new HexOre(4);
-        top2Middle3Hex = new HexWheat(5);
-        top2RightHex = new HexWood(10);
-        middleLeftHex = new HexWood(5);
-        middle2Hex = new HexBricks(9);
-        middle3Hex = new HexDesert();
-        middle4Hex = new HexOre(6);
-        middleRightHex = new HexWheat(9);
-        bottom1LeftHex = new HexWheat(10);
-        bottom1Middle2Hex = new HexOre(11);
-        bottom1Middle3Hex = new HexWood(3);
-        bottom1RightHex = new HexSheep(12);
-        bottom2LeftHex = new HexBricks(8);
-        bottom2MiddleHex = new HexSheep(4);
-        bottom2RightHex = new HexBricks(11);
+        top1LeftHex = new ResourceHex(6, ResourceType.WOOD);
+        top1MiddleHex = new ResourceHex(3, ResourceType.SHEEP);
+        top1RightHex = new ResourceHex(8, ResourceType.SHEEP);
+        top2LeftHex = new ResourceHex(2, ResourceType.WHEAT);
+        top2Middle2Hex = new ResourceHex(4, ResourceType.ORE);
+        top2Middle3Hex = new ResourceHex(5, ResourceType.WHEAT);
+        top2RightHex = new ResourceHex(10, ResourceType.WOOD);
+        middleLeftHex = new ResourceHex(5, ResourceType.WOOD);
+        middle2Hex = new ResourceHex(9, ResourceType.BRICKS);
+        middle3Hex = new DesertHex();
+        middle4Hex = new ResourceHex(6, ResourceType.ORE);
+        middleRightHex = new ResourceHex(9, ResourceType.WHEAT);
+        bottom1LeftHex = new ResourceHex(10, ResourceType.WHEAT);
+        bottom1Middle2Hex = new ResourceHex(11, ResourceType.ORE);
+        bottom1Middle3Hex = new ResourceHex(3, ResourceType.WOOD);
+        bottom1RightHex = new ResourceHex(12, ResourceType.SHEEP);
+        bottom2LeftHex = new ResourceHex(8, ResourceType.BRICKS);
+        bottom2MiddleHex = new ResourceHex(4, ResourceType.SHEEP);
+        bottom2RightHex = new ResourceHex(11, ResourceType.BRICKS);
         connectHexes();
     }
 
@@ -91,6 +92,29 @@ public class MapHexes {
         listHexes.add(bottom2LeftHex);
         listHexes.add(bottom2MiddleHex);
         listHexes.add(bottom2RightHex);
+        return listHexes;
+    }
+
+    public List<ResourceHex> getResourceHexesList() {
+        List<ResourceHex> listHexes = new LinkedList<ResourceHex>();
+        listHexes.add((ResourceHex)top1LeftHex);
+        listHexes.add((ResourceHex)top1MiddleHex);
+        listHexes.add((ResourceHex)top1RightHex);
+        listHexes.add((ResourceHex)top2LeftHex);
+        listHexes.add((ResourceHex)top2Middle2Hex);
+        listHexes.add((ResourceHex)top2Middle3Hex);
+        listHexes.add((ResourceHex)top2RightHex);
+        listHexes.add((ResourceHex)middleLeftHex);
+        listHexes.add((ResourceHex)middle2Hex);
+        listHexes.add((ResourceHex)middle4Hex);
+        listHexes.add((ResourceHex)middleRightHex);
+        listHexes.add((ResourceHex)bottom1LeftHex);
+        listHexes.add((ResourceHex)bottom1Middle2Hex);
+        listHexes.add((ResourceHex)bottom1Middle3Hex);
+        listHexes.add((ResourceHex)bottom1RightHex);
+        listHexes.add((ResourceHex)bottom2LeftHex);
+        listHexes.add((ResourceHex)bottom2MiddleHex);
+        listHexes.add((ResourceHex)bottom2RightHex);
         return listHexes;
     }
 

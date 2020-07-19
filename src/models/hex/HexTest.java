@@ -20,7 +20,7 @@ class HexTest {
 
     @Test
     void hexCompositionTest() {
-        Hex hex = new HexWood(8);
+        Hex hex = new DesertHex();
         assertTrue(checkLinePoint(hex.getGeometry().upperRightLine, hex.getGeometry().upPoint));
         assertTrue(checkLinePoint(hex.getGeometry().upperRightLine, hex.getGeometry().upperRightPoint));
         assertTrue(checkLinePoint(hex.getGeometry().middleRightLine, hex.getGeometry().upperRightPoint));

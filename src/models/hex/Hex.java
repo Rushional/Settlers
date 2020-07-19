@@ -1,24 +1,14 @@
 package models.hex;
 
-import models.ResourcesSet;
-
 import java.util.LinkedList;
 import java.util.List;
 
-public class Hex {
-    private int diceValue;
-
+public abstract class Hex {
     private HexGeometry geometry;
 
-    public Hex(int diceValue) {
-        this.diceValue = diceValue;
+    Hex() {
         geometry = new HexGeometry();
     }
-
-    public ResourcesSet getResource() {
-        return null;
-    }
-
 
     public List<Building> getBuildings() {
         List<Building> buildingsList = new LinkedList<>();
@@ -26,10 +16,6 @@ public class Hex {
             if (hex.getBuilding() != null) buildingsList.add(hex.getBuilding());
         }
         return buildingsList;
-    }
-
-    public int getDiceValue() {
-        return diceValue;
     }
 
     public HexGeometry getGeometry() {
