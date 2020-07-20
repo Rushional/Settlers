@@ -49,5 +49,6 @@ class BuildingController {
             }
         }
         view.showResult();
+        ShowPlayersResources.call(model.getPlayers().getCurrentPlayer());
     }
 }

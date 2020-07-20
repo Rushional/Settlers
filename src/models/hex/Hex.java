@@ -18,6 +18,8 @@ public abstract class Hex {
         return buildingsList;
     }
 
+    public abstract String getHexTypeName();
+
     public HexGeometry getGeometry() {
         return geometry;
     }

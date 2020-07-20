@@ -3,6 +3,7 @@ package views.graphics.map_graphics;
 import models.hex.Hex;
 import models.hex.HexLine;
 import models.hex.HexPoint;
+import models.hex.ValuedHex;
 
 import java.awt.*;
 
@@ -34,6 +35,21 @@ class HexDrawer {
     }
 
     void drawHex() {
+        if (hex instanceof ValuedHex) {
+            int diceValue = ((ValuedHex) hex).getDiceValue();
+            int diceValuePointX;
+            int diceValuePointY = upPointY + 74;
+            if (diceValue < 10) diceValuePointX = upPointX - 3;
+            else diceValuePointX = upPointX - 7;
+            g2d.drawString(String.valueOf(diceValue), diceValuePointX, diceValuePointY);
+        }
+        String typeName = hex.getHexTypeName();
+        int typeNameWidth = g2d.getFontMetrics().stringWidth(typeName);
+        int typeNameShiftX = typeNameWidth/2;
+        int typeNameShiftY;
+        if (hex instanceof ValuedHex) typeNameShiftY = 85;
+        else typeNameShiftY = 74;
+        g2d.drawString(typeName, upPointX - typeNameShiftX, upPointY + typeNameShiftY);
         drawHexLine(g2d, hex.getGeometry().getUpperRightLine(), upPointX, upPointY, upperRightPointX, upperRightPointY);
         if (hex.getGeometry().getUpperRightLine().hasRoad())
             BuildDrawer.drawRoadRightDown(g2d, hex.getGeometry().getUpperRightLine().getRoad(), upPointX, upPointY);

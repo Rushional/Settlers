@@ -13,4 +13,9 @@ public class ResourceHex extends ValuedHex {
     public ResourceType getResourceType() {
         return resourceType;
     }
+
+    @Override
+    public String getHexTypeName() {
+        return resourceType.name();
+    }
 }
