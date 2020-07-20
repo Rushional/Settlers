@@ -1,6 +1,7 @@
 package models.hex;
 
 import models.Player;
+import models.PlayerColor;
 
 import java.awt.Color;
 
@@ -11,7 +12,7 @@ public class Road {
         this.player = player;
     }
 
-    public Color getColor() {
+    public PlayerColor getColor() {
         return player.getColor();
     }
 

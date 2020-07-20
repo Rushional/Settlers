@@ -3,19 +3,19 @@ package models;
 import java.awt.*;
 
 public class Players {
-    private Player redPlayer, bluePlayer, greenPlayer, violetPlayer;
+    private Player redPlayer, bluePlayer, greenPlayer, purplePlayer;
     private Player[] players = new Player[4];
     private short currentPlayer;
 
-    Players(boolean isRedHuman, boolean isBlueHuman, boolean isGreenHuman, boolean isVioletHuman) {
-        redPlayer = new Player(new Color(249, 0, 8), isRedHuman);
-        bluePlayer = new Player(new Color(45, 65, 139), isBlueHuman);
-        greenPlayer = new Player(new Color(0, 180, 0), isGreenHuman);
-        violetPlayer = new Player(new Color(145, 90, 167), isVioletHuman);
+    Players(boolean isRedHuman, boolean isBlueHuman, boolean isGreenHuman, boolean isPurpleHuman) {
+        redPlayer = new Player(PlayerColor.Red, isRedHuman);
+        bluePlayer = new Player(PlayerColor.Blue, isBlueHuman);
+        greenPlayer = new Player(PlayerColor.Green, isGreenHuman);
+        purplePlayer = new Player(PlayerColor.Purple, isPurpleHuman);
         players[0] = redPlayer;
         players[1] = bluePlayer;
         players[2] = greenPlayer;
-        players[3] = violetPlayer;
+        players[3] = purplePlayer;
         currentPlayer = 0;
     }
 
@@ -60,7 +60,7 @@ public class Players {
         return greenPlayer;
     }
 
-    public Player getVioletPlayer() {
-        return violetPlayer;
+    public Player getPurplePlayer() {
+        return purplePlayer;
     }
 }

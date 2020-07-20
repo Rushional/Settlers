@@ -65,4 +65,8 @@ public class StartBuildingModel {
     public boolean isRequiresBuilding() {
         return requiresBuilding;
     }
+
+    public Players getPlayers() {
+        return players;
+    }
 }

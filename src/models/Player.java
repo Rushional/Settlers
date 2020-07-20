@@ -5,13 +5,13 @@ import java.awt.Color;
 import static models.ResourcesSet.*;
 
 public class Player {
-    private Color color;
+    private PlayerColor color;
     private boolean isHuman;
     private ResourcesSet resources;
     private int settlementsAmount = 0, citiesAmount = 0;
     private short victoryPoints = 0;
 
-    public Player(Color color, boolean isHuman) {
+    public Player(PlayerColor color, boolean isHuman) {
         this.color = color;
         this.isHuman = isHuman;
 //        resources = new ResourcesSet(7, 7, 2, 4, 3);
@@ -40,7 +40,7 @@ public class Player {
         victoryPoints++;
     }
 
-    public Color getColor() {
+    public PlayerColor getColor() {
         return color;
     }
 

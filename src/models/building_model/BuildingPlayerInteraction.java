@@ -16,7 +16,7 @@ class BuildingPlayerInteraction {
     }
 
     static void validateRoad(Player player) throws notEnoughForRoad {
-        if (!player.getResources().enoughFor(ResourcesSet.settlementSet())) throw new notEnoughForRoad();
+        if (!player.getResources().enoughFor(ResourcesSet.roadSet())) throw new notEnoughForRoad();
     }
 
     static void validateCity(Player player) throws notEnoughForCity, maximumCitiesAlready {

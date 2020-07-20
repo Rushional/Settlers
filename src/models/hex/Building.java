@@ -1,6 +1,8 @@
 package models.hex;
 
 import models.Player;
+import models.PlayerColor;
+
 import java.awt.Color;
 
 public abstract class Building {
@@ -22,7 +24,7 @@ public abstract class Building {
         return (getClass() == City.class);
     }
 
-    public Color getColor() {
+    public PlayerColor getColor() {
         return player.getColor();
     }
 }

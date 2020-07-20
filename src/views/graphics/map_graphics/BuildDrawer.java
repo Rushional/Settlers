@@ -9,14 +9,14 @@ import java.awt.Color;
 
 class BuildDrawer {
     static void drawSettlement(Graphics2D g2d, Settlement settlement, int x, int y) {
-        g2d.setColor(settlement.getColor());
+        g2d.setColor(BuildingColors.convertToRGB(settlement.getColor()));
         g2d.drawOval(x - 15, y - 15, 30, 30);
         g2d.fillOval(x - 15, y - 15, 30, 30);
         g2d.setColor(Color.black);
     }
 
     static void drawCity(Graphics2D g2d, City city, int x, int y) {
-        g2d.setColor(city.getColor().darker());
+        g2d.setColor(BuildingColors.convertToRGB(city.getColor()).darker());
         g2d.drawOval(x - 16, y - 16, 32, 32);
         g2d.fillOval(x - 16, y - 16, 32, 32);
         g2d.setColor(Color.black);
@@ -37,7 +37,7 @@ class BuildDrawer {
         yPoints[1] = upperPointY +18;
         yPoints[2] = upperPointY + 31;
         yPoints[3] = upperPointY + 14;
-        g2d.setColor(road.getColor());
+        g2d.setColor(BuildingColors.convertToRGB(road.getColor()));
         g2d.drawPolygon(xPoints, yPoints, 4);
         g2d.fillPolygon(xPoints, yPoints, 4);
         g2d.setColor(Color.black);
@@ -58,7 +58,7 @@ class BuildDrawer {
         yPoints[1] = upperPointY + 14;
         yPoints[2] = upperPointY + 31;
         yPoints[3] = upperPointY + 18;
-        g2d.setColor(road.getColor());
+        g2d.setColor(BuildingColors.convertToRGB(road.getColor()));
         g2d.drawPolygon(xPoints, yPoints, 4);
         g2d.fillPolygon(xPoints, yPoints, 4);
         g2d.setColor(Color.black);
@@ -75,7 +75,7 @@ class BuildDrawer {
         yPoints[1] = upperPointY + 17;
         yPoints[2] = upperPointY + 57;
         yPoints[3] = upperPointY + 57;
-        g2d.setColor(road.getColor());
+        g2d.setColor(BuildingColors.convertToRGB(road.getColor()));
         g2d.drawPolygon(xPoints, yPoints, 4);
         g2d.fillPolygon(xPoints, yPoints, 4);
         g2d.setColor(Color.black);

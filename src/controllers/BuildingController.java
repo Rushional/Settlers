@@ -5,6 +5,7 @@ import models.building_model.StartBuildingModel;
 import models.hex.HexLine;
 import models.hex.HexPoint;
 import views.building_view.BuildingView;
+import views.graphics.gui.ShowPlayersResources;
 
 class BuildingController {
     private StartBuildingModel model;
@@ -17,6 +18,7 @@ class BuildingController {
 
     void startingBuildingStage() {
         while (model.isRequiresBuilding()) {
+            System.out.println(model.getPlayers().getCurrentPlayer().getColor() + " player's turn to build a settlement!");
             startBuildSettlement();
             model.startBuildingAiActions();
         }

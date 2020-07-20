@@ -28,25 +28,25 @@ public class MapHexes {
     private Hex bottom2RightHex;
 
     public MapHexes() {
-        top1LeftHex = new ResourceHex(6, ResourceType.WOOD);
-        top1MiddleHex = new ResourceHex(3, ResourceType.SHEEP);
-        top1RightHex = new ResourceHex(8, ResourceType.SHEEP);
-        top2LeftHex = new ResourceHex(2, ResourceType.WHEAT);
-        top2Middle2Hex = new ResourceHex(4, ResourceType.ORE);
-        top2Middle3Hex = new ResourceHex(5, ResourceType.WHEAT);
-        top2RightHex = new ResourceHex(10, ResourceType.WOOD);
-        middleLeftHex = new ResourceHex(5, ResourceType.WOOD);
-        middle2Hex = new ResourceHex(9, ResourceType.BRICKS);
+        top1LeftHex = new ResourceHex(6, ResourceType.Wood);
+        top1MiddleHex = new ResourceHex(3, ResourceType.Sheep);
+        top1RightHex = new ResourceHex(8, ResourceType.Sheep);
+        top2LeftHex = new ResourceHex(2, ResourceType.Wheat);
+        top2Middle2Hex = new ResourceHex(4, ResourceType.Ore);
+        top2Middle3Hex = new ResourceHex(5, ResourceType.Wheat);
+        top2RightHex = new ResourceHex(10, ResourceType.Wood);
+        middleLeftHex = new ResourceHex(5, ResourceType.Wood);
+        middle2Hex = new ResourceHex(9, ResourceType.Bricks);
         middle3Hex = new DesertHex();
-        middle4Hex = new ResourceHex(6, ResourceType.ORE);
-        middleRightHex = new ResourceHex(9, ResourceType.WHEAT);
-        bottom1LeftHex = new ResourceHex(10, ResourceType.WHEAT);
-        bottom1Middle2Hex = new ResourceHex(11, ResourceType.ORE);
-        bottom1Middle3Hex = new ResourceHex(3, ResourceType.WOOD);
-        bottom1RightHex = new ResourceHex(12, ResourceType.SHEEP);
-        bottom2LeftHex = new ResourceHex(8, ResourceType.BRICKS);
-        bottom2MiddleHex = new ResourceHex(4, ResourceType.SHEEP);
-        bottom2RightHex = new ResourceHex(11, ResourceType.BRICKS);
+        middle4Hex = new ResourceHex(6, ResourceType.Ore);
+        middleRightHex = new ResourceHex(9, ResourceType.Wheat);
+        bottom1LeftHex = new ResourceHex(10, ResourceType.Wheat);
+        bottom1Middle2Hex = new ResourceHex(11, ResourceType.Ore);
+        bottom1Middle3Hex = new ResourceHex(3, ResourceType.Wood);
+        bottom1RightHex = new ResourceHex(12, ResourceType.Sheep);
+        bottom2LeftHex = new ResourceHex(8, ResourceType.Bricks);
+        bottom2MiddleHex = new ResourceHex(4, ResourceType.Sheep);
+        bottom2RightHex = new ResourceHex(11, ResourceType.Bricks);
         connectHexes();
     }
 

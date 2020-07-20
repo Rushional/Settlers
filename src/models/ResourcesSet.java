@@ -49,32 +49,32 @@ public class ResourcesSet {
 
     public static ResourcesSet getOneOf(ResourceType type) {
         switch (type) {
-            case WOOD:
+            case Wood:
                 return new ResourcesSet(1,0,0,0,0);
-            case BRICKS:
+            case Bricks:
                 return new ResourcesSet(0,1,0,0,0);
-            case SHEEP:
+            case Sheep:
                 return new ResourcesSet(0,0,1,0,0);
-            case WHEAT:
+            case Wheat:
                 return new ResourcesSet(0,0,0,1,0);
-            case ORE:
+            case Ore:
                 return new ResourcesSet(0,0,0,0,1);
             default:
-                return null;
+                throw new RuntimeException();
         }
     }
 
     public static ResourcesSet getTwoOf(ResourceType type) {
         switch (type) {
-            case WOOD:
+            case Wood:
                 return new ResourcesSet(2,0,0,0,0);
-            case BRICKS:
+            case Bricks:
                 return new ResourcesSet(0,2,0,0,0);
-            case SHEEP:
+            case Sheep:
                 return new ResourcesSet(0,0,2,0,0);
-            case WHEAT:
+            case Wheat:
                 return new ResourcesSet(0,0,0,2,0);
-            case ORE:
+            case Ore:
                 return new ResourcesSet(0,0,0,0,2);
             default:
                 return null;
