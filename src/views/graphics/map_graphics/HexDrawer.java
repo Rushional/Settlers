@@ -35,21 +35,7 @@ class HexDrawer {
     }
 
     void drawHex() {
-        if (hex instanceof ValuedHex) {
-            int diceValue = ((ValuedHex) hex).getDiceValue();
-            int diceValuePointX;
-            int diceValuePointY = upPointY + 74;
-            if (diceValue < 10) diceValuePointX = upPointX - 3;
-            else diceValuePointX = upPointX - 7;
-            g2d.drawString(String.valueOf(diceValue), diceValuePointX, diceValuePointY);
-        }
-        String typeName = hex.getHexTypeName();
-        int typeNameWidth = g2d.getFontMetrics().stringWidth(typeName);
-        int typeNameShiftX = typeNameWidth/2;
-        int typeNameShiftY;
-        if (hex instanceof ValuedHex) typeNameShiftY = 85;
-        else typeNameShiftY = 74;
-        g2d.drawString(typeName, upPointX - typeNameShiftX, upPointY + typeNameShiftY);
+        drawValueAndType();
         drawHexLine(g2d, hex.getGeometry().getUpperRightLine(), upPointX, upPointY, upperRightPointX, upperRightPointY);
         if (hex.getGeometry().getUpperRightLine().hasRoad())
             BuildDrawer.drawRoadRightDown(g2d, hex.getGeometry().getUpperRightLine().getRoad(), upPointX, upPointY);
@@ -87,7 +73,24 @@ class HexDrawer {
         if (point.hasSettlement())
             BuildDrawer.drawSettlement(g2d, point.getSettlement(), pointX, pointY);
         else BuildDrawer.drawCity(g2d, point.getCity(), pointX, pointY);
+    }
 
+    private void drawValueAndType() {
+        if (hex instanceof ValuedHex) {
+            int diceValue = ((ValuedHex) hex).getDiceValue();
+            int diceValuePointX;
+            int diceValuePointY = upPointY + 74;
+            if (diceValue < 10) diceValuePointX = upPointX - 3;
+            else diceValuePointX = upPointX - 7;
+            g2d.drawString(String.valueOf(diceValue), diceValuePointX, diceValuePointY);
+        }
+        String typeName = hex.getHexTypeName();
+        int typeNameWidth = g2d.getFontMetrics().stringWidth(typeName);
+        int typeNameShiftX = typeNameWidth/2;
+        int typeNameShiftY;
+        if (hex instanceof ValuedHex) typeNameShiftY = 85;
+        else typeNameShiftY = 74;
+        g2d.drawString(typeName, upPointX - typeNameShiftX, upPointY + typeNameShiftY);
     }
 
     //TO DO - MAKE A COOL METHOD THAT TAKES A LINE AND DRAWS IT, COORDINATES FOUND SOMEWHERE
