@@ -3,17 +3,16 @@ package views.building_view;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.util.concurrent.CountDownLatch;
 
 public class StartSettlementListener extends MouseInputAdapter {
     private PointsLinesGetter pointsLinesGetter;
-    private CountDownLatch latch;
+    private Object monitor;
     private int pressedX, pressedY;
 
-    StartSettlementListener(PointsLinesGetter pointsLinesGetter, CountDownLatch latch)
+    StartSettlementListener(PointsLinesGetter pointsLinesGetter, Object monitor)
     {
         super();
-        this.latch = latch;
+        this.monitor = monitor;
         this.pointsLinesGetter = pointsLinesGetter;
     }
 
@@ -30,6 +29,8 @@ public class StartSettlementListener extends MouseInputAdapter {
         int releasedX = releasedPoint.x;
         int releasedY = releasedPoint.y;
         pointsLinesGetter.assignCoordinates(pressedX, pressedY, releasedX, releasedY);
-        latch.countDown();
+        synchronized (monitor) {
+            monitor.notify();
+        }
     }
 }

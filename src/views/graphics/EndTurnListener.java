@@ -3,21 +3,22 @@ package views.graphics;
 import views.TurnsView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.CountDownLatch;
 
 public class EndTurnListener implements ActionListener {
     private final TurnsView turnsView;
-    private CountDownLatch latch;
+    private Object monitor;
 
-    EndTurnListener(CountDownLatch latch, TurnsView turnsView) {
+    EndTurnListener(Object monitor, TurnsView turnsView) {
         super();
-        this.latch = latch;
+        this.monitor = monitor;
         this.turnsView = turnsView;
     }
 
     public void actionPerformed(ActionEvent e) {
         System.out.println("End turn button pressed!");
         turnsView.setIntention(new ViewIntentionEndTurn());
-        latch.countDown();
+        synchronized (monitor) {
+            monitor.notify();
+        }
     }
 }

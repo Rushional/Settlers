@@ -5,21 +5,18 @@ import views.TurnsView;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.util.concurrent.CountDownLatch;
-
-import static java.lang.Math.abs;
 
 public class BuildListener extends MouseInputAdapter {
     private PointsLinesGetter pointsLinesGetter;
     private TurnsView turnsView;
-    private CountDownLatch latch;
+    private Object monitor;
     private int pressedX, pressedY;
 
-    BuildListener(PointsLinesGetter pointsLinesGetter, TurnsView turnsView, CountDownLatch latch) {
+    BuildListener(PointsLinesGetter pointsLinesGetter, TurnsView turnsView, Object monitor) {
         super();
         this.pointsLinesGetter = pointsLinesGetter;
         this.turnsView = turnsView;
-        this.latch = latch;
+        this.monitor = monitor;
     }
 
     public void mousePressed(MouseEvent e)
@@ -35,6 +32,6 @@ public class BuildListener extends MouseInputAdapter {
         int releasedX = releasedPoint.x;
         int releasedY = releasedPoint.y;
         int[] coordinates = { pressedX, pressedY, releasedX, releasedY };
-        pointsLinesGetter.assignIntentionCoordinates(turnsView, latch, coordinates);
+        pointsLinesGetter.assignIntentionCoordinates(turnsView, monitor, coordinates);
     }
 }

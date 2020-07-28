@@ -4,9 +4,7 @@ import views.TurnsView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.CountDownLatch;
 
-//shouldn't be public, it was done to test the listener
 public class ControlPanel extends JPanel {
     private EndTurnButton button;
 
@@ -30,7 +28,7 @@ public class ControlPanel extends JPanel {
         button.removeEndTurnListener();
     }
 
-    public void addEndTurnListener(CountDownLatch latch, TurnsView turnsView) {
-        button.addEndTurnListener(new EndTurnListener(latch, turnsView));
+    public void addEndTurnListener(Object monitor, TurnsView turnsView) {
+        button.addEndTurnListener(new EndTurnListener(monitor, turnsView));
     }
 }

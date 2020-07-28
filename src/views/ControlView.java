@@ -2,8 +2,6 @@ package views;
 
 import views.graphics.ControlPanel;
 
-import java.util.concurrent.CountDownLatch;
-
 class ControlView {
     private ControlPanel controlPanel;
 
@@ -11,8 +9,8 @@ class ControlView {
         this.controlPanel = controlPanel;
     }
 
-    void waitForIntention(CountDownLatch latch, TurnsView turnsView) {
-        controlPanel.addEndTurnListener(latch, turnsView);
+    void waitForIntention(Object monitor, TurnsView turnsView) {
+        controlPanel.addEndTurnListener(monitor, turnsView);
     }
 
     void removeEndTurnListener() {

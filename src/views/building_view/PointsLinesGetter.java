@@ -8,7 +8,6 @@ import models.hex.PointsLinesController;
 import models.map.MapHexes;
 import views.TurnsView;
 import views.graphics.*;
-import java.util.concurrent.CountDownLatch;
 import static java.lang.Math.abs;
 
 class PointsLinesGetter {
@@ -18,8 +17,7 @@ class PointsLinesGetter {
     private final static int pointDetectionRadius = 15;
     private int x1,y1,x2,y2;
 
-    PointsLinesGetter(BuildingGraphicsManager graphicsManager,
-                             MapHexes map, BuildingExceptionHandler buildingExceptionHandler) {
+    PointsLinesGetter(BuildingGraphicsManager graphicsManager, MapHexes map) {
         this.graphicsManager = graphicsManager;
         this.map = map;
         this.mapLocationX = graphicsManager.getMapLocationX();
@@ -50,13 +48,15 @@ class PointsLinesGetter {
         return line;
     }
 
-    void waitForIntention(TurnsView turnsView, CountDownLatch latch) {
-        graphicsManager.activateTurnListener(this, turnsView,latch);
+    void waitForIntention(TurnsView turnsView, Object monitor) {
+        graphicsManager.activateTurnListener(this, turnsView, monitor);
     }
 
-    void assignIntentionCoordinates(TurnsView turnsView, CountDownLatch latch, int[] coordinates) {
+    void assignIntentionCoordinates(TurnsView turnsView, Object monitor, int[] coordinates) {
         turnsView.setIntention(intentionByCoordinates(coordinates));
-        latch.countDown();
+        synchronized (monitor) {
+            monitor.notify();
+        }
     }
 
     //TO DO refactor to int[] coordinates

@@ -10,8 +10,6 @@ import views.TurnsView;
 import views.graphics.map_graphics.MapPanel;
 import views.sound.BuildingMessagesPlayer;
 
-import java.util.concurrent.CountDownLatch;
-
 //This probably violates(?) SRP, so maybe should be refactored
 public class BuildingView {
     private BuildingExceptionHandler handler;
@@ -22,7 +20,7 @@ public class BuildingView {
             (BuildingMessagesPlayer buildingMessagesPlayer, MapPanel mapPanel, MapHexes map) {
         handler = new BuildingExceptionHandler(buildingMessagesPlayer);
         graphicsManager = new BuildingGraphicsManager(mapPanel);
-        pointsLinesGetter = new PointsLinesGetter(graphicsManager, map, handler);
+        pointsLinesGetter = new PointsLinesGetter(graphicsManager, map);
     }
 
     public HexPoint requestPoint() throws wrongPointCoordinates {
@@ -33,8 +31,8 @@ public class BuildingView {
         return pointsLinesGetter.getLine();
     }
 
-    public void waitForIntention(CountDownLatch latch, TurnsView turnsView) {
-        pointsLinesGetter.waitForIntention(turnsView, latch);
+    public void waitForIntention(Object monitor, TurnsView turnsView) {
+        pointsLinesGetter.waitForIntention(turnsView, monitor);
     }
 
     public void handleStartSettlement(buildingException buildingException) {

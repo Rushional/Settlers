@@ -2,7 +2,6 @@ package views.building_view;
 
 import views.TurnsView;
 import views.graphics.map_graphics.MapPanel;
-import java.util.concurrent.CountDownLatch;
 
 public class BuildingGraphicsManager {
     private final int mapLocationX, mapLocationY;
@@ -19,33 +18,33 @@ public class BuildingGraphicsManager {
     }
 
     void activateStartSettlementListener(PointsLinesGetter pointsLinesGetter) {
-        CountDownLatch startSettlementLatch = new CountDownLatch(1);
-        StartSettlementListener startSettlementListener = new StartSettlementListener(pointsLinesGetter, startSettlementLatch);
+        var monitor = new Object();
+        StartSettlementListener startSettlementListener = new StartSettlementListener(pointsLinesGetter, monitor);
         mapPanel.replaceListener(startSettlementListener);
-        try {
-            startSettlementLatch.await();
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+        waitForAction(monitor);
     }
 
     void activateStartRoadListener(PointsLinesGetter pointsLinesGetter) {
-        CountDownLatch startRoadLatch = new CountDownLatch(1);
-        StartRoadListener startRoadListener = new StartRoadListener(pointsLinesGetter, startRoadLatch);
+        var monitor = new Object();
+        StartRoadListener startRoadListener = new StartRoadListener(pointsLinesGetter, monitor);
         mapPanel.replaceListener(startRoadListener);
-        try
-        {
-            startRoadLatch.await();
-        }
-        catch (InterruptedException e)
-        {
-            Thread.currentThread().interrupt();
-        }
+        waitForAction(monitor);
         mapPanel.removeMouseListener(startRoadListener);
     }
 
-    void activateTurnListener(PointsLinesGetter pointsLinesGetter, TurnsView turnsView, CountDownLatch latch) {
-        mapPanel.replaceListener(new BuildListener(pointsLinesGetter, turnsView, latch));
+    void activateTurnListener(PointsLinesGetter pointsLinesGetter, TurnsView turnsView, Object monitor) {
+        mapPanel.replaceListener(new BuildListener(pointsLinesGetter, turnsView, monitor));
+    }
+
+    private void waitForAction(Object monitor) {
+        synchronized (monitor) {
+            try {
+                monitor.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 
     //TO DO move repainting to another class
