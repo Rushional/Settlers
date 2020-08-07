@@ -25,7 +25,7 @@ class TurnsController {
 
     private void processTurn() {
         System.out.println(gameModel.getCurrentPlayer().getColor() + " player's turn!");
-        ProcessHarvestStage.call(gameModel.getPlayers(), gameModel.getMap());
+        ProcessHarvestStage.call(gameModel.getPlayers(), gameModel.getMap(), gameView.getFrame());
         System.out.println();
         ShowPlayersResources.call(gameModel.getCurrentPlayer());
         var intention = gameView.getTurnsView().requestIntention();

@@ -30,6 +30,10 @@ public class GameView {
         return turnsView;
     }
 
+    public SettlersFrame getFrame() {
+        return frame;
+    }
+
     public void showTurnResult() {
         buildingView.showResult();
     }

@@ -2,14 +2,14 @@ package controllers.services;
 
 import models.Player;
 import models.Players;
+import views.graphics.SettlersFrame;
 import views.services.ShowPlayerResourcesAmounts;
-import views.services.ShowPlayersResources;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class ProcessSevenRoll {
-    public static void call(Players players) {
+    public static void call(Players players, SettlersFrame frame) {
         List<Player> playersList = players.getPlayersList();
 //        check if anyone has more than seven resources
 //        get a list of those who does
@@ -22,7 +22,7 @@ public class ProcessSevenRoll {
         }
 //        make those who does drop extra resources
         for (Player player : abusersOfWorkingClass) {
-            DropExtraResources.call(player);
+            DiscardExtraResources.call(player, frame);
         }
         MoveRobber.call(players.getCurrentPlayer());
 //        now the ROLLER moves the ROBBER
