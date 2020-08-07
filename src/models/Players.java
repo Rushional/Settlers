@@ -1,6 +1,9 @@
 package models;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Players {
     private Player redPlayer, bluePlayer, greenPlayer, purplePlayer;
@@ -46,6 +49,10 @@ public class Players {
         if (currentPlayer == 0) currentPlayer = 3;
         else currentPlayer--;
         return players[currentPlayer];
+    }
+
+    public List<Player> getPlayersList() {
+        return Arrays.asList(players);
     }
 
     public Player getRedPlayer() {

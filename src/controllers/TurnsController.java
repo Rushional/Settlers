@@ -1,12 +1,12 @@
 package controllers;
 
+import controllers.services.ProcessHarvestStage;
 import exceptions.buildingException;
 import models.GameModel;
-import services.ProcessHarvestStage;
 import views.GameView;
 import views.graphics.ViewIntention;
 import views.graphics.ViewIntentionEndTurn;
-import views.graphics.gui.ShowPlayersResources;
+import views.services.ShowPlayersResources;
 
 class TurnsController {
     private GameModel gameModel;
@@ -25,10 +25,10 @@ class TurnsController {
 
     private void processTurn() {
         System.out.println(gameModel.getCurrentPlayer().getColor() + " player's turn!");
-        ProcessHarvestStage.call(gameModel.getMap());
+        ProcessHarvestStage.call(gameModel.getPlayers(), gameModel.getMap());
         System.out.println();
         ShowPlayersResources.call(gameModel.getCurrentPlayer());
-        ViewIntention intention = gameView.getTurnsView().requestIntention();
+        var intention = gameView.getTurnsView().requestIntention();
         while (!(intention instanceof ViewIntentionEndTurn)) {
             processIntention(intention);
             intention = gameView.getTurnsView().requestIntention();

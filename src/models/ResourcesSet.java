@@ -81,14 +81,18 @@ public class ResourcesSet {
         }
     }
 
+    public int getTotalAmount() {
+        return getWood() + getBricks() + getSheep() + getWheat() + getOre();
+    }
+
     @Override
     public String toString() {
         return "Wood: " + wood + ", bricks: " + bricks + ", sheep: " + sheep + ", wheat: " + wheat + ", ore: " + ore;
     }
 
-    int getWood() { return wood; }
-    int getBricks() { return bricks; }
-    int getSheep() { return sheep; }
+    public int getWood() { return wood; }
+    public int getBricks() { return bricks; }
+    public int getSheep() { return sheep; }
     public int getWheat() { return wheat; }
     public int getOre() { return ore; }
 }

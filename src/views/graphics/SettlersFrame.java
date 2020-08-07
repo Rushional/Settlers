@@ -16,6 +16,10 @@ public class SettlersFrame extends JFrame {
         controlPanel = new ControlPanel();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addComponentsToPane(mapPanel, controlPanel);
+//        the size actually doesn't matter, it's only used for centering the frame
+//        in setLocationRelativeTo(null)
+        setSize(1000, 700);
+        setLocationRelativeTo(null);
         pack();
         setVisible(true);
     }

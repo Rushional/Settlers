@@ -1,4 +1,4 @@
-package views.graphics.gui;
+package views.services;
 
 import models.Player;
 
