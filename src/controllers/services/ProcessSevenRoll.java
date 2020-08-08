@@ -11,7 +11,7 @@ import java.util.List;
 public class ProcessSevenRoll {
     public static void call(Players players, SettlersFrame frame) {
         List<Player> playersList = players.getPlayersList();
-//        check if anyone has more than seven resources
+//        check if anyone has seven or more resources
 //        get a list of those who does
         List<Player> abusersOfWorkingClass = new LinkedList<>();
         for (Player player : playersList) {

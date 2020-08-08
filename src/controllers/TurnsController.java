@@ -35,6 +35,7 @@ class TurnsController {
         }
 //        end turn
         processIntention(intention);
+        System.out.println();
     }
 
     private void processIntention(ViewIntention intention) {
