@@ -34,7 +34,7 @@ class BuildDrawer {
         xPoints[3] = upperPointX + 13;
         int[] yPoints = new int[4];
         yPoints[0] = upperPointY + 1;
-        yPoints[1] = upperPointY +18;
+        yPoints[1] = upperPointY + 18;
         yPoints[2] = upperPointY + 31;
         yPoints[3] = upperPointY + 14;
         g2d.setColor(BuildingColors.convertToRGB(road.getColor()));
