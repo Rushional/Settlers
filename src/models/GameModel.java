@@ -20,7 +20,7 @@ public class GameModel {
 
     public boolean isOngoing() {
         for (int i = 0; i < 4 ; i++) {
-            if (players.getPlayerIndex(i).getVictoryPoints() >= 10) return false;
+            if (players.getPlayerByIndex(i).getVictoryPoints() >= 10) return false;
         }
         return true;
     }

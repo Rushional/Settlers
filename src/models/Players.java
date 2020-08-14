@@ -1,7 +1,5 @@
 package models;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,8 +24,12 @@ public class Players {
         return players[currentPlayer];
     }
 
-    public Player getPlayerIndex(int index) {
+    public Player getPlayerByIndex(int index) {
         return players[index];
+    }
+
+    public short getCurrentIndex() {
+        return currentPlayer;
     }
 
 //    TODO: change to allow for 3 players

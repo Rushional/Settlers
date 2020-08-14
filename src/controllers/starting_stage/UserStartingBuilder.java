@@ -1,31 +1,18 @@
-package controllers;
+package controllers.starting_stage;
 
 import exceptions.buildingException;
 import models.building_model.StartBuildingModel;
 import models.hex.HexLine;
 import models.hex.HexPoint;
 import views.building_view.BuildingView;
-import views.services.ShowPlayersResources;
 
-class BuildingController {
-    StartBuildingModel model;
-    BuildingView view;
+public class UserStartingBuilder extends StartingBuilder {
 
-    BuildingController(StartBuildingModel model, BuildingView view) {
-        this.model = model;
-        this.view = view;
+    public UserStartingBuilder(StartBuildingModel model, BuildingView view) {
+        super(model, view);
     }
 
-    void startingBuildingStage() {
-        while (model.isRequiresBuilding()) {
-            System.out.println(model.getPlayers().getCurrentPlayer().getColor() + " player's turn to build a settlement!");
-            startBuildSettlement();
-//            TODO: AI just returns a point instead
-        }
-    }
-
-    private void startBuildSettlement() {
-//        Building the starting settlement
+    HexPoint buildStartingSettlement() {
         boolean buildSuccessful = false;
         HexPoint settlementPoint = null;
         while (!buildSuccessful) {
@@ -33,13 +20,15 @@ class BuildingController {
                 settlementPoint = view.requestPoint();
                 model.startBuildSettlement(settlementPoint);
                 buildSuccessful = true;
-            } catch (buildingException buildingException) {
+            } catch (exceptions.buildingException buildingException) {
                 view.handleStartSettlement(buildingException);
             }
         }
-        view.showResult();
-//        Building the starting road
-        buildSuccessful = false;
+        return settlementPoint;
+    };
+
+    void buildStartingRoad(HexPoint settlementPoint) {
+        boolean buildSuccessful = false;
         HexLine roadLine;
         while (!buildSuccessful) {
             try {
@@ -50,7 +39,5 @@ class BuildingController {
                 view.handleStartRoad(buildingException);
             }
         }
-        view.showResult();
-        ShowPlayersResources.call(model.getPlayers().getCurrentPlayer());
-    }
+    };
 }
