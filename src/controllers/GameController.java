@@ -8,7 +8,10 @@ public class GameController {
     private TurnsController turnsController;
 
     public GameController(GameModel model, GameView view) {
-        buildingController = new BuildingController(model.getStartBuildingModel(), view.getBuildingView());
+//        real one:
+//        buildingController = new BuildingController(model.getStartBuildingModel(), view.getBuildingView());
+//        Stub:
+        buildingController = new StubBuildingController(model.getStartBuildingModel(), view.getBuildingView(), model.getMap());
         turnsController = new TurnsController(model, view);
     }
 

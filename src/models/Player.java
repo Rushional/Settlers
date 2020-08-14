@@ -6,6 +6,7 @@ import static models.ResourcesSet.*;
 
 public class Player {
     private PlayerColor color;
+//    Right now this isHuman does not mean ANYTHING at all, and I'm not sure if it's ever used
     private boolean isHuman;
     private ResourcesSet resources;
     private int settlementsAmount = 0, citiesAmount = 0;

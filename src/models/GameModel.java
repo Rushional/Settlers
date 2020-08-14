@@ -14,7 +14,7 @@ public class GameModel {
         map = new MapHexes();
         players = new Players(false, true, false, false);
 //        players = new Players(true, true, true, true);
-        startBuildingModel = new StartBuildingModel(players, map);
+        startBuildingModel = new StartBuildingModel(players);
         turnsModel = new TurnsModel(players);
     }
 
