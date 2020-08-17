@@ -27,9 +27,12 @@ public class StartingBuildingController {
 
     public void startingBuildingStage() {
         List<StartingBuilder> buildersList = new ArrayList<>();
-        buildersList.add(new UserStartingBuilder(model, view));
+//        Make 4 players - either real or stubs
+//        buildersList.add(new UserStartingBuilder(model, view));
         buildersList.add(new StubStartingBuilder(map, model, view));
-        buildersList.add(new UserStartingBuilder(model, view));
+//        buildersList.add(new UserStartingBuilder(model, view));
+        buildersList.add(new StubStartingBuilder(map, model, view));
+        buildersList.add(new StubStartingBuilder(map, model, view));
         buildersList.add(new StubStartingBuilder(map, model, view));
         while (model.isRequiresBuilding()) {
             System.out.println(model.getPlayers().getCurrentPlayer().getColor() + " player's turn to build a settlement!");
