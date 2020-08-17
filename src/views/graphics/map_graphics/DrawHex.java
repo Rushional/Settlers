@@ -4,18 +4,21 @@ import models.hex.*;
 
 import java.awt.*;
 
-class HexDrawer {
-    private Hex hex;
-    private HexPolygon hexPolygon;
-    private Graphics2D g2d;
+class DrawHex {
+    protected Graphics2D g2d;
+    protected Hex hex;
+    protected HexPolygon hexPolygon;
+    private int upPointX, upPointY;
 
-    HexDrawer(Graphics2D g2d, Hex hex, int upPointX, int upPointY) {
-        this.hex = hex;
-        hexPolygon = new HexPolygon(hex, upPointX, upPointY);
+    public DrawHex(Graphics2D g2d, Hex hex, int upPointX, int upPointY) {
         this.g2d = g2d;
+        this.hex = hex;
+        this.upPointX = upPointX;
+        this.upPointY = upPointY;
     }
 
-    void drawHex() {
+    void call() {
+        hexPolygon = new HexPolygon(hex, upPointX, upPointY);
         colorHex();
         g2d.drawPolygon(hexPolygon);
         drawValueAndType();
@@ -31,22 +34,24 @@ class HexDrawer {
             BuildDrawer.drawRoadUpDown(g2d, hex.getGeometry().getMiddleLeftLine().getRoad(), hexPolygon.getUpperLeftPoint());
         if (hex.getGeometry().getUpperLeftLine().hasRoad())
             BuildDrawer.drawRoadLeftDown(g2d, hex.getGeometry().getUpperLeftLine().getRoad(), hexPolygon.getUpPoint());
-        //aaand buildings
+//        aaand buildings
+//        Also, I could do that in a cycle. For it to work I'd need to synchronize the usage of model geometry points list
+//        and polygon points list. Doesn't sound simple enough to bother, honestly
         if (hex.getGeometry().getUpPoint().hasBuilding())
-            drawBuilding(g2d, hex.getGeometry().getUpPoint(), hexPolygon.getUpPoint());
+            drawBuilding(hexPolygon.getUpPoint(), hex.getGeometry().getUpPoint());
         if (hex.getGeometry().getUpperRightPoint().hasBuilding())
-            drawBuilding(g2d, hex.getGeometry().getUpperRightPoint(), hexPolygon.getUpperRightPoint());
+            drawBuilding(hexPolygon.getUpperRightPoint(), hex.getGeometry().getUpperRightPoint());
         if (hex.getGeometry().getLowerRightPoint().hasBuilding())
-            drawBuilding(g2d, hex.getGeometry().getLowerRightPoint(), hexPolygon.getLowerRightPoint());
+            drawBuilding(hexPolygon.getLowerRightPoint(), hex.getGeometry().getLowerRightPoint());
         if (hex.getGeometry().getLowPoint().hasBuilding())
-            drawBuilding(g2d, hex.getGeometry().getLowPoint(), hexPolygon.getLowPoint());
+            drawBuilding(hexPolygon.getLowPoint(), hex.getGeometry().getLowPoint());
         if (hex.getGeometry().getLowerLeftPoint().hasBuilding())
-            drawBuilding(g2d, hex.getGeometry().getLowerLeftPoint(), hexPolygon.getLowerLeftPoint());
+            drawBuilding(hexPolygon.getLowerLeftPoint(), hex.getGeometry().getLowerLeftPoint());
         if (hex.getGeometry().getUpperLeftPoint().hasBuilding())
-            drawBuilding(g2d, hex.getGeometry().getUpperLeftPoint(), hexPolygon.getUpperLeftPoint());
+            drawBuilding(hexPolygon.getUpperLeftPoint(), hex.getGeometry().getUpperLeftPoint());
     }
 
-    private void drawBuilding(Graphics2D g2d, HexPoint point, Point polygonPoint) {
+    private void drawBuilding(Point polygonPoint, HexPoint point) {
         if (point.hasSettlement())
             BuildDrawer.drawSettlement(g2d, point.getSettlement(), polygonPoint.x, polygonPoint.y);
         else BuildDrawer.drawCity(g2d, point.getCity(), polygonPoint.x, polygonPoint.y);
@@ -73,7 +78,14 @@ class HexDrawer {
     }
 
     private void colorHex() {
-        Color hexColor = new Color(255, 0, 152);
+        Color hexColor = chooseHexColor();
+        g2d.setColor(hexColor);
+        g2d.fillPolygon(hexPolygon);
+        g2d.setColor(Color.BLACK);
+    }
+
+    protected Color chooseHexColor() {
+        Color hexColor;
         if (hex instanceof DesertHex)
             hexColor = new Color(237, 201, 175);
         else {
@@ -94,10 +106,10 @@ class HexDrawer {
                 case Ore:
                     hexColor = new Color(189, 199, 196);
                     break;
+                default:
+                    throw new RuntimeException();
             }
         }
-        g2d.setColor(hexColor);
-        g2d.fillPolygon(hexPolygon);
-        g2d.setColor(Color.BLACK);
+        return hexColor;
     }
 }
