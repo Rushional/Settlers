@@ -5,13 +5,13 @@ import models.building_model.StartBuildingModel;
 import models.hex.HexLine;
 import models.hex.HexPoint;
 import models.map.MapHexes;
-import views.building_view.BuildingView;
+import views.GameView;
 
-public class StubStartingBuilder extends StartingBuilder {
+class StubStartingBuilder extends StartingBuilder {
     private HexPoint[] points;
     private int currentPoint = 0;
 
-    public StubStartingBuilder(MapHexes map, StartBuildingModel model, BuildingView view) {
+    StubStartingBuilder(StartBuildingModel model, GameView view, MapHexes map) {
         super(model, view);
         points = new HexPoint[20];
 //        These 8 are sort of optimal points for the standard map
@@ -50,7 +50,7 @@ public class StubStartingBuilder extends StartingBuilder {
             } catch (buildingException ignored) {}
         }
         return settlementPoint;
-    };
+    }
 
     void buildStartingRoad(HexPoint settlementPoint) {
         try {
@@ -59,7 +59,7 @@ public class StubStartingBuilder extends StartingBuilder {
             throw new RuntimeException(); //this probably won't ever happen
             //and also this is a stub so for now this is enough
         }
-    };
+    }
 
     private HexPoint chooseStartPoint() {
         HexPoint point = getCurrentPoint();

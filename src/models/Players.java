@@ -8,6 +8,7 @@ public class Players {
     private Player[] players = new Player[4];
     private short currentPlayer;
 
+//    Stubbing players in starting stage can be changed in StartingBuildingController
     Players(boolean isRedHuman, boolean isBlueHuman, boolean isGreenHuman, boolean isPurpleHuman) {
         redPlayer = new Player(PlayerColor.Red, isRedHuman);
         bluePlayer = new Player(PlayerColor.Blue, isBlueHuman);

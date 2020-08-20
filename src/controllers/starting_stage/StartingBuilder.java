@@ -2,22 +2,22 @@ package controllers.starting_stage;
 
 import models.building_model.StartBuildingModel;
 import models.hex.HexPoint;
-import views.building_view.BuildingView;
+import views.GameView;
 
 public abstract class StartingBuilder {
     StartBuildingModel model;
-    BuildingView view;
+    GameView view;
 
-    StartingBuilder(StartBuildingModel model, BuildingView view) {
+    StartingBuilder(StartBuildingModel model, GameView view) {
         this.model = model;
         this.view = view;
     }
 
     public void buildAtStartPoint() {
         HexPoint settlementPoint = buildStartingSettlement();
-        view.showResult();
+        view.updateMap();
         buildStartingRoad(settlementPoint);
-        view.showResult();
+        view.updateMap();
     };
 
     abstract HexPoint buildStartingSettlement();

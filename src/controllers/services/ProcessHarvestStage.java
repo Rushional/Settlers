@@ -3,7 +3,7 @@ package controllers.services;
 import models.Players;
 import models.map.MapHexes;
 import models.services.HarvestRollResources;
-import views.graphics.SettlersFrame;
+import views.frame.SettlersFrame;
 
 import java.util.Random;
 

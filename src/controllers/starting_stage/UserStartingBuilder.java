@@ -4,11 +4,11 @@ import exceptions.buildingException;
 import models.building_model.StartBuildingModel;
 import models.hex.HexLine;
 import models.hex.HexPoint;
-import views.building_view.BuildingView;
+import views.GameView;
 
-public class UserStartingBuilder extends StartingBuilder {
+class UserStartingBuilder extends StartingBuilder {
 
-    public UserStartingBuilder(StartBuildingModel model, BuildingView view) {
+    UserStartingBuilder(StartBuildingModel model, GameView view) {
         super(model, view);
     }
 
@@ -17,27 +17,27 @@ public class UserStartingBuilder extends StartingBuilder {
         HexPoint settlementPoint = null;
         while (!buildSuccessful) {
             try {
-                settlementPoint = view.requestPoint();
+                settlementPoint = view.getMapInputRequester().inputStartPoint();
                 model.startBuildSettlement(settlementPoint);
                 buildSuccessful = true;
             } catch (exceptions.buildingException buildingException) {
-                view.handleStartSettlement(buildingException);
+                view.getExceptionsHandler().handleStartSettlement(buildingException);
             }
         }
         return settlementPoint;
-    };
+    }
 
     void buildStartingRoad(HexPoint settlementPoint) {
         boolean buildSuccessful = false;
         HexLine roadLine;
         while (!buildSuccessful) {
             try {
-                roadLine = view.requestLine();
+                roadLine = view.getMapInputRequester().inputStartLine();
                 model.startBuildRoad(roadLine, settlementPoint);
                 buildSuccessful = true;
             } catch (buildingException buildingException) {
-                view.handleStartRoad(buildingException);
+                view.getExceptionsHandler().handleStartRoad(buildingException);
             }
         }
-    };
+    }
 }

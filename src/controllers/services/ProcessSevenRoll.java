@@ -2,7 +2,7 @@ package controllers.services;
 
 import models.Player;
 import models.Players;
-import views.graphics.SettlersFrame;
+import views.frame.SettlersFrame;
 import views.services.ShowPlayerResourcesAmounts;
 
 import java.util.LinkedList;

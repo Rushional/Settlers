@@ -2,8 +2,8 @@ package controllers.services;
 
 import models.Player;
 import models.ResourcesSet;
-import views.graphics.SettlersFrame;
-import views.services.RequestResourcesToDiscard;
+import views.frame.SettlersFrame;
+import views.dialogs.RequestResourcesToDiscard;
 import views.services.ShowPlayersResources;
 
 /*

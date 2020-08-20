@@ -1,7 +1,6 @@
 package controllers.services;
 
 import models.ResourcesSet;
-import views.harvest_stage.DiscardResourcesDialog;
 
 // The intended purpose of this class was to check if the discarded resources are correct
 // E.g that player hasn't discarded too many or too few

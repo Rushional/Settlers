@@ -3,14 +3,14 @@ package views.building_view;
 import exceptions.*;
 import views.sound.BuildingMessagesPlayer;
 
-class BuildingExceptionHandler {
+public class BuildingExceptionHandler {
     private BuildingMessagesPlayer buildingMessagesPlayer;
 
-    BuildingExceptionHandler(BuildingMessagesPlayer buildingMessagesPlayer) {
+    public BuildingExceptionHandler(BuildingMessagesPlayer buildingMessagesPlayer) {
         this.buildingMessagesPlayer = buildingMessagesPlayer;
     }
 
-    void handleStartSettlement(buildingException buildingException) {
+    public void handleStartSettlement(buildingException buildingException) {
         defaultHandleSettlement(buildingException);
         if (buildingException.getClass() == pointHasSettlement.class) {
             System.out.println("В этом месте уже есть поселение");
@@ -18,7 +18,7 @@ class BuildingExceptionHandler {
         }
     }
 
-    void handleStartRoad(buildingException buildingException) {
+    public void handleStartRoad(buildingException buildingException) {
         defaultHandleRoad(buildingException);
         if (buildingException.getClass() == lineHasNoPoint.class) {
             System.out.println("Дорогу нужно построить рядом с новым поселением");
@@ -26,7 +26,7 @@ class BuildingExceptionHandler {
         }
     }
 
-    void handleTurn(buildingException buildingException) {
+    public void handleTurn(buildingException buildingException) {
         defaultHandleSettlement(buildingException);
         if (buildingException.getClass() == noRoadsNearby.class) {
             System.out.println("Рядом нет дорог");
