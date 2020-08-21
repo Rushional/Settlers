@@ -1,6 +1,6 @@
 package controllers.services;
 
-import models.Players;
+import models.players.Players;
 import models.map.MapHexes;
 import models.services.HarvestRollResources;
 import views.frame.SettlersFrame;

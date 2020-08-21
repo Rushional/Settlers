@@ -18,7 +18,7 @@ public class ResourcesSet {
         return new ResourcesSet(reduced.bricks-subtracted.bricks, reduced.wood-subtracted.wood, reduced.sheep-subtracted.sheep, reduced.wheat-subtracted.wheat, reduced.ore-subtracted.ore);
     }
 
-    static ResourcesSet addSet(ResourcesSet reduced, ResourcesSet added) {
+    public static ResourcesSet addSet(ResourcesSet reduced, ResourcesSet added) {
         return new ResourcesSet(reduced.bricks+added.bricks, reduced.wood+added.wood, reduced.sheep+added.sheep, reduced.wheat+added.wheat, reduced.ore+added.ore);
     }
 

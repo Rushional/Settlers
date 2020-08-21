@@ -1,6 +1,6 @@
 package views.services;
 
-import models.Player;
+import models.players.Player;
 
 public class ShowPlayerResourcesAmounts {
     public static void call(Player player) {

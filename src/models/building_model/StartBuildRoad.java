@@ -3,7 +3,7 @@ package models.building_model;
 import exceptions.lineHasNoPoint;
 import models.hex.HexLine;
 import models.hex.HexPoint;
-import models.Player;
+import models.players.Player;
 
 class StartBuildRoad {
     private Player player;

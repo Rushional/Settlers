@@ -1,7 +1,7 @@
 package models.hex;
 
 import exceptions.*;
-import models.Player;
+import models.players.Player;
 
 public class HexPoint {
     HexLine[] lines = new HexLine[3];

@@ -1,4 +1,4 @@
-package views.dialogs;
+package views.inputs.dialogs;
 
 import models.ResourcesSet;
 

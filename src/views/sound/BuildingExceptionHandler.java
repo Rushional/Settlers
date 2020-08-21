@@ -1,4 +1,4 @@
-package views.building_view;
+package views.sound;
 
 import exceptions.*;
 import views.sound.BuildingMessagesPlayer;

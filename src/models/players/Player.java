@@ -1,7 +1,8 @@
-package models;
+package models.players;
 
 import exceptions.*;
-import java.awt.Color;
+import models.ResourcesSet;
+
 import static models.ResourcesSet.*;
 
 public class Player {
@@ -61,7 +62,7 @@ public class Player {
         return citiesAmount;
     }
 
-    short getVictoryPoints() {
+    public short getVictoryPoints() {
         return victoryPoints;
     }
 }

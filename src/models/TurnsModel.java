@@ -4,7 +4,8 @@ import exceptions.buildingException;
 import exceptions.wrongPointCoordinates;
 import exceptions.wrongRoadCoordinates;
 import models.building_model.TurnBuildingModel;
-import views.listeners.*;
+import models.players.Players;
+import views.inputs.intentions.*;
 
 public class TurnsModel {
     private Players players;

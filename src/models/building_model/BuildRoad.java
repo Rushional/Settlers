@@ -3,7 +3,7 @@ package models.building_model;
 import exceptions.buildingException;
 import exceptions.lineHasRoad;
 import models.hex.HexLine;
-import models.Player;
+import models.players.Player;
 import static models.building_model.BuildingPlayerInteraction.payForRoad;
 import static models.building_model.BuildingPlayerInteraction.validateRoad;
 

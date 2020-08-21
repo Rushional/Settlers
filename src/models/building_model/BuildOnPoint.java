@@ -2,7 +2,7 @@ package models.building_model;
 
 import exceptions.*;
 import models.hex.HexPoint;
-import models.Player;
+import models.players.Player;
 
 import static models.building_model.BuildingPlayerInteraction.*;
 

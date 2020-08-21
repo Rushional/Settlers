@@ -1,7 +1,7 @@
 package controllers.services;
 
-import models.Player;
-import models.Players;
+import models.players.Player;
+import models.players.Players;
 import views.frame.SettlersFrame;
 import views.services.ShowPlayerResourcesAmounts;
 

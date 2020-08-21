@@ -1,4 +1,4 @@
-package views.listeners;
+package views.inputs.listeners;
 
 import exceptions.wrongPointCoordinates;
 import exceptions.wrongRoadCoordinates;
@@ -6,8 +6,9 @@ import models.hex.HexLine;
 import models.hex.HexPoint;
 import models.map.MapHexes;
 import views.Constants;
-import views.building_view.BuildListener;
 import views.frame.MapPanel;
+import views.inputs.intentions.ViewIntention;
+import views.inputs.intentions.ViewIntentionNone;
 
 import java.awt.*;
 
@@ -49,8 +50,7 @@ public class MapInputRequester extends InputRequester {
     }
 
     public void requestTurnIntention(Object monitor) {
-        BuildListener buildListener = mapPanel.addBuildListener(monitor);
-        currentBuildListener = buildListener;
+        currentBuildListener = mapPanel.addBuildListener(monitor);
     }
 
     public ViewIntention getIntentionInputFromListener() {

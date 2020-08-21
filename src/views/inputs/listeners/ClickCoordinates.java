@@ -1,4 +1,4 @@
-package views.listeners;
+package views.inputs.listeners;
 
 import java.awt.*;
 

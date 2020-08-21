@@ -1,6 +1,7 @@
 package views.frame;
 
 import models.map.MapHexes;
+import views.graphics.MapView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,9 +10,9 @@ public class SettlersFrame extends JFrame {
     private MapPanel mapPanel;
     private ControlPanel controlPanel;
 
-    SettlersFrame(MapHexes map) {
+    SettlersFrame(MapHexes map, MapView mapView) {
         super("Колонизаторы!");
-        mapPanel = new MapPanel(map);
+        mapPanel = new MapPanel(map, mapView);
         controlPanel = new ControlPanel();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addComponentsToPane(mapPanel, controlPanel);

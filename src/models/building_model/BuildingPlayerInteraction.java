@@ -1,7 +1,7 @@
 package models.building_model;
 
 import exceptions.*;
-import models.Player;
+import models.players.Player;
 import models.ResourcesSet;
 import static models.ResourcesSet.*;
 import static models.ResourcesSet.citySet;

@@ -1,7 +1,10 @@
-package views.listeners;
+package views.inputs.listeners;
 
 import views.frame.ControlPanel;
 import views.frame.EndTurnListener;
+import views.inputs.intentions.ViewIntention;
+import views.inputs.intentions.ViewIntentionEndTurn;
+import views.inputs.intentions.ViewIntentionNone;
 
 public class ControlInputRequester extends InputRequester {
     private ControlPanel controlPanel;

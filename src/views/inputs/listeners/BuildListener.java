@@ -1,19 +1,14 @@
-package views.building_view;
+package views.inputs.listeners;
 
-import views.listeners.ClickCoordinates;
-
-import javax.swing.event.MouseInputAdapter;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
-public class BuildListener extends MouseInputAdapter {
-    private Object monitor;
+public class BuildListener extends MapListener {
     private ClickCoordinates clickCoordinates = null;
     private Point pressedPoint;
 
     public BuildListener(Object monitor) {
-        super();
-        this.monitor = monitor;
+        super(monitor);
     }
 
     public void mousePressed(MouseEvent e)

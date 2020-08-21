@@ -2,6 +2,8 @@ package models;
 
 import models.building_model.StartBuildingModel;
 import models.map.MapHexes;
+import models.players.Player;
+import models.players.Players;
 
 //This class starts the game and determines the whole flow of it
 public class GameModel {

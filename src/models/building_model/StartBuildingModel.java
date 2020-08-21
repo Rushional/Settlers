@@ -3,7 +3,7 @@ package models.building_model;
 import exceptions.buildingNearby;
 import exceptions.lineHasNoPoint;
 import exceptions.pointHasSettlement;
-import models.Players;
+import models.players.Players;
 import models.hex.HexLine;
 import models.hex.HexPoint;
 

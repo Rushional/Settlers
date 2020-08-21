@@ -1,6 +1,6 @@
 package controllers.services;
 
-import models.Player;
+import models.players.Player;
 
 public class MoveRobber {
     public static void call(Player player) {

@@ -1,9 +1,7 @@
 package models.hex;
 
-import models.Player;
-import models.PlayerColor;
-
-import java.awt.Color;
+import models.players.Player;
+import models.players.PlayerColor;
 
 public abstract class Building {
     private Player player;

@@ -3,7 +3,7 @@ package models.building_model;
 import exceptions.buildingNearby;
 import exceptions.pointHasSettlement;
 import models.hex.HexPoint;
-import models.Player;
+import models.players.Player;
 
 //This is an action object, it manages building on a point at the start of the game
 class StartBuildSettlement {

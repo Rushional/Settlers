@@ -1,6 +1,6 @@
 package views.graphics;
 
-import models.PlayerColor;
+import models.players.PlayerColor;
 
 import java.awt.*;
 

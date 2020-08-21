@@ -4,7 +4,7 @@ import exceptions.connectionsArrayFull;
 import exceptions.opponentsCityOnWay;
 import exceptions.opponentsSettlementOnWay;
 import exceptions.roadHasNoAccess;
-import models.Player;
+import models.players.Player;
 
 public class HexLine {
     HexPoint[] points = new HexPoint[2];

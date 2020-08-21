@@ -4,7 +4,9 @@ import controllers.services.ProcessHarvestStage;
 import exceptions.buildingException;
 import models.GameModel;
 import views.GameView;
-import views.listeners.*;
+import views.inputs.intentions.ViewIntention;
+import views.inputs.intentions.ViewIntentionEndTurn;
+import views.inputs.listeners.*;
 import views.services.ShowPlayersResources;
 
 class TurnsController {

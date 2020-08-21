@@ -1,4 +1,4 @@
-package models;
+package models.players;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +9,7 @@ public class Players {
     private short currentPlayer;
 
 //    Stubbing players in starting stage can be changed in StartingBuildingController
-    Players(boolean isRedHuman, boolean isBlueHuman, boolean isGreenHuman, boolean isPurpleHuman) {
+    public Players(boolean isRedHuman, boolean isBlueHuman, boolean isGreenHuman, boolean isPurpleHuman) {
         redPlayer = new Player(PlayerColor.Red, isRedHuman);
         bluePlayer = new Player(PlayerColor.Blue, isBlueHuman);
         greenPlayer = new Player(PlayerColor.Green, isGreenHuman);

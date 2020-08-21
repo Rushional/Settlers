@@ -1,4 +1,6 @@
-package views.listeners;
+package views.inputs.listeners;
+
+import views.inputs.intentions.ViewIntention;
 
 public abstract class InputRequester {
     void waitForAction(Object monitor) {

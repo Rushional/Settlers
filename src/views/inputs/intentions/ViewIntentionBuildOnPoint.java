@@ -1,4 +1,4 @@
-package views.listeners;
+package views.inputs.intentions;
 
 import models.hex.HexPoint;
 

@@ -1,7 +1,10 @@
-package views.listeners;
+package views.inputs.listeners;
 
 // This class calls requestIntention methods from both mapPanel and controlPanel,
 // then processes the result and re
+
+import views.inputs.intentions.ViewIntention;
+import views.inputs.intentions.ViewIntentionNone;
 
 public class RequestTurnIntention {
     public static ViewIntention call(MapInputRequester mapManager, ControlInputRequester controlManager) {
