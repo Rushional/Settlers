@@ -9,10 +9,11 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MapView {
-    private List<HexView> hexViewsList;
-    private List<Hex> hexesList;
+    private List<HexView> hexViewsList; // I'm not making a HexViews because this is basically it
+    private Hexes hexes;
 
     public MapView(Polygons polygons, Hexes hexes, PolygonGeometries polygonsGeometries) {
+        this.hexes = hexes;
         hexViewsList = new ArrayList<>();
         Iterator<Hex> hexIterator = hexes.list().iterator();
         Iterator<Polygon> polygonIterator = polygons.list().iterator();
@@ -26,5 +27,9 @@ public class MapView {
 
     public List<HexView> getHexViewsList() {
         return hexViewsList;
+    }
+
+    public Hexes getHexes() {
+        return hexes;
     }
 }

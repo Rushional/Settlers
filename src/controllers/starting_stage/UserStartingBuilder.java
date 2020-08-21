@@ -17,7 +17,7 @@ class UserStartingBuilder extends StartingBuilder {
         HexPoint settlementPoint = null;
         while (!buildSuccessful) {
             try {
-                settlementPoint = view.getMapInputRequester().inputStartPoint();
+                settlementPoint = view.getMapInputRequester().getStartPoint();
                 model.startBuildSettlement(settlementPoint);
                 buildSuccessful = true;
             } catch (exceptions.buildingException buildingException) {
@@ -32,7 +32,7 @@ class UserStartingBuilder extends StartingBuilder {
         HexLine roadLine;
         while (!buildSuccessful) {
             try {
-                roadLine = view.getMapInputRequester().inputStartLine();
+                roadLine = view.getMapInputRequester().getStartLine();
                 model.startBuildRoad(roadLine, settlementPoint);
                 buildSuccessful = true;
             } catch (buildingException buildingException) {

@@ -1,12 +1,15 @@
 package views.inputs.listeners;
 
+import exceptions.PointNotInHex;
 import exceptions.wrongPointCoordinates;
 import exceptions.wrongRoadCoordinates;
+import models.hex.Hex;
 import models.hex.HexLine;
 import models.hex.HexPoint;
 import models.map.MapHexes;
 import views.Constants;
 import views.frame.MapPanel;
+import views.graphics.MapView;
 import views.inputs.intentions.ViewIntention;
 import views.inputs.intentions.ViewIntentionNone;
 
@@ -29,8 +32,8 @@ public class MapInputRequester extends InputRequester {
 //        listener gets the input and saves it in his clickCoordinates field
 //        manager accesses it and gets the coordinates,
 //        processes them and sends back to the controller that called the manager in the first place
-    public HexPoint inputStartPoint() throws wrongPointCoordinates {
-        ClickCoordinates clickCoordinates = inputCoordinates();
+    public HexPoint getStartPoint() throws wrongPointCoordinates {
+        ClickCoordinates clickCoordinates = inputBuildCoordinates();
 //        TODO: add an algorithm that checks if the user has tried to build a road with those points
 //         Although this is such a pointless detail that I really shouldn't bother
         Point pointPressed = clickCoordinates.getPressed();
@@ -44,13 +47,17 @@ public class MapInputRequester extends InputRequester {
         return CoordinatesProcessor.coordinatesToHexPoint(pointReleased, map);
     }
 
-    public HexLine inputStartLine() throws wrongRoadCoordinates {
-        ClickCoordinates clickCoordinates = inputCoordinates();
+    public HexLine getStartLine() throws wrongRoadCoordinates {
+        ClickCoordinates clickCoordinates = inputBuildCoordinates();
         return CoordinatesProcessor.coordinatesToHexLine(clickCoordinates, map);
     }
 
+//    this sends requests, then we have to wait for the result and get it back separately
+//    This is because we have to wait for 2 listeners at the same time, so waiting here is not an option:
+//    It would stop the second listener from ever activating
     public void requestTurnIntention(Object monitor) {
-        currentBuildListener = mapPanel.addBuildListener(monitor);
+        currentBuildListener = new BuildListener(monitor);
+        mapPanel.addMouseListener(monitor, currentBuildListener);
     }
 
     public ViewIntention getIntentionInputFromListener() {
@@ -66,9 +73,21 @@ public class MapInputRequester extends InputRequester {
         return intention;
     }
 
-    private ClickCoordinates inputCoordinates() {
+    public Hex getRobberHex(MapView mapView) throws PointNotInHex {
         var monitor = new Object();
-        BuildListener buildListener = mapPanel.addBuildListener(monitor);
+        MoveRobberListener moveRobberListener = new MoveRobberListener(monitor, mapPanel);
+        mapPanel.addMouseListener(monitor, moveRobberListener);
+        mapPanel.addMouseMotionListener(moveRobberListener);
+        waitForAction(monitor);
+        mapPanel.removeMouseListener(moveRobberListener);
+        mapPanel.removeMouseMotionListener(moveRobberListener);
+        return CoordinatesProcessor.coordinatesToHex(mapView, moveRobberListener.getClickCoordinates().getReleased());
+    }
+
+    private ClickCoordinates inputBuildCoordinates() {
+        var monitor = new Object();
+        BuildListener buildListener = new BuildListener(monitor);
+        mapPanel.addMouseListener(monitor, buildListener);
         waitForAction(monitor);
         mapPanel.removeMouseListener(buildListener);
         return buildListener.getClickCoordinates();

@@ -3,13 +3,15 @@ package controllers.services;
 import models.players.Player;
 import models.players.Players;
 import views.frame.SettlersFrame;
+import views.graphics.MapView;
+import views.inputs.listeners.MapInputRequester;
 import views.services.ShowPlayerResourcesAmounts;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class ProcessSevenRoll {
-    public static void call(Players players, SettlersFrame frame) {
+    public static void call(Players players, SettlersFrame frame, MapInputRequester inputRequester, MapView mapView) {
         List<Player> playersList = players.getPlayersList();
 //        check if anyone has seven or more resources
 //        get a list of those who does
@@ -24,7 +26,10 @@ public class ProcessSevenRoll {
         for (Player player : abusersOfWorkingClass) {
             DiscardExtraResources.call(player, frame);
         }
-        MoveRobber.call(players.getCurrentPlayer());
-//        now the ROLLER moves the ROBBER
+//        now the ROLLER moves the ROBBER, ohhhhh yeah!!!!
+        frame.getMapPanel().setStateRobber();
+        MoveRobber.call(players.getCurrentPlayer(), inputRequester, mapView);
+        frame.getMapPanel().setStateUsual();
+        frame.getMapPanel().repaint();
     }
 }

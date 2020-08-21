@@ -1,15 +1,21 @@
 package views.inputs.listeners;
 
+import exceptions.PointNotInHex;
 import exceptions.wrongPointCoordinates;
 import exceptions.wrongRoadCoordinates;
+import models.hex.Hex;
 import models.hex.HexLine;
 import models.hex.HexPoint;
 import models.hex.PointsLinesController;
 import models.map.MapHexes;
 import views.Constants;
+import views.graphics.HexView;
+import views.graphics.MapView;
 import views.inputs.intentions.*;
 
 import java.awt.*;
+import java.util.List;
+import java.util.Iterator;
 
 import static java.lang.Math.abs;
 
@@ -251,5 +257,22 @@ public class CoordinatesProcessor {
         } catch (wrongRoadCoordinates wrongLine) {
             return new ViewIntentionWrongLine();
         }
+    }
+
+    public static Hex coordinatesToHex(MapView mapView, Point point) throws PointNotInHex {
+        List<HexView> hexViewList = mapView.getHexViewsList();
+        List<Hex> hexList = mapView.getHexes().list();
+        Iterator<HexView> hexViewIterator = hexViewList.iterator();
+        Iterator<Hex> hexIterator = hexList.iterator();
+//        I know I can just use fori 19, but iterators feels more comfortable in this situation for me, that's my excuse!
+        while (hexViewIterator.hasNext() && hexIterator.hasNext()) {
+            if (hexViewIterator.next().getPolygon().contains(point)) {
+                return hexIterator.next();
+            }
+            else {
+                hexIterator.next();
+            }
+        }
+        throw new PointNotInHex();
     }
 }

@@ -26,7 +26,8 @@ class TurnsController {
 
     private void processTurn() {
         System.out.println(gameModel.getCurrentPlayer().getColor() + " player's turn!");
-        ProcessHarvestStage.call(gameModel.getPlayers(), gameModel.getMap(), gameView.getFrame());
+        ProcessHarvestStage.call(gameModel.getPlayers(), gameModel.getMap(), gameView.getFrame(),
+                gameView.getMapInputRequester(), gameView.getMapView());
         System.out.println();
         ShowPlayersResources.call(gameModel.getCurrentPlayer());
         ViewIntention intention = RequestTurnIntention.call(gameView.getMapInputRequester(), gameView.getControlInputRequester());
@@ -45,7 +46,6 @@ class TurnsController {
         try {
             gameModel.getTurnsModel().realizeIntention(intention);
         } catch (buildingException buildingException) {
-            System.out.println("I'm trying my best to handle a building exception here");
             gameView.getExceptionsHandler().handleTurn(buildingException);
         }
         gameView.updateMap();
