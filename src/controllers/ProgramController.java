@@ -1,15 +1,14 @@
-package system;
+package controllers;
 
-import controllers.GameController;
 import views.GameView;
 import models.GameModel;
 
-public class GameInitiator {
+public class ProgramController {
     private GameModel gameModel;
     private GameView gameView;
     private GameController gameController;
 
-    public GameInitiator() {
+    public ProgramController() {
         gameModel = new GameModel();
         gameView = new GameView(gameModel.getMap());
         gameController = new GameController(gameModel, gameView);
