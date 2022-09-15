@@ -30,7 +30,6 @@ public class MoveRobberListener extends MapListener {
     }
 
     public void mouseMoved(MouseEvent e) {
-        System.out.println("Мышкой шевелишь, да? Ах, молодость с её бесмысленной и беспощадной суетой");
         mapPanel.setCursorPoint(new Point(e.getX(), e.getY()));
         mapPanel.repaint();
     }

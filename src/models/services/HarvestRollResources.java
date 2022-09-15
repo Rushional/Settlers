@@ -10,7 +10,7 @@ import views.services.ShowPlayersResources;
 public class HarvestRollResources {
     public static void call(MapHexes map, int diceValue) {
         for(ResourceHex hex : map.getResourceHexes().list()) {
-            if (hex.getDiceValue() == diceValue) {
+            if (checkIfHexHarvestsThisTurn(hex, diceValue)) {
                 System.out.println("Hex type is " + hex.getResourceType());
                 for (Building building : hex.getBuildings()) {
 //                    ShowPlayersResources.call(building.getPlayer());
@@ -25,6 +25,10 @@ public class HarvestRollResources {
                 }
             }
         }
+    }
+
+    private static boolean checkIfHexHarvestsThisTurn(ResourceHex hex, int diceValue) {
+        return (hex.getDiceValue() == diceValue) && (!hex.isRobbed());
     }
 }
 
