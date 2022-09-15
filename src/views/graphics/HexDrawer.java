@@ -4,21 +4,22 @@ import models.hex.*;
 
 import java.awt.*;
 
-class DrawHex {
+class HexDrawer {
     protected Graphics2D g2d;
 //    protected Hex hex;
     protected HexView hexView;
 
-    public DrawHex(Graphics2D g2d, HexView hexView) {
+    public HexDrawer(Graphics2D g2d, HexView hexView) {
         this.g2d = g2d;
 //        this.hex = hex;
         this.hexView = hexView;
     }
 
-    void call() {
+    void drawHex() {
         colorHex();
         g2d.drawPolygon(hexView.getPolygon());
         drawValueAndType();
+        if (hexView.getHexModel().isRobbed()) drawRobber();
         HexGeometry hexGeometry = hexView.getHexModel().getGeometry();
         if (hexGeometry.getUpperRightLine().hasRoad())
             BuildDrawer.drawRoadRightDown(g2d, hexGeometry.getUpperRightLine().getRoad(), hexView.getPolygonGeometry().getUpPoint());
@@ -35,7 +36,6 @@ class DrawHex {
 //        aaand buildings
 //        Also, I could do that in a cycle. For it to work I'd need to synchronize the usage of model geometry points list
 //        and polygon points list. Doesn't sound simple enough to bother, honestly
-//        EDIT: I DID IT THE MADLAD
         if (hexGeometry.getUpPoint().hasBuilding())
             drawBuilding(hexView.getPolygonGeometry().getUpPoint(), hexGeometry.getUpPoint());
         if (hexGeometry.getUpperRightPoint().hasBuilding())
@@ -74,6 +74,19 @@ class DrawHex {
         if (hexView.getHexModel() instanceof ValuedHex) typeNameShiftY = 85;
         else typeNameShiftY = 74;
         g2d.drawString(typeName, upPointX - typeNameShiftX, upPointY + typeNameShiftY);
+    }
+
+    private void drawRobber() {
+        /*
+        * TODO: have upPoints as arguments in drawValueAndType and drawRobber
+        *  and have some method that calls these methods and give them the coordinates?
+        */
+        int upPointX = hexView.getPolygonGeometry().getUpPoint().x;
+        int upPointY = hexView.getPolygonGeometry().getUpPoint().y;
+//        TODO: this could use a constant instead, optimize a tiny bit. Practically irrelevant though.
+        String robberText = "HAS ROBBER";
+        int typeNameShiftX = g2d.getFontMetrics().stringWidth(robberText)/2;
+        g2d.drawString(robberText, upPointX - typeNameShiftX, upPointY + 63);
     }
 
     private void colorHex() {

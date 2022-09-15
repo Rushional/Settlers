@@ -1,7 +1,7 @@
 package models.building_model;
 
-import exceptions.buildingNearby;
-import exceptions.pointHasSettlement;
+import exceptions.building_exceptions.buildingNearby;
+import exceptions.building_exceptions.pointHasSettlement;
 import models.hex.HexPoint;
 import models.players.Player;
 

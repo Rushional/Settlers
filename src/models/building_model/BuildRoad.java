@@ -1,7 +1,7 @@
 package models.building_model;
 
-import exceptions.buildingException;
-import exceptions.lineHasRoad;
+import exceptions.building_exceptions.buildingException;
+import exceptions.building_exceptions.lineHasRoad;
 import models.hex.HexLine;
 import models.players.Player;
 import static models.building_model.BuildingPlayerInteraction.payForRoad;

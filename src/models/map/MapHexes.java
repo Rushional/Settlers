@@ -1,5 +1,6 @@
 package models.map;
 
+import exceptions.HexAlreadyRobbed;
 import models.ResourceType;
 import models.hex.*;
 
@@ -31,6 +32,7 @@ public class MapHexes {
         Hex middle2Hex = new ResourceHex(9, ResourceType.Bricks);
         listHexes.add(middle2Hex);
         Hex middle3Hex = new DesertHex();
+        middle3Hex.addRobber();
         listHexes.add(middle3Hex);
         Hex middle4Hex = new ResourceHex(6, ResourceType.Ore);
         listHexes.add(middle4Hex);

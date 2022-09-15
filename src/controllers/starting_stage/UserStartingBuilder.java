@@ -1,6 +1,6 @@
 package controllers.starting_stage;
 
-import exceptions.buildingException;
+import exceptions.building_exceptions.buildingException;
 import models.building_model.StartBuildingModel;
 import models.hex.HexLine;
 import models.hex.HexPoint;
@@ -20,7 +20,7 @@ class UserStartingBuilder extends StartingBuilder {
                 settlementPoint = view.getMapInputRequester().getStartPoint();
                 model.startBuildSettlement(settlementPoint);
                 buildSuccessful = true;
-            } catch (exceptions.buildingException buildingException) {
+            } catch (exceptions.building_exceptions.buildingException buildingException) {
                 view.getExceptionsHandler().handleStartSettlement(buildingException);
             }
         }

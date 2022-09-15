@@ -1,8 +1,8 @@
 package views.inputs.listeners;
 
 import exceptions.PointNotInHex;
-import exceptions.wrongPointCoordinates;
-import exceptions.wrongRoadCoordinates;
+import exceptions.building_exceptions.wrongPointCoordinates;
+import exceptions.building_exceptions.wrongRoadCoordinates;
 import models.hex.Hex;
 import models.hex.HexLine;
 import models.hex.HexPoint;

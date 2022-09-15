@@ -1,9 +1,9 @@
 package models.hex;
 
 import exceptions.connectionsArrayFull;
-import exceptions.opponentsCityOnWay;
-import exceptions.opponentsSettlementOnWay;
-import exceptions.roadHasNoAccess;
+import exceptions.building_exceptions.opponentsCityOnWay;
+import exceptions.building_exceptions.opponentsSettlementOnWay;
+import exceptions.building_exceptions.roadHasNoAccess;
 import models.players.Player;
 
 public class HexLine {

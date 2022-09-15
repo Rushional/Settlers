@@ -1,6 +1,6 @@
 package controllers.starting_stage;
 
-import exceptions.buildingException;
+import exceptions.building_exceptions.buildingException;
 import models.building_model.StartBuildingModel;
 import models.hex.HexLine;
 import models.hex.HexPoint;

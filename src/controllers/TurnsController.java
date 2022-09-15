@@ -1,7 +1,7 @@
 package controllers;
 
 import controllers.services.ProcessHarvestStage;
-import exceptions.buildingException;
+import exceptions.building_exceptions.buildingException;
 import models.GameModel;
 import views.GameView;
 import views.inputs.intentions.ViewIntention;

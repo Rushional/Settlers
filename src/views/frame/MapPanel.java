@@ -2,9 +2,8 @@ package views.frame;
 
 import models.map.MapHexes;
 import views.graphics.MapView;
-import views.inputs.listeners.BuildListener;
-import views.graphics.DrawMap;
-import views.graphics.DrawMapRobberChoice;
+import views.graphics.MapDrawer;
+import views.graphics.MapDrawerRobberChoice;
 import views.graphics.DrawingState;
 
 import javax.swing.JPanel;
@@ -33,18 +32,18 @@ public class MapPanel extends JPanel {
     {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
-        DrawMap drawMap;
+        MapDrawer mapDrawer;
         if (drawingState == DrawingState.USUAL) {
-            drawMap = new DrawMap(g2d, mapView);
+            mapDrawer = new MapDrawer(g2d, mapView);
         }
         else {
 /*
 *        TODO: It's probably better to use something like robberMouseListener.getStuff() to get the cursor point
 *         instead of updating the field of the whole MapPanel all the time. It would just look cleaner
 */
-            drawMap = new DrawMapRobberChoice(g2d, mapView, cursorPoint);
+            mapDrawer = new MapDrawerRobberChoice(g2d, mapView, cursorPoint);
         }
-        drawMap.call();
+        mapDrawer.drawMap();
 //        System.out.println("I'm mister Meeseeks look at me!"); // I just wanted to find out how often this is run
     }
 

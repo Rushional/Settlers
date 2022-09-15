@@ -1,7 +1,6 @@
 package views.sound;
 
-import exceptions.*;
-import views.sound.BuildingMessagesPlayer;
+import exceptions.building_exceptions.*;
 
 public class BuildingExceptionHandler {
     private BuildingMessagesPlayer buildingMessagesPlayer;

@@ -1,6 +1,6 @@
 package models.building_model;
 
-import exceptions.*;
+import exceptions.building_exceptions.*;
 import models.players.Player;
 import models.ResourcesSet;
 import static models.ResourcesSet.*;

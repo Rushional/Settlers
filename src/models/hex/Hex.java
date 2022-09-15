@@ -1,10 +1,14 @@
 package models.hex;
 
+import exceptions.HexAlreadyRobbed;
+import exceptions.HexDoesntHaveRobber;
+
 import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Hex {
     private HexGeometry geometry;
+    private boolean isRobbed;
 
     Hex() {
         geometry = new HexGeometry();
@@ -22,5 +26,19 @@ public abstract class Hex {
 
     public HexGeometry getGeometry() {
         return geometry;
+    }
+
+    public boolean isRobbed() {
+        return isRobbed;
+    }
+
+    public void addRobber() {
+        if (isRobbed) throw new HexAlreadyRobbed();
+        isRobbed = true;
+    }
+
+    public void removeRobber() {
+        if (!isRobbed) throw new HexDoesntHaveRobber();
+        isRobbed = false;
     }
 }

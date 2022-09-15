@@ -1,6 +1,6 @@
 package models.building_model;
 
-import exceptions.lineHasNoPoint;
+import exceptions.building_exceptions.lineHasNoPoint;
 import models.hex.HexLine;
 import models.hex.HexPoint;
 import models.players.Player;

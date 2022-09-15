@@ -1,8 +1,8 @@
 package models.building_model;
 
-import exceptions.buildingNearby;
-import exceptions.lineHasNoPoint;
-import exceptions.pointHasSettlement;
+import exceptions.building_exceptions.buildingNearby;
+import exceptions.building_exceptions.lineHasNoPoint;
+import exceptions.building_exceptions.pointHasSettlement;
 import models.players.Players;
 import models.hex.HexLine;
 import models.hex.HexPoint;

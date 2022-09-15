@@ -1,8 +1,8 @@
 package models;
 
-import exceptions.buildingException;
-import exceptions.wrongPointCoordinates;
-import exceptions.wrongRoadCoordinates;
+import exceptions.building_exceptions.buildingException;
+import exceptions.building_exceptions.wrongPointCoordinates;
+import exceptions.building_exceptions.wrongRoadCoordinates;
 import models.building_model.TurnBuildingModel;
 import models.players.Players;
 import views.inputs.intentions.*;

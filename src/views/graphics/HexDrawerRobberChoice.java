@@ -1,13 +1,11 @@
 package views.graphics;
 
-import models.hex.Hex;
-
 import java.awt.*;
 
-public class DrawHexRobberChoice extends DrawHex {
+public class HexDrawerRobberChoice extends HexDrawer {
     private Point cursorPoint;
 
-    public DrawHexRobberChoice(Graphics2D g2d, HexView hexView, Point cursorPoint) {
+    public HexDrawerRobberChoice(Graphics2D g2d, HexView hexView, Point cursorPoint) {
         super(g2d, hexView);
         this.cursorPoint = cursorPoint;
     }

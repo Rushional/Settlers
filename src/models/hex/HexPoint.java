@@ -1,6 +1,8 @@
 package models.hex;
 
 import exceptions.*;
+import exceptions.building_exceptions.buildingNearby;
+import exceptions.building_exceptions.noRoadsNearby;
 import models.players.Player;
 
 public class HexPoint {

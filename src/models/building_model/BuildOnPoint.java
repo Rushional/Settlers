@@ -1,12 +1,12 @@
 package models.building_model;
 
-import exceptions.*;
+import exceptions.building_exceptions.*;
 import models.hex.HexPoint;
 import models.players.Player;
 
 import static models.building_model.BuildingPlayerInteraction.*;
 
-//This is an action object, it manages building on a point
+//TODO: refactor to be a service because obviously that's what it was intended to be
 class BuildOnPoint {
     private Player player;
     private HexPoint point;
