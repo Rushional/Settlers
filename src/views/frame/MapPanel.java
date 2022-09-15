@@ -14,7 +14,6 @@ import java.awt.event.MouseListener;
 public class MapPanel extends JPanel {
     private MapHexes map;
     private MapView mapView;
-    private MouseInputAdapter currentListener = null;
     private DrawingState drawingState = DrawingState.USUAL;
     private Point cursorPoint = null; //Needed to update the position of cursor to color the chosen hex
 

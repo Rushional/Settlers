@@ -15,9 +15,6 @@ import views.inputs.intentions.ViewIntentionNone;
 
 import java.awt.*;
 
-// I haven't started using this class. I'm planning to refactor the process of getting input and start using this
-
-// This class gets raw coordinates from the user
 public class MapInputRequester extends InputRequester {
     private MapPanel mapPanel;
     private MapHexes map;
@@ -76,7 +73,7 @@ public class MapInputRequester extends InputRequester {
     public Hex getRobberHex(MapView mapView) throws PointNotInHex {
         var monitor = new Object();
         MoveRobberListener moveRobberListener = new MoveRobberListener(monitor, mapPanel);
-        mapPanel.addMouseListener(monitor, moveRobberListener);
+        mapPanel.addMouseListener(moveRobberListener);
         mapPanel.addMouseMotionListener(moveRobberListener);
         waitForAction(monitor);
         mapPanel.removeMouseListener(moveRobberListener);

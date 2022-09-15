@@ -1,6 +1,5 @@
 package models.map;
 
-import exceptions.HexAlreadyRobbed;
 import models.ResourceType;
 import models.hex.*;
 
@@ -10,6 +9,8 @@ import java.util.List;
 
 public class MapHexes {
     private Hexes hexes;
+
+    private Hex currentRobbedHex;
 
     public MapHexes() {
         List<Hex> listHexes = new ArrayList<>();
@@ -32,7 +33,7 @@ public class MapHexes {
         Hex middle2Hex = new ResourceHex(9, ResourceType.Bricks);
         listHexes.add(middle2Hex);
         Hex middle3Hex = new DesertHex();
-        middle3Hex.addRobber();
+        placeRobber(middle3Hex);
         listHexes.add(middle3Hex);
         Hex middle4Hex = new ResourceHex(6, ResourceType.Ore);
         listHexes.add(middle4Hex);
@@ -73,6 +74,16 @@ public class MapHexes {
         HexController.middleLeftAdd(bottom1Middle3Hex.getGeometry(), bottom1RightHex.getGeometry(), bottom2MiddleHex.getGeometry(), bottom2RightHex.getGeometry());
     }
 
+    private void placeRobber(Hex targetHex) {
+        currentRobbedHex = targetHex;
+        targetHex.addRobber();
+    }
+
+    public void moveRobber(Hex targetHex) {
+        currentRobbedHex.removeRobber();
+        placeRobber(targetHex);
+    }
+
     public ResourceHexes getResourceHexes() {
         return new ResourceHexes(getHexes());
     }
@@ -85,5 +96,9 @@ public class MapHexes {
 
     public Hexes getHexes() {
         return hexes;
+    }
+
+    public Hex getCurrentRobbedHex() {
+        return currentRobbedHex;
     }
 }
