@@ -7,7 +7,7 @@ I used the Model View Controller approach. I made a GUI and a map drawn during t
 
 This is what the boardgame map looks like:
 
-![Settlers middlegame](https://user-images.githubusercontent.com/56831898/191044980-feb18537-ab89-4205-ae07-a6e9397a7c39.png)
+![image](https://user-images.githubusercontent.com/56831898/194760407-7f524198-44e4-4d37-865b-047d4d50d4eb.png)
 
 The map is made of hexes. Each one has a number. Every turn two 6-sided dice are rolled, and their combined result determines which hexes are active that turn.
 
@@ -36,7 +36,7 @@ As the player hovers the cursor over a hex, it is hilighted:
 
 Так выглядит поле игры. 
 
-![Settlers middlegame](https://user-images.githubusercontent.com/56831898/191044980-feb18537-ab89-4205-ae07-a6e9397a7c39.png)
+![image](https://user-images.githubusercontent.com/56831898/194760419-b1f208f4-f11a-423e-99be-87580861d94e.png)
 
 Во время своего хода можно курсором строить города, поселения и дороги, если на это хватает ресурсов. 
 
