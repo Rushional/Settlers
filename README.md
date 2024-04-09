@@ -22,7 +22,7 @@ Sometimes, based on the dice roll, instead of getting resources, players with mo
 
 After that, the active players chooses a hex that will have a Robber on it and so will not provide any resources.
 
-As the player hovers the cursor over a hex, it is hilighted:
+As the player hovers the cursor over a hex, it is highlighted:
 
 ![Moving the Robber](https://user-images.githubusercontent.com/56831898/194759142-769b924a-6158-4e59-a098-2103a797ebbe.gif)
 
